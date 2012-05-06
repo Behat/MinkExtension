@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+
+        <parameter key="behat.mink.driver.zombie.class">Behat\Mink\Driver\ZombieDriver</parameter>
+        <parameter key="behat.mink.zombie.connection.class">Behat\Mink\Driver\Zombie\Connection</parameter>
+        <parameter key="behat.mink.zombie.server.class">Behat\Mink\Driver\Zombie\Server</parameter>
+
+        <parameter key="behat.mink.zombie.host">127.0.0.1</parameter>
+        <parameter key="behat.mink.zombie.port">8124</parameter>
+        <parameter key="behat.mink.zombie.auto_server">true</parameter>
+        <parameter key="behat.mink.zombie.node_bin">node</parameter>
+
+    </parameters>
+    <services>
+
+        <service id="behat.mink.session.zombie" class="%behat.mink.session.class%">
+            <argument type="service">
+                <service class="%behat.mink.driver.zombie.class%">
+                    <argument type="service" id="behat.mink.zombie.connection" />
+                    <argument type="service" id="behat.mink.zombie.server" />
+                    <argument>%behat.mink.zombie.auto_server%</argument>
+                </service>
+            </argument>
+            <argument type="service" id="behat.mink.selectors_handler" />
+            <tag name="behat.mink.session" alias="zombie" />
+        </service>
+
+        <service id="behat.mink.zombie.connection" class="%behat.mink.zombie.connection.class%">
+            <argument>%behat.mink.zombie.host%</argument>
+            <argument>%behat.mink.zombie.port%</argument>
+        </service>
+
+        <service id="behat.mink.zombie.server" class="%behat.mink.zombie.server.class%">
+            <argument>%behat.mink.zombie.host%</argument>
+            <argument>%behat.mink.zombie.port%</argument>
+            <argument>%behat.mink.zombie.node_bin%</argument>
+        </service>
+
+    </services>
+</container>

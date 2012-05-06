@@ -40,6 +40,16 @@ class Extension implements ExtensionInterface
         $config = $processor->processConfiguration($configuration, array($config));
         $loader->load('mink.xml');
 
+        if (isset($config['mink_loader'])) {
+            $configPath = $container->getParameter('behat.paths.config');
+
+            if (file_exists($configPath.DIRECTORY_SEPARATOR.$config['mink_loader'])) {
+                require($configPath.DIRECTORY_SEPARATOR.$config['mink_loader']);
+            } else {
+                require($config['mink_loader']);
+            }
+        }
+
         if (isset($config['goutte'])) {
             $loader->load('sessions/goutte.xml');
         }

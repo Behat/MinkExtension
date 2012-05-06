@@ -32,6 +32,9 @@ class Configuration implements ConfigurationInterface
 
         return $treeBuilder->root('mink')->
             children()->
+                scalarNode('mink_loader')->
+                    defaultNull()->
+                end()->
                 scalarNode('base_url')->
                     defaultNull()->
                 end()->

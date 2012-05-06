@@ -408,7 +408,7 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      */
     public function getTranslationResources()
     {
-        return glob(__DIR__.'/../../../../../i18n/*.xliff');
+        return glob(__DIR__.'/../../../../i18n/*.xliff');
     }
 
     /**

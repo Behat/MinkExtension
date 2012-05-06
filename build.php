@@ -9,7 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-$phar = new \Phar('behat-mink-extension.phar', 0, 'behat-mink-extension.phar');
+if (file_exists('mink_extension.phar')) {
+    unlink('mink_extension.phar');
+}
+
+$phar = new \Phar('mink_extension.phar', 0, 'extension.phar');
 $phar->setSignatureAlgorithm(\Phar::SHA1);
 $phar->startBuffering();
 
@@ -21,6 +25,13 @@ addFileToPhar($phar, 'src/Behat/MinkExtension/Context/RawMinkContext.php');
 addFileToPhar($phar, 'src/Behat/MinkExtension/Context/MinkContext.php');
 addFileToPhar($phar, 'src/Behat/MinkExtension/Configuration.php');
 addFileToPhar($phar, 'src/Behat/MinkExtension/Extension.php');
+addFileToPhar($phar, 'src/Behat/MinkExtension/services/mink.xml');
+addFileToPhar($phar, 'src/Behat/MinkExtension/services/sessions/goutte.xml');
+addFileToPhar($phar, 'src/Behat/MinkExtension/services/sessions/sahi.xml');
+addFileToPhar($phar, 'src/Behat/MinkExtension/services/sessions/zombie.xml');
+addFileToPhar($phar, 'src/Behat/MinkExtension/services/sessions/selenium.xml');
+addFileToPhar($phar, 'src/Behat/MinkExtension/services/sessions/selenium2.xml');
+addFileToPhar($phar, 'init.php');
 
 $phar->setStub(<<<STUB
 <?php
@@ -34,17 +45,15 @@ $phar->setStub(<<<STUB
  * with this source code in the file LICENSE.
  */
 
-Phar::mapPhar('behat-mink-extension.phar');
+Phar::mapPhar('extension.phar');
 
-return require_once 'phar://behat-mink-extension.phar/init.php';
+return require 'phar://extension.phar/init.php';
 
 __HALT_COMPILER();
 STUB
 );
 $phar->stopBuffering();
 
-unset($phar);
-
 function addFileToPhar($phar, $path) {
-    $phar->addFromString($path, __DIR__.'/'.$path);
+    $phar->addFromString($path, file_get_contents(__DIR__.'/'.$path));
 }

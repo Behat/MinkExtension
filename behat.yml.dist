@@ -1,6 +1,7 @@
 default:
   extensions:
-    Behat\MinkExtension\Extension:
-      base_url: http://en.wikipedia.org/
-      goutte:   ~
-      sahi:     ~
+    mink_extension.phar:
+      mink_loader:  mink-1.4.0beta1.phar
+      base_url:     http://en.wikipedia.org/
+      goutte:       ~
+      sahi:         ~

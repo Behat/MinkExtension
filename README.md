@@ -78,6 +78,25 @@ be automatically called **immediately after** each context creation before each 
 this `$mink` instance will be preconfigured based on the settings you've provided in your
 `behat.yml`.
 
+Concrete `FeatureContext` example:
+
+``` php
+<?php
+
+use Behat\MinkExtension\Context\MinkContext;
+
+class FeatureContext extends MinkContext
+{
+    /**
+     * @Then /^I wait for the suggestion box to appear$/
+     */
+    public function iWaitForTheSuggestionBoxToAppear()
+    {
+        $this->getSession()->wait(5000, "$('.suggestions-results').children().length > 0");
+    }
+}
+```
+
 Copyright
 ---------
 

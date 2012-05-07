@@ -66,10 +66,12 @@ After installing extension, there would be 4 usage options available for you:
   in as many subcontexts as you want - you'll never get `RedundantStepException`.
 * Subcontexting/extending `Behat\MinkExtension\Context\MinkContext` in your feature suite.
   Exactly like previous option, but also provides lot of predefined step definitions out
-  of the box.
+  of the box. As this context provides step definitions and hooks, you can use it **only once**
+  inside your feature context tree.
 * If you're on the php 5.4+, you can simply use `Behat\MinkExtension\Context\MinkDictionary`
   trait inside your `FeatureContext` or any of its subcontexts. This trait will provide
-  all the needed methods, hooks and definitions for you to start.
+  all the needed methods, hooks and definitions for you to start. You can use this trait **only
+  once** inside your feature context tree.
 * Implementing `Behat\MinkExtension\Context\MinkAwareContextInterface` with your context or its
   subcontexts.
   This will give you more customization options. Also, you can use this mechanism on multiple

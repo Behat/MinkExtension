@@ -53,7 +53,7 @@ activate `MinkExtension`:
 Usage
 -----
 
-After installing extension, there would be 3 usage options available for you:
+After installing extension, there would be 4 usage options available for you:
 
 * Subcontexting/extending `Behat\MinkExtension\Context\RawMinkContext` in your feature suite.
   This will give you ability to use preconfigured `Mink` instance altogether with some
@@ -66,6 +66,9 @@ After installing extension, there would be 3 usage options available for you:
 * Subcontexting/extending `Behat\MinkExtension\Context\MinkContext` in your feature suite.
   Exactly like previous option, but also provides lot of predefined step definitions out
   of the box.
+* If you're on the php 5.4+, you can simply use `Behat\MinkExtension\Context\MinkDictionary`
+  trait inside your `FeatureContext` or any of its subcontexts. This trait will provide
+  all the needed methods, hooks and definitions for you to start.
 * Implementing `Behat\MinkExtension\Context\MinkAwareContextInterface` with your context or its
   subcontexts.
   This will give you more customization options. Also, you can use this mechanism on multiple
@@ -87,6 +90,28 @@ use Behat\MinkExtension\Context\MinkContext;
 
 class FeatureContext extends MinkContext
 {
+    /**
+     * @Then /^I wait for the suggestion box to appear$/
+     */
+    public function iWaitForTheSuggestionBoxToAppear()
+    {
+        $this->getSession()->wait(5000, "$('.suggestions-results').children().length > 0");
+    }
+}
+```
+
+Dictionary usage example:
+
+``` php
+<?php
+
+use Behat\Behat\Context\BehatContext;
+use Behat\MinkExtension\Context\MinkDictionary;
+
+class FeatureContext extends BehatContext
+{
+    use MinkDictionary;
+
     /**
      * @Then /^I wait for the suggestion box to appear$/
      */

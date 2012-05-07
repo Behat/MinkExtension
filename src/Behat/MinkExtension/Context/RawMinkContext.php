@@ -2,8 +2,7 @@
 
 namespace Behat\MinkExtension\Context;
 
-use Behat\Behat\Context\BehatContext,
-    Behat\Behat\Event\ScenarioEvent;
+use Behat\Behat\Context\BehatContext;
 
 use Behat\Mink\Mink,
     Behat\Mink\WebAssert;
@@ -25,7 +24,7 @@ use Behat\Mink\Mink,
 class RawMinkContext extends BehatContext implements MinkAwareContextInterface
 {
     private $mink;
-    protected $minkParameters;
+    private $minkParameters;
 
     /**
      * Sets Mink instance.
@@ -35,6 +34,16 @@ class RawMinkContext extends BehatContext implements MinkAwareContextInterface
     public function setMink(Mink $mink)
     {
         $this->mink = $mink;
+    }
+
+    /**
+     * Returns Mink instance.
+     *
+     * @return Mink
+     */
+    public function getMink()
+    {
+        return $this->mink;
     }
 
     /**
@@ -48,13 +57,15 @@ class RawMinkContext extends BehatContext implements MinkAwareContextInterface
     }
 
     /**
-     * Returns Mink instance.
+     * Returns specific mink parameter.
      *
-     * @return Mink
+     * @param string $name
+     *
+     * @return mixed
      */
-    public function getMink()
+    public function getMinkParameter($name)
     {
-        return $this->mink;
+        return isset($this->minkParameters[$name]) ? $this->minkParameters[$name] : null;
     }
 
     /**
@@ -79,30 +90,5 @@ class RawMinkContext extends BehatContext implements MinkAwareContextInterface
     public function assertSession($name = null)
     {
         return $this->getMink()->assertSession($name);
-    }
-
-    /**
-     * @BeforeScenario
-     */
-    public function prepareMinkSessions($event)
-    {
-        $scenario = $event instanceof ScenarioEvent ? $event->getScenario() : $event->getOutline();
-        $session  = $this->minkParameters['default_session'];
-
-        foreach ($scenario->getTags() as $tag) {
-            if ('javascript' === $tag) {
-                $session = $this->minkParameters['javascript_session'];
-            } elseif (preg_match('/^mink\:(.+)/', $tag, $matches)) {
-                $session = $matches[1];
-            }
-        }
-
-        if ($scenario->hasTag('insulated')) {
-            $this->getMink()->stopSessions();
-        } else {
-            $this->getMink()->resetSessions();
-        }
-
-        $this->getMink()->setDefaultSessionName($session);
     }
 }

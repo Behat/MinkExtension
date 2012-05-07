@@ -47,7 +47,20 @@ class MinkAwareContextInitializer implements ContextInitializerInterface
      */
     public function supports(ContextInterface $context)
     {
-        return $context instanceof MinkAwareContextInterface;
+        // if context/subcontext implements MinkAwareContextInterface
+        if ($context instanceof MinkAwareContextInterface) {
+            return true;
+        }
+
+        // if context/subcontext uses MinkDictionary trait
+        $refl = new \ReflectionObject($context);
+        if (method_exists($refl, 'getTraitNames')) {
+            if (in_array('Behat\\MinkExtension\\Context\\MinkDictionary', $refl->getTraitNames())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

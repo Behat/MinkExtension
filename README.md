@@ -38,10 +38,10 @@ activate `MinkExtension`:
       # ...
       extensions:
         mink_extension.phar:
-          mink_loader:        mink-VERSION.phar
-          base_url:           http://example.com
+          mink_loader:        'mink-VERSION.phar'
+          base_url:           'http://example.com'
 
-          javascript_session: selenium2
+          javascript_session: 'selenium2'
 
           goutte:             ~
           selenium2:          ~

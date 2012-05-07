@@ -62,7 +62,8 @@ After installing extension, there would be 4 usage options available for you:
   - `getSession($name = null)`
   - `assertSession($name = null)`
 
-  And autohook, which will switch current session based on scenario tags.
+  `RawMinkContext` doesn't provide any hooks or definitions, so you can inherit from it
+  in as many subcontexts as you want - you'll never get `RedundantStepException`.
 * Subcontexting/extending `Behat\MinkExtension\Context\MinkContext` in your feature suite.
   Exactly like previous option, but also provides lot of predefined step definitions out
   of the box.

@@ -20,7 +20,7 @@ This extension requires:
 * Behat 2.4+
 * Mink 1.4+
 
-While there is not stable versions for those packages, you could download betas from:
+While there is no stable versions for those packages, you could download betas from:
 
 * [Behat downloads](https://github.com/Behat/Behat/downloads)
 * [Mink downloads](https://github.com/Behat/Mink/downloads)

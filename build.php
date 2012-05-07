@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Behat\MinkExtension
+ * This file is part of the Behat
  *
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
  *
@@ -9,35 +9,27 @@
  * with this source code in the file LICENSE.
  */
 
-if (file_exists('mink_extension.phar')) {
-    unlink('mink_extension.phar');
+$filename = 'mink_extension.phar';
+
+if (file_exists($filename)) {
+    unlink($filename);
 }
 
-$phar = new \Phar('mink_extension.phar', 0, 'extension.phar');
+$phar = new \Phar($filename, 0, 'extension.phar');
 $phar->setSignatureAlgorithm(\Phar::SHA1);
 $phar->startBuffering();
 
-addFileToPhar($phar, 'src/Behat/MinkExtension/Compiler/SelectorsPass.php');
-addFileToPhar($phar, 'src/Behat/MinkExtension/Compiler/SessionsPass.php');
-addFileToPhar($phar, 'src/Behat/MinkExtension/Context/MinkAwareContextInterface.php');
-addFileToPhar($phar, 'src/Behat/MinkExtension/Context/MinkAwareContextInitializer.php');
-addFileToPhar($phar, 'src/Behat/MinkExtension/Context/RawMinkContext.php');
-addFileToPhar($phar, 'src/Behat/MinkExtension/Context/MinkContext.php');
-addFileToPhar($phar, 'src/Behat/MinkExtension/Configuration.php');
-addFileToPhar($phar, 'src/Behat/MinkExtension/Extension.php');
-addFileToPhar($phar, 'src/Behat/MinkExtension/services/mink.xml');
-addFileToPhar($phar, 'src/Behat/MinkExtension/services/sessions/goutte.xml');
-addFileToPhar($phar, 'src/Behat/MinkExtension/services/sessions/sahi.xml');
-addFileToPhar($phar, 'src/Behat/MinkExtension/services/sessions/zombie.xml');
-addFileToPhar($phar, 'src/Behat/MinkExtension/services/sessions/selenium.xml');
-addFileToPhar($phar, 'src/Behat/MinkExtension/services/sessions/selenium2.xml');
-addFileToPhar($phar, 'init.php');
+foreach (findFiles('src') as $path) {
+    $phar->addFromString($path, file_get_contents(__DIR__.'/'.$path));
+}
+
+$phar->addFromString('init.php', file_get_contents(__DIR__.'/init.php'));
 
 $phar->setStub(<<<STUB
 <?php
 
 /*
- * This file is part of the Behat\MinkExtension
+ * This file is part of the Behat
  *
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
  *
@@ -54,6 +46,16 @@ STUB
 );
 $phar->stopBuffering();
 
-function addFileToPhar($phar, $path) {
-    $phar->addFromString($path, file_get_contents(__DIR__.'/'.$path));
+function findFiles($dir) {
+    $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir),
+      RecursiveIteratorIterator::CHILD_FIRST);
+
+    $files = array();
+    foreach ($iterator as $path) {
+      if ($path->isFile()) {
+          $files[] = $path->getPath().DIRECTORY_SEPARATOR.$path->getFilename();
+      }
+    }
+
+    return $files;
 }

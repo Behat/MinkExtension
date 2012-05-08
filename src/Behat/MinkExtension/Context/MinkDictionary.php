@@ -262,7 +262,7 @@ trait MinkDictionary
         $field = $this->fixStepArgument($field);
 
         if ($this->getMinkParameter('files_path')) {
-            $path = $this->getMinkParameter('files_path').DIRECTORY_SEPARATOR.$path;
+            $path = rtrim($this->getMinkParameter('files_path'), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$path;
         }
 
         $this->getSession()->getPage()->attachFileToField($field, $path);

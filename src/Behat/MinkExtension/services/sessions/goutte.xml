@@ -18,7 +18,7 @@
                     <argument type="service" id="behat.mink.goutte" />
                 </service>
             </argument>
-            <argument type="service" id="behat.mink.selectors_handler" />
+            <argument type="service" id="behat.mink.selector.handler" />
             <tag name="behat.mink.session" alias="goutte" />
         </service>
 

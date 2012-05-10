@@ -22,7 +22,7 @@
                     <argument type="service" id="behat.mink.sahi" />
                 </service>
             </argument>
-            <argument type="service" id="behat.mink.selectors_handler" />
+            <argument type="service" id="behat.mink.selector.handler" />
             <tag name="behat.mink.session" alias="sahi" />
         </service>
 

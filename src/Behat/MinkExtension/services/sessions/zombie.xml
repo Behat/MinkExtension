@@ -24,7 +24,7 @@
                     <argument>%behat.mink.zombie.auto_server%</argument>
                 </service>
             </argument>
-            <argument type="service" id="behat.mink.selectors_handler" />
+            <argument type="service" id="behat.mink.selector.handler" />
             <tag name="behat.mink.session" alias="zombie" />
         </service>
 

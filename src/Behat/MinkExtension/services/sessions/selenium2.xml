@@ -27,7 +27,7 @@
                     <argument type="string">%behat.mink.selenium2.wd_host%</argument>
                 </service>
             </argument>
-            <argument type="service" id="behat.mink.selectors_handler" />
+            <argument type="service" id="behat.mink.selector.handler" />
             <tag name="behat.mink.session" alias="selenium2" />
         </service>
 

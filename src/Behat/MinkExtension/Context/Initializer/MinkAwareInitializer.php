@@ -1,11 +1,13 @@
 <?php
 
-namespace Behat\MinkExtension\Context;
+namespace Behat\MinkExtension\Context\Initializer;
 
-use Behat\Behat\Context\ContextInitializerInterface,
+use Behat\Behat\Context\Initializer\InitializerInterface,
     Behat\Behat\Context\ContextInterface;
 
 use Behat\Mink\Mink;
+
+use Behat\MinkExtension\Context\MinkAwareContextInterface;
 
 /*
  * This file is part of the Behat\MinkExtension.
@@ -21,7 +23,7 @@ use Behat\Mink\Mink;
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class MinkAwareContextInitializer implements ContextInitializerInterface
+class MinkAwareInitializer implements InitializerInterface
 {
     private $mink;
     private $parameters;

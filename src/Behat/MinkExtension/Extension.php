@@ -2,8 +2,8 @@
 
 namespace Behat\MinkExtension;
 
-use Symfony\Component\Config\Definition\Processor,
-    Symfony\Component\Config\FileLocator,
+use Symfony\Component\Config\FileLocator,
+    Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition,
     Symfony\Component\DependencyInjection\ContainerBuilder,
     Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
@@ -33,18 +33,14 @@ class Extension implements ExtensionInterface
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $processor     = new Processor();
-        $configuration = new Configuration();
-        $loader        = new XmlFileLoader($container, new FileLocator(__DIR__.'/services'));
-
-        $config = $processor->processConfiguration($configuration, array($config));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/services'));
         $loader->load('mink.xml');
 
         if (isset($config['mink_loader'])) {
-            $configPath = $container->getParameter('behat.paths.config');
+            $basePath = $container->getParameter('behat.paths.base');
 
-            if (file_exists($configPath.DIRECTORY_SEPARATOR.$config['mink_loader'])) {
-                require($configPath.DIRECTORY_SEPARATOR.$config['mink_loader']);
+            if (file_exists($basePath.DIRECTORY_SEPARATOR.$config['mink_loader'])) {
+                require($basePath.DIRECTORY_SEPARATOR.$config['mink_loader']);
             } else {
                 require($config['mink_loader']);
             }
@@ -81,6 +77,126 @@ class Extension implements ExtensionInterface
         $minkReflection = new \ReflectionClass('Behat\Mink\Mink');
         $minkLibPath    = realpath(dirname($minkReflection->getFilename()) . '/../../../');
         $container->setParameter('mink.paths.lib', $minkLibPath);
+    }
+
+    /**
+     * Setups configuration for current extension.
+     *
+     * @param ArrayNodeDefinition $builder
+     */
+    public function getConfig(ArrayNodeDefinition $builder)
+    {
+        $builder->
+            children()->
+                scalarNode('mink_loader')->
+                    defaultNull()->
+                end()->
+                scalarNode('base_url')->
+                    defaultNull()->
+                end()->
+                scalarNode('files_path')->
+                    defaultNull()->
+                end()->
+                scalarNode('show_cmd')->
+                    defaultNull()->
+                end()->
+                scalarNode('show_tmp_dir')->
+                    defaultValue(sys_get_temp_dir())->
+                end()->
+                scalarNode('default_session')->
+                    defaultValue('goutte')->
+                end()->
+                scalarNode('javascript_session')->
+                    defaultValue('selenium2')->
+                end()->
+                scalarNode('browser_name')->
+                    defaultValue('firefox')->
+                end()->
+                arrayNode('goutte')->
+                    children()->
+                        arrayNode('zend_config')->
+                            useAttributeAsKey('key')->
+                            prototype('variable')->end()->
+                        end()->
+                        arrayNode('server_parameters')->
+                            useAttributeAsKey('key')->
+                            prototype('variable')->end()->
+                        end()->
+                    end()->
+                end()->
+                arrayNode('sahi')->
+                    children()->
+                        scalarNode('sid')->
+                            defaultNull()->
+                        end()->
+                        scalarNode('host')->
+                            defaultValue('localhost')->
+                        end()->
+                        scalarNode('port')->
+                            defaultValue(9999)->
+                        end()->
+                    end()->
+                end()->
+                arrayNode('zombie')->
+                    children()->
+                        scalarNode('host')->
+                            defaultValue('127.0.0.1')->
+                        end()->
+                        scalarNode('port')->
+                            defaultValue(8124)->
+                        end()->
+                        scalarNode('auto_server')->
+                            defaultValue(true)->
+                        end()->
+                        scalarNode('node_bin')->
+                            defaultValue('node')->
+                        end()->
+                    end()->
+                end()->
+                arrayNode('selenium')->
+                    children()->
+                        scalarNode('host')->
+                            defaultValue('127.0.0.1')->
+                        end()->
+                        scalarNode('port')->
+                            defaultValue(4444)->
+                        end()->
+                        scalarNode('browser')->
+                            defaultValue('*%behat.mink.browser_name%')->
+                        end()->
+                    end()->
+                end()->
+                arrayNode('selenium2')->
+                    children()->
+                        scalarNode('browser')->
+                            defaultValue('%behat.mink.browser_name%')->
+                        end()->
+                        arrayNode('capabilities')->
+                            children()->
+                                scalarNode('browserName')->
+                                    defaultValue('firefox')->
+                                end()->
+                                scalarNode('version')->
+                                    defaultValue(8)->
+                                end()->
+                                scalarNode('platform')->
+                                    defaultValue('ANY')->
+                                end()->
+                                scalarNode('browserVersion')->
+                                    defaultValue(8)->
+                                end()->
+                                scalarNode('browser')->
+                                    defaultValue('firefox')->
+                                end()->
+                            end()->
+                        end()->
+                        scalarNode('wd_host')->
+                            defaultValue('http://localhost:4444/wd/hub')->
+                        end()->
+                    end()->
+                end()->
+            end()->
+        end();
     }
 
     /**

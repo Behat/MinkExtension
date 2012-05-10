@@ -9,10 +9,9 @@
         <parameter key="behat.mink.class">Behat\Mink\Mink</parameter>
         <parameter key="behat.mink.session.class">Behat\Mink\Session</parameter>
         <parameter key="behat.mink.selectors_handler.class">Behat\Mink\Selector\SelectorsHandler</parameter>
-        <parameter key="behat.test_client.class">Behat\MinkBundle\Client</parameter>
 
         <parameter key="behat.mink.default_session">goutte</parameter>
-        <parameter key="behat.mink.javascript_session">sahi</parameter>
+        <parameter key="behat.mink.javascript_session">selenium2</parameter>
         <parameter key="behat.mink.base_url">null</parameter>
         <parameter key="behat.mink.show_cmd">null</parameter>
         <parameter key="behat.mink.show_tmp_dir">null</parameter>
@@ -33,10 +32,14 @@
             <tag name="behat.mink.selector" alias="named" />
         </service>
 
-        <service id="behat.mink.context_initializer" class="Behat\MinkExtension\Context\MinkAwareContextInitializer">
+        <service id="behat.mink.context.initializer" class="Behat\MinkExtension\Context\Initializer\MinkAwareInitializer">
             <argument type="service" id="behat.mink" />
             <argument>%behat.mink.parameters%</argument>
-            <tag name="behat.context_initializer" />
+            <tag name="behat.context.initializer" />
+        </service>
+
+        <service id="behat.mink.context.class_guesser" class="Behat\MinkExtension\Context\ClassGuesser\MinkContextClassGuesser">
+            <tag name="behat.context.class_guesser" priority="-1" />
         </service>
 
     </services>

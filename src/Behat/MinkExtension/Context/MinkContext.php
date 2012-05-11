@@ -186,7 +186,7 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
     /**
      * Checks, that current page PATH matches regular expression.
      *
-     * @Then /^the (?i)url(?-i) should match (?P<pattern>\/([^\/]|\\\/)*\/)$/
+     * @Then /^the (?i)url(?-i) should match (?P<pattern>"([^"]|\\")*")$/
      */
     public function assertUrlRegExp($pattern)
     {

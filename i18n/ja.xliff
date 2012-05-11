@@ -99,8 +99,8 @@
             <target><![CDATA[/^(?:|ユーザーが )(?P<page>[^\s]+) を表示していること$/]]></target>
         </trans-unit>
         <trans-unit id="the-url-should-match">
-            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>\/([^\/]|\\\/)*\/)$/]]></source>
-            <target><![CDATA[/^(?i)url(?-i)が "(?P<pattern>\/([^\/]|\\\/)*\/)" にマッチすること$/]]></target>
+            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"([^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^(?i)url(?-i)が (?P<pattern>"([^"]|\\")*") にマッチすること$/]]></target>
         </trans-unit>
         <trans-unit id="the-element-should-contain">
             <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>

@@ -99,8 +99,8 @@
             <target><![CDATA[/^(?:|ich )sollte auf "(?P<page>[^"]+)" sein$/]]></target>
         </trans-unit>
         <trans-unit id="the-url-should-match">
-            <source><![CDATA[/^the url should match "(?P<pattern>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^die Webadresse sollte mit "(?P<pattern>(?:[^"]|\\")*)" übereinstimmen$/]]></target>
+            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"([^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^die Webadresse sollte mit (?P<pattern>"([^"]|\\")*") übereinstimmen$/]]></target>
         </trans-unit>
         <trans-unit id="the-element-should-contain">
             <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>

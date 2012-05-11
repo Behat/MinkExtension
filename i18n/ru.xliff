@@ -66,6 +66,14 @@
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^(?:|я )должен видеть "(?P<text>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
+        <trans-unit id="i-should-see-text-matching">
+            <source><![CDATA[/^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^(?:|я )должен видеть текст соответствующий (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+        </trans-unit>
+        <trans-unit id="i-should-not-see-text-matching">
+            <source><![CDATA[/^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^(?:|я )не должен видеть текст соответствующий (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+        </trans-unit>
         <trans-unit id="the-response-should-contain">
             <source><![CDATA[/^the response should contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^тело ответа должно содержать "(?P<text>(?:[^"]|\\")*)"$/]]></target>
@@ -99,7 +107,7 @@
             <target><![CDATA[/^(?:|я )должен быть на странице "(?P<page>[^"]+)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-url-should-match">
-            <source><![CDATA[/^the url should match "(?P<pattern>(?:[^"]|\\")*)"$/]]></source>
+            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>\/([^\/]|\\\/)*\/)$/]]></source>
             <target><![CDATA[/^(?:url|адрес) должен соответствовать "(?P<pattern>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-element-should-contain">

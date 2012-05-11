@@ -66,6 +66,14 @@
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^(?:|je )devrais voir "(?P<text>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
+        <trans-unit id="i-should-see-text-matching">
+            <source><![CDATA[/^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^(?:|je )devrais voir un texte suivant le motif (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+        </trans-unit>
+        <trans-unit id="i-should-not-see-text-matching">
+            <source><![CDATA[/^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^(?:|je )ne devrais pas voir de texte suivant le motif (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+        </trans-unit>
         <trans-unit id="the-response-should-contain">
             <source><![CDATA[/^the response should contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^la réponse devrait contenir "(?P<text>(?:[^"]|\\")*)"$/]]></target>

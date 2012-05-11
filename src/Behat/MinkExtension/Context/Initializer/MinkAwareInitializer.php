@@ -108,11 +108,14 @@ class MinkAwareInitializer implements InitializerInterface, EventSubscriberInter
 
     /**
      * Configures default Mink session before each scenario.
-     * Configuration is based on scenario tags.
+     * Configuration is based on provided scenario tags:
      *
      * `@javascript` tagged scenarios will get `javascript_session` as default session
      * `@mink:CUSTOM_NAME tagged scenarios will get `CUSTOM_NAME` as default session
      * Other scenarios get `default_session` as default session
+     *
+     * `@insulated` tag will cause Mink to stop current sessions before scenario
+     * instead of just soft-resetting them
      *
      * @param ScenarioEvent|OutlineEvent $event
      */

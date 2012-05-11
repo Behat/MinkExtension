@@ -53,8 +53,11 @@ activate `MinkExtension`:
 Usage
 -----
 
-After installing extension, there would be 4 usage options available for you:
+After installing extension, there would be 5 usage options available for you:
 
+* Writing features with bundled steps only. In this case, you don't need to create
+  `boostrap/` folder or custom `FeatureContext` class - Behat will use default
+  `MinkContext` by default.
 * Subcontexting/extending `Behat\MinkExtension\Context\RawMinkContext` in your feature suite.
   This will give you ability to use preconfigured `Mink` instance altogether with some
   convenience methods:
@@ -78,7 +81,7 @@ After installing extension, there would be 4 usage options available for you:
   contexts avoiding the need to call parent contexts from subcontexts when only thing you need
   is mink instance.
 
-There's common things between those 3 methods. In each of those, target context will implement
+There's common things between last 4 methods. In each of those, target context will implement
 `setMink(Mink $mink)` and `setMinkParameters(array $parameters)` methods. Those methods would
 be automatically called **immediately after** each context creation before each scenario. And
 this `$mink` instance will be preconfigured based on the settings you've provided in your
@@ -124,6 +127,24 @@ class FeatureContext extends BehatContext
     }
 }
 ```
+
+Translated languages
+--------------------
+
+For now exist 10 translated languages: `cs`,`de`,`es`,`fr`,`ja`,`nl`,`pl`,`pt`,`ru`,`sv`.
+
+**Note:** The `ja`,`nl`,`pt` and `sv` are outdated.
+
+#### How to add a new translated language?
+
+If you want to translate another language, you can use as reference the `ru` language file under
+[translations folder](https://github.com/Behat/MinkExtension/tree/master/i18n).
+
+**Important:** The filename must match with the same translated language name in [Behat](https://github.com/Behat/Behat/tree/master/i18n) and [Gherkin](https://github.com/Behat/Gherkin/blob/master/i18n.php) in order to work correctly.
+
+If the language does not exist in [Gherkin](https://github.com/Behat/Gherkin/tree/master/i18n).
+You should consider making a [Pull Request](https://github.com/cucumber/cucumber/pulls) to
+[cucumber\gherkin i18n file](https://github.com/cucumber/gherkin/blob/master/lib/gherkin/i18n.yml).
 
 Copyright
 ---------

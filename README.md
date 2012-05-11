@@ -52,31 +52,31 @@ Usage
 
 After installing extension, there would be 5 usage options available for you:
 
-* Writing features with bundled steps only. In this case, you don't need to create
-  `boostrap/` folder or custom `FeatureContext` class - Behat will use default
-  `MinkContext` by default.
-* Subcontexting/extending `Behat\MinkExtension\Context\RawMinkContext` in your feature suite.
-  This will give you ability to use preconfigured `Mink` instance altogether with some
-  convenience methods:
+1. Writing features with bundled steps only. In this case, you don't need to create
+   `boostrap/` folder or custom `FeatureContext` class - Behat will use default
+   `MinkContext` by default.
+2. Subcontexting/extending `Behat\MinkExtension\Context\RawMinkContext` in your feature suite.
+   This will give you ability to use preconfigured `Mink` instance altogether with some
+   convenience methods:
 
-  - `getSession($name = null)`
-  - `assertSession($name = null)`
+   - `getSession($name = null)`
+   - `assertSession($name = null)`
 
-  `RawMinkContext` doesn't provide any hooks or definitions, so you can inherit from it
-  in as many subcontexts as you want - you'll never get `RedundantStepException`.
-* Subcontexting/extending `Behat\MinkExtension\Context\MinkContext` in your feature suite.
-  Exactly like previous option, but also provides lot of predefined step definitions out
-  of the box. As this context provides step definitions and hooks, you can use it **only once**
-  inside your feature context tree.
-* If you're on the php 5.4+, you can simply use `Behat\MinkExtension\Context\MinkDictionary`
-  trait inside your `FeatureContext` or any of its subcontexts. This trait will provide
-  all the needed methods, hooks and definitions for you to start. You can use this trait **only
-  once** inside your feature context tree.
-* Implementing `Behat\MinkExtension\Context\MinkAwareContextInterface` with your context or its
-  subcontexts.
-  This will give you more customization options. Also, you can use this mechanism on multiple
-  contexts avoiding the need to call parent contexts from subcontexts when only thing you need
-  is mink instance.
+   `RawMinkContext` doesn't provide any hooks or definitions, so you can inherit from it
+   in as many subcontexts as you want - you'll never get `RedundantStepException`.
+3. Subcontexting/extending `Behat\MinkExtension\Context\MinkContext` in your feature suite.
+   Exactly like previous option, but also provides lot of predefined step definitions out
+   of the box. As this context provides step definitions and hooks, you can use it **only once**
+   inside your feature context tree.
+4. If you're on the php 5.4+, you can simply use `Behat\MinkExtension\Context\MinkDictionary`
+   trait inside your `FeatureContext` or any of its subcontexts. This trait will provide
+   all the needed methods, hooks and definitions for you to start. You can use this trait **only
+   once** inside your feature context tree.
+5. Implementing `Behat\MinkExtension\Context\MinkAwareContextInterface` with your context or its
+   subcontexts.
+   This will give you more customization options. Also, you can use this mechanism on multiple
+   contexts avoiding the need to call parent contexts from subcontexts when only thing you need
+   is mink instance.
 
 There's common things between last 4 methods. In each of those, target context will implement
 `setMink(Mink $mink)` and `setMinkParameters(array $parameters)` methods. Those methods would

@@ -4,8 +4,6 @@ namespace Behat\MinkExtension\Context;
 
 use Behat\Gherkin\Node\TableNode;
 
-use Behat\Behat\Event\ScenarioEvent;
-
 use Behat\Mink\Mink,
     Behat\Mink\WebAssert;
 
@@ -91,31 +89,6 @@ trait MinkDictionary
     public function assertSession($name = null)
     {
         return $this->getMink()->assertSession($name);
-    }
-
-    /**
-     * @BeforeScenario
-     */
-    public function prepareMinkSessions($event)
-    {
-        $scenario = $event instanceof ScenarioEvent ? $event->getScenario() : $event->getOutline();
-        $session  = $this->getMinkParameter('default_session');
-
-        foreach ($scenario->getTags() as $tag) {
-            if ('javascript' === $tag) {
-                $session = $this->getMinkParameter('javascript_session');
-            } elseif (preg_match('/^mink\:(.+)/', $tag, $matches)) {
-                $session = $matches[1];
-            }
-        }
-
-        if ($scenario->hasTag('insulated')) {
-            $this->getMink()->stopSessions();
-        } else {
-            $this->getMink()->resetSessions();
-        }
-
-        $this->getMink()->setDefaultSessionName($session);
     }
 
     /**

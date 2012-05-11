@@ -24,31 +24,6 @@ use Behat\Behat\Context\TranslatedContextInterface,
 class MinkContext extends RawMinkContext implements TranslatedContextInterface
 {
     /**
-     * @BeforeScenario
-     */
-    public function prepareMinkSessions($event)
-    {
-        $scenario = $event instanceof ScenarioEvent ? $event->getScenario() : $event->getOutline();
-        $session  = $this->getMinkParameter('default_session');
-
-        foreach ($scenario->getTags() as $tag) {
-            if ('javascript' === $tag) {
-                $session = $this->getMinkParameter('javascript_session');
-            } elseif (preg_match('/^mink\:(.+)/', $tag, $matches)) {
-                $session = $matches[1];
-            }
-        }
-
-        if ($scenario->hasTag('insulated')) {
-            $this->getMink()->stopSessions();
-        } else {
-            $this->getMink()->resetSessions();
-        }
-
-        $this->getMink()->setDefaultSessionName($session);
-    }
-
-    /**
      * Opens specified page.
      *
      * @Given /^(?:|I )am on "(?P<page>[^"]+)"$/

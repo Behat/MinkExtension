@@ -66,6 +66,14 @@
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^(?:|je )devrais voir "(?P<text>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
+        <trans-unit id="i-should-see-text-matching">
+            <source><![CDATA[/^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^(?:|je )devrais voir un texte suivant le motif (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+        </trans-unit>
+        <trans-unit id="i-should-not-see-text-matching">
+            <source><![CDATA[/^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^(?:|je )ne devrais pas voir de texte suivant le motif (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+        </trans-unit>
         <trans-unit id="the-response-should-contain">
             <source><![CDATA[/^the response should contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^la réponse devrait contenir "(?P<text>(?:[^"]|\\")*)"$/]]></target>
@@ -99,8 +107,8 @@
             <target><![CDATA[/^(?:|je )devrais être sur "(?P<page>[^"]+)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-url-should-match">
-            <source><![CDATA[/^the url should match "(?P<pattern>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^l'url devrait suivre le motif "(?P<pattern>(?:[^"]|\\")*)"$/]]></target>
+            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"([^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^l'(?i)url(?-i) devrait suivre le motif (?P<pattern>"([^"]|\\")*")$/]]></target>
         </trans-unit>
         <trans-unit id="the-element-should-contain">
             <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>

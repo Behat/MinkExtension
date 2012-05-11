@@ -64,6 +64,7 @@ After installing extension, there would be 5 usage options available for you:
 
    `RawMinkContext` doesn't provide any hooks or definitions, so you can inherit from it
    in as many subcontexts as you want - you'll never get `RedundantStepException`.
+
 3. Subcontexting/extending `Behat\MinkExtension\Context\MinkContext` in your feature suite.
    Exactly like previous option, but also provides lot of predefined step definitions out
    of the box. As this context provides step definitions and hooks, you can use it **only once**

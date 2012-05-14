@@ -17,7 +17,7 @@ use Behat\Mink\Mink;
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-interface MinkAwareContextInterface
+interface MinkAwareInterface
 {
     /**
      * Sets Mink instance.

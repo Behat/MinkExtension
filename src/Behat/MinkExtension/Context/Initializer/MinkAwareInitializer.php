@@ -11,7 +11,7 @@ use Behat\Behat\Context\Initializer\InitializerInterface,
 
 use Behat\Mink\Mink;
 
-use Behat\MinkExtension\Context\MinkAwareContextInterface;
+use Behat\MinkExtension\Context\MinkAwareInterface;
 
 /*
  * This file is part of the Behat\MinkExtension.
@@ -79,8 +79,8 @@ class MinkAwareInitializer implements InitializerInterface, EventSubscriberInter
      */
     public function supports(ContextInterface $context)
     {
-        // if context/subcontext implements MinkAwareContextInterface
-        if ($context instanceof MinkAwareContextInterface) {
+        // if context/subcontext implements MinkAwareInterface
+        if ($context instanceof MinkAwareInterface) {
             return true;
         }
 

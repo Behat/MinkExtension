@@ -471,16 +471,6 @@ trait MinkDictionary
     }
 
     /**
-     * Returns list of definition translation resources paths.
-     *
-     * @return  array
-     */
-    public function getTranslationResources()
-    {
-        return $this->getMinkTranslationResources();
-    }
-
-    /**
      * Returns list of definition translation resources paths for this dictionary.
      *
      * @return  array

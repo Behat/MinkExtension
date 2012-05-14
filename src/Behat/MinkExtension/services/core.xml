@@ -36,8 +36,9 @@
         </service>
 
         <service id="behat.mink.context.class_guesser" class="%behat.mink.context.class_guesser.class%">
-            <tag name="behat.context.class_guesser" priority="-1" />
+            <tag name="behat.context.class_guesser" priority="0" />
         </service>
+
         <service id="behat.mink.context.initializer" class="%behat.mink.context.initializer.class%">
             <argument type="service" id="behat.mink" />
             <argument>%behat.mink.parameters%</argument>

@@ -34,7 +34,7 @@ class Extension implements ExtensionInterface
     public function load(array $config, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/services'));
-        $loader->load('mink.xml');
+        $loader->load('core.xml');
 
         if (isset($config['mink_loader'])) {
             $basePath = $container->getParameter('behat.paths.base');

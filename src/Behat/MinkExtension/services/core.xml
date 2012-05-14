@@ -42,7 +42,7 @@
             <argument type="service" id="behat.mink" />
             <argument>%behat.mink.parameters%</argument>
             <tag name="behat.context.initializer" />
-            <tag name="behat.event_subscriber" priority="0" />
+            <tag name="behat.event_subscriber" />
         </service>
 
     </services>

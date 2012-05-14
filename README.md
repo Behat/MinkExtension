@@ -4,7 +4,7 @@ MinkExtension
 Provides integrartion layer:
 
 * Additional services for Behat (`Mink`, `Sessions`, `Drivers`).
-* `Behat\MinkExtension\Context\MinkAwareContextInterface` which provides `Mink`
+* `Behat\MinkExtension\Context\MinkAwareInterface` which provides `Mink`
   instance for your contexts or subcontexts.
 * Base `Behat\MinkExtension\Context\MinkContext` context which provides base
   step definitions and hooks for your contexts or subcontexts. Or it could be
@@ -70,7 +70,7 @@ After installing extension, there would be 5 usage options available for you:
    trait inside your `FeatureContext` or any of its subcontexts. This trait will provide
    all the needed methods, hooks and definitions for you to start. You can use this trait **only
    once** inside your feature context tree.
-5. Implementing `Behat\MinkExtension\Context\MinkAwareContextInterface` with your context or its
+5. Implementing `Behat\MinkExtension\Context\MinkAwareInterface` with your context or its
    subcontexts.
    This will give you more customization options. Also, you can use this mechanism on multiple
    contexts avoiding the need to call parent contexts from subcontexts when only thing you need

@@ -104,13 +104,13 @@ class Extension implements ExtensionInterface
                     defaultValue(sys_get_temp_dir())->
                 end()->
                 scalarNode('default_session')->
-                    defaultNull()->
+                    defaultValue('goutte')->
                 end()->
                 scalarNode('javascript_session')->
-                    defaultNull()->
+                    defaultValue('selenium2')->
                 end()->
                 scalarNode('browser_name')->
-                    defaultNull()->
+                    defaultValue('firefox')->
                 end()->
                 arrayNode('goutte')->
                     children()->

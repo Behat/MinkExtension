@@ -74,6 +74,10 @@ class Extension implements ExtensionInterface
         }
         $container->setParameter('behat.mink.parameters', $minkParameters);
 
+        $container->setParameter('behat.mink.default_session', $config['default_session']);
+        $container->setParameter('behat.mink.javascript_session', $config['javascript_session']);
+        $container->setParameter('behat.mink.browser_name', $config['browser_name']);
+
         $minkReflection = new \ReflectionClass('Behat\Mink\Mink');
         $minkLibPath    = realpath(dirname($minkReflection->getFilename()) . '/../../../');
         $container->setParameter('mink.paths.lib', $minkLibPath);

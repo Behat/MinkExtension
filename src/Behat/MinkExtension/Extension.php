@@ -114,10 +114,6 @@ class Extension implements ExtensionInterface
                 end()->
                 arrayNode('goutte')->
                     children()->
-                        arrayNode('zend_config')->
-                            useAttributeAsKey('key')->
-                            prototype('variable')->end()->
-                        end()->
                         arrayNode('server_parameters')->
                             useAttributeAsKey('key')->
                             prototype('variable')->end()->

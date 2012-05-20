@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Behat\MinkExtension
+ * This file is part of the Behat
  *
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
  *
@@ -9,13 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-require_once __DIR__.'/src/Behat/MinkExtension/Compiler/SelectorsPass.php';
-require_once __DIR__.'/src/Behat/MinkExtension/Compiler/SessionsPass.php';
-require_once __DIR__.'/src/Behat/MinkExtension/Context/MinkAwareContextInterface.php';
-require_once __DIR__.'/src/Behat/MinkExtension/Context/MinkAwareContextInitializer.php';
-require_once __DIR__.'/src/Behat/MinkExtension/Context/RawMinkContext.php';
-require_once __DIR__.'/src/Behat/MinkExtension/Context/MinkContext.php';
-require_once __DIR__.'/src/Behat/MinkExtension/Configuration.php';
-require_once __DIR__.'/src/Behat/MinkExtension/Extension.php';
+spl_autoload_register(function($class) {
+    if (false !== strpos($class, 'Behat\\MinkExtension')) {
+        require_once(__DIR__.'/src/'.str_replace('\\', '/', $class).'.php');
+        return true;
+    }
+}, true, false);
 
 return new Behat\MinkExtension\Extension;

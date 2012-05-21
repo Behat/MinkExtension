@@ -1,5 +1,4 @@
-MinkExtension
-=============
+# MinkExtension
 
 [![Build
 Status](https://secure.travis-ci.org/Behat/MinkExtension.png?branch=master)](http://travis-ci.org/Behat/MinkExtension)
@@ -15,15 +14,16 @@ Provides integrartion layer:
 
 between Behat 2.4+ and Mink 1.4+.
 
-Installation
-------------
+## Installation
 
 This extension requires:
 
 * Behat 2.4+
 * Mink 1.4+
 
-While there is no stable versions for those packages, you could download betas from:
+### Through PHAR
+
+You could download phars from:
 
 * [Behat downloads](https://github.com/Behat/Behat/downloads)
 * [Mink downloads](https://github.com/Behat/Mink/downloads)
@@ -50,8 +50,41 @@ activate `MinkExtension`:
     For all configuration options, check [extension configuration
     class](https://github.com/Behat/MinkExtension/blob/master/src/Behat/MinkExtension/Configuration.php#L35-142).
 
-Usage
------
+### Through Composer
+
+1. Set dependencies in your `composer.json`:
+
+    ``` json
+    {
+        "require": {
+            ...
+
+            "behat/mink-extension": "*"
+        }
+    }
+    ```
+
+2. Install/update your vendors:
+
+    ``` bash
+    $> curl http://getcomposer.org/installer | php
+    $> php composer.phar install
+    ```
+
+3. Activate extension in your `behat.yml`:
+
+    ``` yaml
+    # behat.yml
+    defaults:
+      # ...
+      extensions:
+        Behat\MinkExtension\Extension:
+          base_url:  'http://example.com'
+          goutte:    ~
+          selenium2: ~
+    ```
+
+## Usage
 
 After installing extension, there would be 5 usage options available for you:
 
@@ -84,6 +117,8 @@ There's common things between last 4 methods. In each of those, target context w
 be automatically called **immediately after** each context creation before each scenario. And
 this `$mink` instance will be preconfigured based on the settings you've provided in your
 `behat.yml`.
+
+### Context examples
 
 Concrete `FeatureContext` example:
 
@@ -126,8 +161,7 @@ class FeatureContext extends BehatContext
 }
 ```
 
-Translated languages
---------------------
+## Translated languages
 
 For now exist 10 translated languages: `cs`,`de`,`es`,`fr`,`ja`,`nl`,`pl`,`pt`,`ru`,`sv`.
 
@@ -144,18 +178,15 @@ If the language does not exist in [Gherkin](https://github.com/Behat/Gherkin/tre
 You should consider making a [Pull Request](https://github.com/cucumber/cucumber/pulls) to
 [cucumber\gherkin i18n file](https://github.com/cucumber/gherkin/blob/master/lib/gherkin/i18n.yml).
 
-Copyright
----------
+## Copyright
 
 Copyright (c) 2012 Konstantin Kudryashov (ever.zet). See LICENSE for details.
 
-Contributors
-------------
+## Contributors
 
 * Konstantin Kudryashov [everzet](http://github.com/everzet) [lead developer]
 * Other [awesome developers](https://github.com/Behat/MinkExtension/graphs/contributors)
 
-Sponsors
---------
+## Sponsors
 
 * knpLabs [knpLabs](http://www.knplabs.com/) [main sponsor]

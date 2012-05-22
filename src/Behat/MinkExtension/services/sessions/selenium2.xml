@@ -7,7 +7,7 @@
         <parameter key="behat.mink.driver.selenium2.class">Behat\Mink\Driver\Selenium2Driver</parameter>
 
         <parameter key="behat.mink.selenium2.browser">%behat.mink.browser_name%</parameter>
-        <parameter key="behat.mink.selenium2.capabilities">
+        <parameter key="behat.mink.selenium2.capabilities" type="collection">
             <parameter key="browserName">firefox</parameter>
             <parameter key="version">8</parameter>
             <parameter key="platform">ANY</parameter>
@@ -22,9 +22,9 @@
         <service id="behat.mink.session.selenium2" class="%behat.mink.session.class%">
             <argument type="service">
                 <service class="%behat.mink.driver.selenium2.class%">
-                    <argument type="string">%behat.mink.selenium2.browser%</argument>
-                    <argument type="collection">%behat.mink.selenium2.capabilities%</argument>
-                    <argument type="string">%behat.mink.selenium2.wd_host%</argument>
+                    <argument>%behat.mink.selenium2.browser%</argument>
+                    <argument>%behat.mink.selenium2.capabilities%</argument>
+                    <argument>%behat.mink.selenium2.wd_host%</argument>
                 </service>
             </argument>
             <argument type="service" id="behat.mink.selector.handler" />

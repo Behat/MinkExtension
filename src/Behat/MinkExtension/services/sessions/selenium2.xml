@@ -8,11 +8,11 @@
 
         <parameter key="behat.mink.selenium2.browser">%behat.mink.browser_name%</parameter>
         <parameter key="behat.mink.selenium2.capabilities" type="collection">
-            <parameter key="browserName">firefox</parameter>
-            <parameter key="version">8</parameter>
-            <parameter key="platform">ANY</parameter>
-            <parameter key="browserVersion">8</parameter>
-            <parameter key="browser">firefox</parameter>
+            <parameter key="browserName" type="string">firefox</parameter>
+            <parameter key="version" type="string">8</parameter>
+            <parameter key="platform" type="string">ANY</parameter>
+            <parameter key="browserVersion" type="string">8</parameter>
+            <parameter key="browser" type="string">firefox</parameter>
         </parameter>
         <parameter key="behat.mink.selenium2.wd_host">http://localhost:4444/wd/hub</parameter>
 

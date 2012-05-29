@@ -48,7 +48,7 @@ activate `MinkExtension`:
     ```
 
     For all configuration options, check [extension configuration
-    class](https://github.com/Behat/MinkExtension/blob/master/src/Behat/MinkExtension/Configuration.php#L35-142).
+    class](https://github.com/Behat/MinkExtension/blob/master/src/Behat/MinkExtension/Extension.php#L91-200).
 
 ### Through Composer
 

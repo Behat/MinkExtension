@@ -46,19 +46,19 @@ class Extension implements ExtensionInterface
             }
         }
 
-        if (isset($config['goutte'])) {
+        if (isset($config['goutte']) || class_exists('Behat\\Mink\\Driver\\GoutteDriver')) {
             $loader->load('sessions/goutte.xml');
         }
-        if (isset($config['sahi'])) {
+        if (isset($config['sahi']) || class_exists('Behat\\Mink\\Driver\\SahiDriver')) {
             $loader->load('sessions/sahi.xml');
         }
-        if (isset($config['zombie'])) {
+        if (isset($config['zombie']) || class_exists('Behat\\Mink\\Driver\\ZombieDriver')) {
             $loader->load('sessions/zombie.xml');
         }
-        if (isset($config['selenium'])) {
+        if (isset($config['selenium']) || class_exists('Behat\\Mink\\Driver\\SeleniumDriver')) {
             $loader->load('sessions/selenium.xml');
         }
-        if (isset($config['selenium2'])) {
+        if (isset($config['selenium2']) || class_exists('Behat\\Mink\\Driver\\Selenium2Driver')) {
             $loader->load('sessions/selenium2.xml');
         }
 

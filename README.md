@@ -37,7 +37,7 @@ activate `MinkExtension`:
 
     ``` yaml
     # behat.yml
-    defaults:
+    default:
       # ...
       extensions:
         mink_extension.phar:
@@ -75,7 +75,7 @@ activate `MinkExtension`:
 
     ``` yaml
     # behat.yml
-    defaults:
+    default:
       # ...
       extensions:
         Behat\MinkExtension\Extension:

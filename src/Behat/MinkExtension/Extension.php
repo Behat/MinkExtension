@@ -47,18 +47,48 @@ class Extension implements ExtensionInterface
         }
 
         if (isset($config['goutte'])) {
+            if (!class_exists('Behat\\Mink\\Driver\\GoutteDriver')) {
+                throw new \RuntimeException(
+                    'Install MinkGoutteDriver in order to activate goutte session.'
+                );
+            }
+
             $loader->load('sessions/goutte.xml');
         }
         if (isset($config['sahi'])) {
+            if (!class_exists('Behat\\Mink\\Driver\\SahiDriver')) {
+                throw new \RuntimeException(
+                    'Install MinkSahiDriver in order to activate sahi session.'
+                );
+            }
+
             $loader->load('sessions/sahi.xml');
         }
         if (isset($config['zombie'])) {
+            if (!class_exists('Behat\\Mink\\Driver\\ZombieDriver')) {
+                throw new \RuntimeException(
+                    'Install MinkZombieDriver in order to activate zombie session.'
+                );
+            }
+
             $loader->load('sessions/zombie.xml');
         }
         if (isset($config['selenium'])) {
+            if (!class_exists('Behat\\Mink\\Driver\\SeleniumDriver')) {
+                throw new \RuntimeException(
+                    'Install MinkSeleniumDriver in order to activate selenium session.'
+                );
+            }
+
             $loader->load('sessions/selenium.xml');
         }
         if (isset($config['selenium2'])) {
+            if (!class_exists('Behat\\Mink\\Driver\\Selenium2Driver')) {
+                throw new \RuntimeException(
+                    'Install MinkSelenium2Driver in order to activate selenium2 session.'
+                );
+            }
+
             $loader->load('sessions/selenium2.xml');
         }
 
@@ -117,10 +147,6 @@ class Extension implements ExtensionInterface
                     defaultValue('firefox')->
                 end()->
                 arrayNode('goutte')->
-                    validate()->
-                        ifTrue(function($v) { return !class_exists('Behat\\Mink\\Driver\\GoutteDriver'); })->
-                        thenInvalid('Install MinkGoutteDriver in order to activate goutte session.')->
-                    end()->
                     children()->
                         arrayNode('server_parameters')->
                             useAttributeAsKey('key')->
@@ -129,10 +155,6 @@ class Extension implements ExtensionInterface
                     end()->
                 end()->
                 arrayNode('sahi')->
-                    validate()->
-                        ifTrue(function($v) { return !class_exists('Behat\\Mink\\Driver\\SahiDriver'); })->
-                        thenInvalid('Install MinkSahiDriver in order to activate sahi session.')->
-                    end()->
                     children()->
                         scalarNode('sid')->
                             defaultNull()->
@@ -146,10 +168,6 @@ class Extension implements ExtensionInterface
                     end()->
                 end()->
                 arrayNode('zombie')->
-                    validate()->
-                        ifTrue(function($v) { return !class_exists('Behat\\Mink\\Driver\\ZombieDriver'); })->
-                        thenInvalid('Install MinkZombieDriver in order to activate zombie session.')->
-                    end()->
                     children()->
                         scalarNode('host')->
                             defaultValue('127.0.0.1')->
@@ -166,10 +184,6 @@ class Extension implements ExtensionInterface
                     end()->
                 end()->
                 arrayNode('selenium')->
-                    validate()->
-                        ifTrue(function($v) { return !class_exists('Behat\\Mink\\Driver\\SeleniumDriver'); })->
-                        thenInvalid('Install MinkSeleniumDriver in order to activate selenium session.')->
-                    end()->
                     children()->
                         scalarNode('host')->
                             defaultValue('127.0.0.1')->
@@ -183,10 +197,6 @@ class Extension implements ExtensionInterface
                     end()->
                 end()->
                 arrayNode('selenium2')->
-                    validate()->
-                        ifTrue(function($v) { return !class_exists('Behat\\Mink\\Driver\\Selenium2Driver'); })->
-                        thenInvalid('Install MinkSelenium2Driver in order to activate selenium2 session.')->
-                    end()->
                     children()->
                         scalarNode('browser')->
                             defaultValue('%behat.mink.browser_name%')->

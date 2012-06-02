@@ -5,8 +5,8 @@
     <parameters>
 
         <parameter key="behat.mink.driver.zombie.class">Behat\Mink\Driver\ZombieDriver</parameter>
-        <parameter key="behat.mink.zombie.connection.class">Behat\Mink\Driver\Zombie\Connection</parameter>
-        <parameter key="behat.mink.zombie.server.class">Behat\Mink\Driver\Zombie\Server</parameter>
+        <parameter key="behat.mink.zombie.connection.class">Behat\Mink\Driver\NodeJS\Connection</parameter>
+        <parameter key="behat.mink.zombie.server.class">Behat\Mink\Driver\NodeJS\Server\ZombieServer</parameter>
 
         <parameter key="behat.mink.zombie.host">127.0.0.1</parameter>
         <parameter key="behat.mink.zombie.port">8124</parameter>
@@ -19,8 +19,8 @@
         <service id="behat.mink.session.zombie" class="%behat.mink.session.class%">
             <argument type="service">
                 <service class="%behat.mink.driver.zombie.class%">
-                    <argument type="service" id="behat.mink.zombie.connection" />
                     <argument type="service" id="behat.mink.zombie.server" />
+                    <argument type="service" id="behat.mink.zombie.connection" />
                     <argument>%behat.mink.zombie.auto_server%</argument>
                 </service>
             </argument>

@@ -473,7 +473,7 @@ trait MinkDictionary
     /**
      * Returns list of definition translation resources paths for this dictionary.
      *
-     * @return  array
+     * @return array
      */
     public function getMinkTranslationResources()
     {

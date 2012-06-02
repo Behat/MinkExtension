@@ -405,7 +405,7 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
     /**
      * Returns list of definition translation resources paths.
      *
-     * @return  array
+     * @return array
      */
     public function getTranslationResources()
     {
@@ -415,7 +415,7 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
     /**
      * Returns list of definition translation resources paths for this dictionary.
      *
-     * @return  array
+     * @return array
      */
     public function getMinkTranslationResources()
     {

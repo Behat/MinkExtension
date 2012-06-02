@@ -62,7 +62,7 @@ class MinkAwareInitializer implements InitializerInterface, EventSubscriberInter
      *
      * @return array The event names to listen to
      */
-    static public function getSubscribedEvents()
+    public static function getSubscribedEvents()
     {
         return array(
             'beforeScenario' => 'prepareDefaultMinkSession',

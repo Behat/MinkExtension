@@ -24,12 +24,12 @@ interface MinkAwareInterface
      *
      * @param Mink $mink Mink session manager
      */
-    function setMink(Mink $mink);
+    public function setMink(Mink $mink);
 
     /**
      * Sets parameters provided for Mink.
      *
      * @param array $parameters
      */
-    function setMinkParameters(array $parameters);
+    public function setMinkParameters(array $parameters);
 }

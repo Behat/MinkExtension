@@ -438,7 +438,7 @@ trait MinkDictionary
      */
     public function assertNumElements($num, $element)
     {
-        $this->assertSession()->elementsCount('css', $element);
+        $this->assertSession()->elementsCount('css', $element, intval($num));
     }
 
     /**

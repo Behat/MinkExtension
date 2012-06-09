@@ -243,7 +243,7 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      */
     public function assertPageMatchesText($pattern)
     {
-        $this->assertSession()->pageTextMatches($this->fixStepArgument($text));
+        $this->assertSession()->pageTextMatches($this->fixStepArgument($pattern));
     }
 
     /**
@@ -253,7 +253,7 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      */
     public function assertPageNotMatchesText($pattern)
     {
-        $this->assertSession()->pageTextNotMatches($this->fixStepArgument($text));
+        $this->assertSession()->pageTextNotMatches($this->fixStepArgument($pattern));
     }
 
     /**

@@ -104,7 +104,7 @@ class Extension implements ExtensionInterface
         }
         $container->setParameter('behat.mink.parameters', $minkParameters);
 
-        if (isset($config['base_url')) {
+        if (isset($config['base_url'])) {
             $container->setParameter('behat.mink.base_url', $config['base_url']);
         }
         $container->setParameter('behat.mink.default_session', $config['default_session']);

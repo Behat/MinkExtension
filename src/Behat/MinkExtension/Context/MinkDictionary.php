@@ -5,6 +5,7 @@ namespace Behat\MinkExtension\Context;
 use Behat\Gherkin\Node\TableNode;
 
 use Behat\Mink\Mink,
+    Behat\Mink\Session,
     Behat\Mink\WebAssert;
 
 /*

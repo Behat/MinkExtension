@@ -24,6 +24,17 @@ use Behat\Behat\Context\TranslatedContextInterface,
 class MinkContext extends RawMinkContext implements TranslatedContextInterface
 {
     /**
+     * Opens homepage.
+     *
+     * @Given /^(?:|I )am on homepage$/
+     * @When /^(?:|I )go to homepage$/
+     */
+    public function iAmOnHomepage()
+    {
+        $this->getSession()->visit($this->locatePath('/'));
+    }
+
+    /**
      * Opens specified page.
      *
      * @Given /^(?:|I )am on "(?P<page>[^"]+)"$/

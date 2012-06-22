@@ -314,3 +314,8 @@ There's other useful parameters, that you can use to configure your suite:
   For example: ``show_cmd: 'firefox %s'``.
 * ``browser_name`` - metaoption, that defines which browser to use for Sahi,
   Selenium and Selenium2 drivers.
+* ``default_session`` - defines default session (driver) to be used for all
+  untagged scenarios. Could be any enabled driver name.
+* ``javascript_session`` - defines javascript session (driver) (the one, which
+  will be used for ``@javascript`` tagged scenarios). Could be any enabled driver
+  name.

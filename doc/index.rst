@@ -32,9 +32,9 @@ Through PHAR
 
 You should first download 3 phar archives:
 
-* `Behat <http://behat.org/download/behat.phar>`_ - Behat itself
-* `Mink <http://behat.org/download/mink.phar>`_ - Mink framework
-* `MinkExtension <http://behat.org/download/mink_extension.phar>`_
+* `behat.phar <http://behat.org/downloads/behat.phar>`_ - Behat itself
+* `mink.phar <http://behat.org/downloads/mink.phar>`_ - Mink framework
+* `mink_extension.phar <http://behat.org/downloads/mink_extension.phar>`_
   - integration extension
 
 After downloading and placing them into project directory, you need to 

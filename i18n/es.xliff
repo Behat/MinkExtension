@@ -2,6 +2,14 @@
   <file original="global" source-language="en" target-language="es" datatype="plaintext">
     <header />
     <body>
+        <trans-unit id="i-am-homepage">
+            <source><![CDATA[/^(?:|I )am on homepage$/]]></source>
+            <target><![CDATA[/^estoy en la página de inicio/]]></target>
+        </trans-unit>
+        <trans-unit id="i-go-to-homepage">
+            <source><![CDATA[/^(?:|I )go to homepage$/]]></source>
+            <target><![CDATA[/^voy a la página de inicio/]]></target>
+        </trans-unit>
         <trans-unit id="i-am-on-page">
             <source><![CDATA[/^(?:|I )am on "(?P<page>[^"]+)"$/]]></source>
             <target><![CDATA[/^estoy en "(?P<page>[^"]+)"$/]]></target>
@@ -70,6 +78,14 @@
             <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^no debo ver "(?P<text>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
+        <trans-unit id="i-should-see-text-matching">
+            <source><![CDATA[/^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^debo ver texto que siga el patrón (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+        </trans-unit>
+        <trans-unit id="i-should-not-see-text-matching">
+            <source><![CDATA[/^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^no debo ver texto que siga el patrón (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+        </trans-unit>
         <trans-unit id="the-response-should-contain">
             <source><![CDATA[/^the response should contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^la respuesta debe contener "(?P<text>(?:[^"]|\\")*)"$/]]></target>
@@ -109,6 +125,10 @@
         <trans-unit id="i-should-see-text-in-element">
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
             <target><![CDATA[/^debo ver "(?P<text>(?:[^"]|\\")*)" en el elemento "(?P<element>[^"]*)"$/]]></target>
+        </trans-unit>
+        <trans-unit id="i-should-not-see-text-in-element">
+            <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
+            <target><![CDATA[/^no debo ver "(?P<text>(?:[^"]|\\")*)" en el elemento "(?P<element>[^"]*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-element">
             <source><![CDATA[/^(?:|I )should see an? "(?P<element>[^"]*)" element$/]]></source>

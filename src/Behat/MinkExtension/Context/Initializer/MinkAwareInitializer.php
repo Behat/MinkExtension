@@ -67,6 +67,7 @@ class MinkAwareInitializer implements InitializerInterface, EventSubscriberInter
         return array(
             'beforeScenario' => array('prepareDefaultMinkSession', 10),
             'beforeOutline'  => array('prepareDefaultMinkSession', 10),
+            'beforeOutlineExample' => array('prepareDefaultMinkSession', 10),
             'afterSuite'     => array('tearDownMinkSessions', -10)
         );
     }

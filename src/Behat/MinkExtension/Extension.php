@@ -123,31 +123,33 @@ class Extension implements ExtensionInterface
      */
     public function getConfig(ArrayNodeDefinition $builder)
     {
+        $config = $this->loadEnvironmentConfiguration();
+
         $builder->
             children()->
                 scalarNode('mink_loader')->
-                    defaultNull()->
+                    defaultValue(isset($config['mink_loader']) ? $config['mink_loader'] : null)->
                 end()->
                 scalarNode('base_url')->
-                    defaultNull()->
+                    defaultValue(isset($config['base_url']) ? $config['base_url'] : null)->
                 end()->
                 scalarNode('files_path')->
-                    defaultNull()->
+                    defaultValue(isset($config['files_path']) ? $config['files_path'] : null)->
                 end()->
                 scalarNode('show_cmd')->
-                    defaultNull()->
+                    defaultValue(isset($config['show_cmd']) ? $config['show_cmd'] : null)->
                 end()->
                 scalarNode('show_tmp_dir')->
-                    defaultValue(sys_get_temp_dir())->
+                    defaultValue(isset($config['show_tmp_dir']) ? $config['show_tmp_dir'] : sys_get_temp_dir())->
                 end()->
                 scalarNode('default_session')->
-                    defaultValue('goutte')->
+                    defaultValue(isset($config['default_session']) ? $config['default_session'] : 'goutte')->
                 end()->
                 scalarNode('javascript_session')->
-                    defaultValue('selenium2')->
+                    defaultValue(isset($config['javascript_session']) ? $config['javascript_session'] : 'selenium2')->
                 end()->
                 scalarNode('browser_name')->
-                    defaultValue('firefox')->
+                    defaultValue(isset($config['browser_name']) ? $config['browser_name'] : 'firefox')->
                 end()->
                 arrayNode('goutte')->
                     children()->
@@ -160,71 +162,71 @@ class Extension implements ExtensionInterface
                 arrayNode('sahi')->
                     children()->
                         scalarNode('sid')->
-                            defaultNull()->
+                            defaultValue(isset($config['sahi']['sid']) ? $config['sahi']['sid'] : null)->
                         end()->
                         scalarNode('host')->
                             defaultValue('localhost')->
                         end()->
                         scalarNode('port')->
-                            defaultValue(9999)->
+                            defaultValue(isset($config['sahi']['port']) ? $config['sahi']['port'] : 999)->
                         end()->
                     end()->
                 end()->
                 arrayNode('zombie')->
                     children()->
                         scalarNode('host')->
-                            defaultValue('127.0.0.1')->
+                            defaultValue(isset($config['zombie']['host']) ? $config['zombie']['host'] : '127.0.0.1')->
                         end()->
                         scalarNode('port')->
-                            defaultValue(8124)->
+                            defaultValue(isset($config['zombie']['port']) ? $config['zombie']['port'] : 8124)->
                         end()->
                         scalarNode('auto_server')->
-                            defaultValue(true)->
+                            defaultValue(isset($config['zombie']['auto_server']) ? $config['zombie']['auto_server'] : true)->
                         end()->
                         scalarNode('node_bin')->
-                            defaultValue('node')->
+                            defaultValue(isset($config['zombie']['node_bin']) ? $config['zombie']['node_bin'] : 'node')->
                         end()->
                     end()->
                 end()->
                 arrayNode('selenium')->
                     children()->
                         scalarNode('host')->
-                            defaultValue('127.0.0.1')->
+                            defaultValue(isset($config['selenium']['host']) ? $config['selenium']['host'] : '127.0.0.1')->
                         end()->
                         scalarNode('port')->
-                            defaultValue(4444)->
+                            defaultValue(isset($config['selenium']['port']) ? $config['selenium']['port'] : 4444)->
                         end()->
                         scalarNode('browser')->
-                            defaultValue('*%behat.mink.browser_name%')->
+                            defaultValue(isset($config['selenium']['browser']) ? $config['selenium']['browser'] : '*%behat.mink.browser_name%')->
                         end()->
                     end()->
                 end()->
                 arrayNode('selenium2')->
                     children()->
                         scalarNode('browser')->
-                            defaultValue('%behat.mink.browser_name%')->
+                            defaultValue(isset($config['selenium2']['browser']) ? $config['selenium2']['browser'] : '%behat.mink.browser_name%')->
                         end()->
                         arrayNode('capabilities')->
                             children()->
                                 scalarNode('browserName')->
-                                    defaultValue('firefox')->
+                                    defaultValue(isset($config['selenium2']['capabilities']['browserName']) ? $config['selenium2']['capabilities']['browserName'] : 'firefox')->
                                 end()->
                                 scalarNode('version')->
-                                    defaultValue(8)->
+                                    defaultValue(isset($config['selenium2']['capabilities']['version']) ? $config['selenium2']['capabilities']['version'] : 8)->
                                 end()->
                                 scalarNode('platform')->
-                                    defaultValue('ANY')->
+                                    defaultValue(isset($config['selenium2']['capabilities']['platform']) ? $config['selenium2']['capabilities']['platform'] : 'ANY')->
                                 end()->
                                 scalarNode('browserVersion')->
-                                    defaultValue(8)->
+                                    defaultValue(isset($config['selenium2']['capabilities']['browserVersion']) ? $config['selenium2']['capabilities']['browserVersion'] : 8)->
                                 end()->
                                 scalarNode('browser')->
-                                    defaultValue('firefox')->
+                                    defaultValue(isset($config['selenium2']['capabilities']['browser']) ? $config['selenium2']['capabilities']['browser'] : 'firefox')->
                                 end()->
                             end()->
                         end()->
                         scalarNode('wd_host')->
-                            defaultValue('http://localhost:4444/wd/hub')->
+                            defaultValue(isset($config['selenium2']['wd_host']) ? $config['selenium2']['wd_host'] : 'http://localhost:4444/wd/hub')->
                         end()->
                     end()->
                 end()->
@@ -243,5 +245,15 @@ class Extension implements ExtensionInterface
             new Compiler\SelectorsPass(),
             new Compiler\SessionsPass(),
         );
+    }
+
+    protected function loadEnvironmentConfiguration()
+    {
+        $config = array();
+        if ($envConfig = getenv('MINK_EXTENSION_PARAMS')) {
+            parse_str($envConfig, $config);
+        }
+
+        return $config;
     }
 }

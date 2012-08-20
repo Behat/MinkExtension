@@ -12,6 +12,8 @@
         }
     ],
 
+    "minimum-stability": "dev",
+
     "require": {
         "php":          ">=5.3.2",
         "behat/behat":  ">=2.4.0,<2.5.0",

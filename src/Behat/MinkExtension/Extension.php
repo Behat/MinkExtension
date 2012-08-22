@@ -210,13 +210,13 @@ class Extension implements ExtensionInterface
                                     defaultValue('firefox')->
                                 end()->
                                 scalarNode('version')->
-                                    defaultValue(8)->
+                                    defaultValue("9")->
                                 end()->
                                 scalarNode('platform')->
                                     defaultValue('ANY')->
                                 end()->
                                 scalarNode('browserVersion')->
-                                    defaultValue(8)->
+                                    defaultValue("9")->
                                 end()->
                                 scalarNode('browser')->
                                     defaultValue('firefox')->

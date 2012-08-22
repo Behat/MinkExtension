@@ -221,6 +221,10 @@ class Extension implements ExtensionInterface
                                 scalarNode('browser')->
                                     defaultValue('firefox')->
                                 end()->
+                                arrayNode('proxy')->
+                                    useAttributeAsKey('key')->
+                                    prototype('variable')->end()->
+                                end()->
                             end()->
                         end()->
                         scalarNode('wd_host')->

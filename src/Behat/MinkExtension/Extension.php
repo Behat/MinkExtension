@@ -212,13 +212,13 @@ class Extension implements ExtensionInterface
                                     defaultValue(isset($config['selenium2']['capabilities']['browserName']) ? $config['selenium2']['capabilities']['browserName'] : 'firefox')->
                                 end()->
                                 scalarNode('version')->
-                                    defaultValue(isset($config['selenium2']['capabilities']['version']) ? $config['selenium2']['capabilities']['version'] : 9)->
+                                    defaultValue(isset($config['selenium2']['capabilities']['version']) ? $config['selenium2']['capabilities']['version'] : "9")->
                                 end()->
                                 scalarNode('platform')->
                                     defaultValue(isset($config['selenium2']['capabilities']['platform']) ? $config['selenium2']['capabilities']['platform'] : 'ANY')->
                                 end()->
                                 scalarNode('browserVersion')->
-                                    defaultValue(isset($config['selenium2']['capabilities']['browserVersion']) ? $config['selenium2']['capabilities']['browserVersion'] : 9)->
+                                    defaultValue(isset($config['selenium2']['capabilities']['browserVersion']) ? $config['selenium2']['capabilities']['browserVersion'] : "9")->
                                 end()->
                                 scalarNode('browser')->
                                     defaultValue(isset($config['selenium2']['capabilities']['browser']) ? $config['selenium2']['capabilities']['browser'] : 'firefox')->

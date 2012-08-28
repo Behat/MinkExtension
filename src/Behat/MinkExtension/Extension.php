@@ -157,6 +157,10 @@ class Extension implements ExtensionInterface
                             useAttributeAsKey('key')->
                             prototype('variable')->end()->
                         end()->
+                        arrayNode('guzzle_parameters')->
+                            useAttributeAsKey('key')->
+                            prototype('variable')->end()->
+                        end()->
                     end()->
                 end()->
                 arrayNode('sahi')->

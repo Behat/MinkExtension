@@ -172,7 +172,7 @@ class Extension implements ExtensionInterface
                             defaultValue('localhost')->
                         end()->
                         scalarNode('port')->
-                            defaultValue(isset($config['sahi']['port']) ? $config['sahi']['port'] : 999)->
+                            defaultValue(isset($config['sahi']['port']) ? $config['sahi']['port'] : 9999)->
                         end()->
                     end()->
                 end()->

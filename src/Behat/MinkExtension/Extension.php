@@ -141,7 +141,7 @@ class Extension implements ExtensionInterface
                     defaultValue(isset($config['files_path']) ? $config['files_path'] : null)->
                 end()->
                 booleanNode('show_auto')->
-                    defaultValue(false)->
+                    defaultValue(isset($config['show_auto']) ? $config['show_auto'] : null)->
                 end()->
                 scalarNode('show_cmd')->
                     defaultValue(isset($config['show_cmd']) ? $config['show_cmd'] : null)->

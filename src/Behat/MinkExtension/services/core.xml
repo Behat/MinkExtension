@@ -14,6 +14,7 @@
 
         <parameter key="behat.mink.context.class_guesser.class">Behat\MinkExtension\Context\ClassGuesser\MinkContextClassGuesser</parameter>
         <parameter key="behat.mink.context.initializer.class">Behat\MinkExtension\Context\Initializer\MinkAwareInitializer</parameter>
+        <parameter key="behat.mink.listener.sessions_listener.class">Behat\MinkExtension\Listener\SessionsListener</parameter>
 
         <parameter key="behat.mink.default_session">goutte</parameter>
         <parameter key="behat.mink.javascript_session">selenium2</parameter>
@@ -43,6 +44,11 @@
             <argument type="service" id="behat.mink" />
             <argument>%behat.mink.parameters%</argument>
             <tag name="behat.context.initializer" />
+        </service>
+
+        <service id="behat.mink.listener.sessions_listener" class="%behat.mink.listener.sessions_listener.class%">
+            <argument type="service" id="behat.mink" />
+            <argument>%behat.mink.parameters%</argument>
             <tag name="behat.event_subscriber" priority="0" />
         </service>
 

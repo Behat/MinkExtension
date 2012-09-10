@@ -114,6 +114,10 @@ class Extension implements ExtensionInterface
         $minkReflection = new \ReflectionClass('Behat\Mink\Mink');
         $minkLibPath    = realpath(dirname($minkReflection->getFilename()) . '/../../../');
         $container->setParameter('mink.paths.lib', $minkLibPath);
+
+        if ($config['show_auto']) {
+            $loader->load('failure_show_listener.xml');
+        }
     }
 
     /**
@@ -135,6 +139,9 @@ class Extension implements ExtensionInterface
                 end()->
                 scalarNode('files_path')->
                     defaultValue(isset($config['files_path']) ? $config['files_path'] : null)->
+                end()->
+                booleanNode('show_auto')->
+                    defaultValue(false)->
                 end()->
                 scalarNode('show_cmd')->
                     defaultValue(isset($config['show_cmd']) ? $config['show_cmd'] : null)->

@@ -124,11 +124,11 @@
         </trans-unit>
         <trans-unit id="the-response-status-code-should-be">
             <source><![CDATA[/^the response status code should be (?P<code>\d+)$/]]></source>
-            <target><![CDATA[/^Statuskoderesponsen skulle være (?P<code>\d+)$/]]></target>
+            <target><![CDATA[/^skulle statuskoderesponsen være (?P<code>\d+)$/]]></target>
         </trans-unit>
         <trans-unit id="the-response-status-code-should-not-be">
             <source><![CDATA[/^the response status code should not be (?P<code>\d+)$/]]></source>
-            <target><![CDATA[/^Statuskoderesponsen skulle ikke være (?P<code>\d+)$/]]></target>
+            <target><![CDATA[/^skulle statuskoderesponsen ikke være (?P<code>\d+)$/]]></target>
         </trans-unit>
         <trans-unit id="print-last-response">
             <source><![CDATA[/^print last response$/]]></source>

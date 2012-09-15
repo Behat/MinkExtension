@@ -238,6 +238,17 @@ class Extension implements ExtensionInterface
                                     useAttributeAsKey('key')->
                                     prototype('variable')->end()->
                                 end()->
+                                arrayNode('chrome')->
+                                    children()->
+                                        arrayNode('switches')->
+                                            prototype('scalar')->end()->
+                                        end()->
+                                        scalarNode('binary')->end()->
+                                        arrayNode('extensions')->
+                                            prototype('scalar')->end()->
+                                        end()->
+                                    end()->
+                                end()->
                             end()->
                         end()->
                         scalarNode('wd_host')->

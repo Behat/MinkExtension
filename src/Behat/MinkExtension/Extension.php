@@ -234,6 +234,15 @@ class Extension implements ExtensionInterface
                                 scalarNode('browser')->
                                     defaultValue(isset($config['selenium2']['capabilities']['browser']) ? $config['selenium2']['capabilities']['browser'] : 'firefox')->
                                 end()->
+                                booleanNode('javascriptEnabled')->end()->
+                                booleanNode('databaseEnabled')->end()->
+                                booleanNode('locationContextEnabled')->end()->
+                                booleanNode('applicationCacheEnabled')->end()->
+                                booleanNode('browserConnectionEnabled')->end()->
+                                booleanNode('webStorageEnabled')->end()->
+                                booleanNode('rotatable')->end()->
+                                booleanNode('acceptSslCerts')->end()->
+                                booleanNode('nativeEvents')->end()->
                                 arrayNode('proxy')->
                                     useAttributeAsKey('key')->
                                     prototype('variable')->end()->

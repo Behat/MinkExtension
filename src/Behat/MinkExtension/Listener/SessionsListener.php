@@ -61,9 +61,9 @@ class SessionsListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            'beforeScenario' => array('prepareDefaultMinkSession', 10),
-            'beforeOutline'  => array('prepareDefaultMinkSession', 10),
-            'afterSuite'     => array('tearDownMinkSessions', -10)
+            'beforeScenario'       => array('prepareDefaultMinkSession', 10),
+            'beforeOutlineExample' => array('prepareDefaultMinkSession', 10),
+            'afterSuite'           => array('tearDownMinkSessions', -10)
         );
     }
 
@@ -78,7 +78,7 @@ class SessionsListener implements EventSubscriberInterface
      * `@insulated` tag will cause Mink to stop current sessions before scenario
      * instead of just soft-resetting them
      *
-     * @param ScenarioEvent|OutlineEvent $event
+     * @param ScenarioEvent|OutlineExampleEvent $event
      */
     public function prepareDefaultMinkSession($event)
     {

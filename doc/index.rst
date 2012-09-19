@@ -93,7 +93,7 @@ Usage
 After installing extension, there would be 6 usage options available for you:
 
 1. Writing features with bundled steps only. In this case, you don't need to create
-   ``boostrap/`` folder or custom ``FeatureContext`` class - Behat will use default
+   ``bootstrap/`` folder or custom ``FeatureContext`` class - Behat will use default
    ``MinkContext`` by default. To see all available steps, run:
 
     .. code-block:: bash
@@ -206,7 +206,7 @@ Configuration
 -------------
 
 MinkExtension comes with flexible configuration system, that gives you
-ability to configure Mink inside Behat to fullfil all your needs.
+ability to configure Mink inside Behat to fulfil all your needs.
 
 Drivers
 ~~~~~~~

@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\Reference,
  */
 
 /**
- * Selectors handler compilation pass. Registers all avaiable Mink selector engines.
+ * Selectors handler compilation pass. Registers all available Mink selector engines.
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */

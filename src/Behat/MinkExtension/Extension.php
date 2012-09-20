@@ -244,8 +244,11 @@ class Extension implements ExtensionInterface
                                 booleanNode('acceptSslCerts')->end()->
                                 booleanNode('nativeEvents')->end()->
                                 arrayNode('proxy')->
-                                    useAttributeAsKey('key')->
-                                    prototype('variable')->end()->
+                                    children()->
+                                        scalarNode('proxyType')->
+                                            defaultValue(isset($config['selenium2']['capabilities']['proxy']['proxyType']) ? $config['selenium2']['capabilities']['proxy']['proxyType'] : 'system')->
+                                        end()->
+                                    end()->
                                 end()->
                                 arrayNode('chrome')->
                                     children()->

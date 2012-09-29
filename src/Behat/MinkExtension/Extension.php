@@ -245,9 +245,17 @@ class Extension implements ExtensionInterface
                                 booleanNode('nativeEvents')->end()->
                                 arrayNode('proxy')->
                                     children()->
-                                        scalarNode('proxyType')->
-                                            defaultValue(isset($config['selenium2']['capabilities']['proxy']['proxyType']) ? $config['selenium2']['capabilities']['proxy']['proxyType'] : 'system')->
-                                        end()->
+                                        scalarNode('proxyType')->end()->
+                                        scalarNode('proxyAuthconfigUrl')->end()->
+                                        scalarNode('ftpProxy')->end()->
+                                        scalarNode('httpProxy')->end()->
+                                        scalarNode('sslProxy')->end()->
+                                    end()->
+                                    validate()->
+                                        ifTrue(function ($v) {
+                                            return empty($v);
+                                        })->
+                                        thenUnset()->
                                     end()->
                                 end()->
                                 arrayNode('chrome')->

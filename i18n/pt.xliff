@@ -2,6 +2,14 @@
   <file original="global" source-language="en" target-language="pt" datatype="plaintext">
     <header />
     <body>
+        <trans-unit id="i-am-homepage">
+            <source><![CDATA[/^(?:|I )am on homepage$/]]></source>
+            <target><![CDATA[/^(?:|Eu )estou na página de entrada/]]></target>
+        </trans-unit>
+        <trans-unit id="i-go-to-homepage">
+            <source><![CDATA[/^(?:|I )go to homepage$/]]></source>
+            <target><![CDATA[/^(?:|Eu )vou para a página de entrada$/]]></target>
+        </trans-unit>
         <trans-unit id="i-am-on-page">
             <source><![CDATA[/^(?:|I )am on "(?P<page>[^"]+)"$/]]></source>
             <target><![CDATA[/^(?:|Eu )estou em "(?P<page>[^"]+)"$/]]></target>
@@ -117,6 +125,10 @@
         <trans-unit id="i-should-see-text-in-element">
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
             <target><![CDATA[/^(?:|Eu )devo ver "(?P<text>(?:[^"]|\\")*)" no elemento "(?P<element>[^"]*)"$/]]></target>
+        </trans-unit>
+        <trans-unit id="i-should-not-see-text-in-element">
+            <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
+            <target><![CDATA[/^(?:|Eu )não deveria de ver "(?P<text>(?:[^"]|\\")*)" no elemento "(?P<element>[^"]*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-element">
             <source><![CDATA[/^(?:|I )should see an? "(?P<element>[^"]*)" element$/]]></source>

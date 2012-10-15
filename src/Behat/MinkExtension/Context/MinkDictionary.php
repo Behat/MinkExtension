@@ -384,6 +384,16 @@ trait MinkDictionary
     }
 
     /**
+     * Checks, that element with specified CSS doesn't contain specified HTML.
+     *
+     * @Then /^the "(?P<element>[^"]*)" element should not contain "(?P<value>(?:[^"]|\\")*)"$/
+     */
+    public function assertElementNotContains($element, $value)
+    {
+        $this->assertSession()->elementNotContains('css', $element, $this->fixStepArgument($value));
+    }
+
+    /**
      * Checks, that element with specified CSS exists on page.
      *
      * @Then /^(?:|I )should see an? "(?P<element>[^"]*)" element$/

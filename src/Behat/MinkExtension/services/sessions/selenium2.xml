@@ -13,6 +13,9 @@
             <parameter key="platform" type="string">ANY</parameter>
             <parameter key="browserVersion" type="string">8</parameter>
             <parameter key="browser" type="string">firefox</parameter>
+            <parameter key="name" type="string">Behat test</parameter>
+            <parameter key="deviceOrientation" type="string">portrait</parameter>
+            <parameter key="deviceType" type="string">tablet</parameter>
         </parameter>
         <parameter key="behat.mink.selenium2.wd_host">http://localhost:4444/wd/hub</parameter>
 

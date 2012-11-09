@@ -114,9 +114,17 @@
             <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^элемент "(?P<element>[^"]*)" должен содержать "(?P<value>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
+        <trans-unit id="the-element-should-not-contain">
+            <source><![CDATA[/^the "(?P<element>[^"]*)" element should not contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
+            <target><![CDATA[/^элемент "(?P<element>[^"]*)" не должен содержать "(?P<value>(?:[^"]|\\")*)"$/]]></target>
+        </trans-unit>
         <trans-unit id="i-should-see-text-in-element">
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
             <target><![CDATA[/^(?:|я )должен видеть "(?P<text>(?:[^"]|\\")*)" внутри элемента "(?P<element>[^"]*)"$/]]></target>
+        </trans-unit>
+        <trans-unit id="i-should-not-see-text-in-element">
+            <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
+            <target><![CDATA[/^(?:|я )не должен видеть "(?P<text>(?:[^"]|\\")*)" внутри элемента "(?P<element>[^"]*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-element">
             <source><![CDATA[/^(?:|I )should see an? "(?P<element>[^"]*)" element$/]]></source>

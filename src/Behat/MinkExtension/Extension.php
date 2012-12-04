@@ -234,6 +234,15 @@ class Extension implements ExtensionInterface
                                 scalarNode('browser')->
                                     defaultValue(isset($config['selenium2']['capabilities']['browser']) ? $config['selenium2']['capabilities']['browser'] : 'firefox')->
                                 end()->
+                                scalarNode('name')->
+                                    defaultValue(isset($config['selenium2']['capabilities']['name']) ? $config['selenium2']['capabilities']['name'] : 'Behat Test')->
+                                end()->
+                                scalarNode('deviceOrientation')->
+                                    defaultValue(isset($config['selenium2']['capabilities']['deviceOrientation']) ? $config['selenium2']['capabilities']['deviceOrientation'] : 'portrait')->
+                                end()->
+                                scalarNode('deviceType')->
+                                    defaultValue(isset($config['selenium2']['capabilities']['deviceType']) ? $config['selenium2']['capabilities']['deviceType'] : 'tablet')->
+                                end()->
                                 booleanNode('javascriptEnabled')->end()->
                                 booleanNode('databaseEnabled')->end()->
                                 booleanNode('locationContextEnabled')->end()->

@@ -26,8 +26,8 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
     /**
      * Opens homepage.
      *
-     * @Given /^(?:|I )am on homepage$/
-     * @When /^(?:|I )go to homepage$/
+     * @Given /^(?:|I )am on (?:|the )homepage$/
+     * @When /^(?:|I )go to (?:|the )homepage$/
      */
     public function iAmOnHomepage()
     {

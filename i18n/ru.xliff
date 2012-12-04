@@ -3,11 +3,11 @@
     <header />
     <body>
         <trans-unit id="i-am-homepage">
-            <source><![CDATA[/^(?:|I )am on homepage$/]]></source>
+            <source><![CDATA[/^(?:|I )am on (?:|the )homepage$/]]></source>
             <target><![CDATA[/^(?:|я )на главной странице$/]]></target>
         </trans-unit>
         <trans-unit id="i-go-to-homepage">
-            <source><![CDATA[/^(?:|I )go to homepage$/]]></source>
+            <source><![CDATA[/^(?:|I )go to (?:|the )homepage$/]]></source>
             <target><![CDATA[/^(?:|я )перехожу на главную страницу$/]]></target>
         </trans-unit>
         <trans-unit id="i-am-on-page">

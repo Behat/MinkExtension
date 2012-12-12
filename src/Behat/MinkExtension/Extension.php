@@ -98,6 +98,10 @@ class Extension implements ExtensionInterface
                 $minkParameters[$ns] = $tlValue;
             } else {
                 foreach ($tlValue as $name => $value) {
+                    if ('guzzle_parameters' === $name) {
+                        $value['redirect.disable'] = true;
+                    }
+
                     $container->setParameter("behat.mink.$ns.$name", $value);
                 }
             }

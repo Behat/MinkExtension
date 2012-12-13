@@ -437,6 +437,7 @@ trait MinkDictionary
      * Checks, that checkbox with specified in|name|label|value is checked.
      *
      * @Then /^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should be checked$/
+     * @Then /^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" (?:is|should be) checked$/
      */
     public function assertCheckboxChecked($checkbox)
     {
@@ -447,6 +448,8 @@ trait MinkDictionary
      * Checks, that checkbox with specified in|name|label|value is unchecked.
      *
      * @Then /^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should not be checked$/
+     * @Then /^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" should (?:be unchecked|not be checked)$/
+     * @Then /^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" is (?:unchecked|not checked)$/
      */
     public function assertCheckboxNotChecked($checkbox)
     {

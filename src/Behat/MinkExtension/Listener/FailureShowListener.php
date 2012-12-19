@@ -7,6 +7,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Behat\Behat\Event\StepEvent;
 
 use Behat\Mink\Mink;
+use Behat\Mink\Exception\Exception as MinkException;
 
 /*
  * This file is part of the Behat\MinkExtension.
@@ -77,6 +78,10 @@ class FailureShowListener implements EventSubscriberInterface
     public function showFailedStepResponse($event)
     {
         if (StepEvent::FAILED !== $event->getResult()) {
+            return;
+        }
+        
+        if (!$event->getException() instanceof MinkException) {
             return;
         }
 

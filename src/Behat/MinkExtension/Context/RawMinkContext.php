@@ -5,7 +5,8 @@ namespace Behat\MinkExtension\Context;
 use Behat\Behat\Context\BehatContext;
 
 use Behat\Mink\Mink,
-    Behat\Mink\WebAssert;
+    Behat\Mink\WebAssert,
+    Behat\Mink\Session;
 
 /*
  * This file is part of the Behat\MinkExtension.

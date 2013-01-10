@@ -2,6 +2,14 @@
   <file original="global" source-language="en" target-language="de" datatype="plaintext">
     <header />
     <body>
+        <trans-unit id="i-am-on-homepage">
+            <source><![CDATA[/^(?:|I )am on (?:|the )homepage$/]]></source>
+            <target><![CDATA[/^(?:|ich )bin auf (?:|der )Startseite$/]]></target>
+        </trans-unit>
+        <trans-unit id="i-go-to-homepage">
+            <source><![CDATA[/^(?:|I )go to (?:|the )homepage$/]]></source>
+            <target><![CDATA[/^(?:|ich )gehe auf (?:|die )Startseite$/]]></target>
+        </trans-unit>
         <trans-unit id="i-am-on-page">
             <source><![CDATA[/^(?:|I )am on "(?P<page>[^"]+)"$/]]></source>
             <target><![CDATA[/^(?:|ich )bin auf "(?P<page>[^"]+)"$/]]></target>
@@ -62,21 +70,69 @@
             <source><![CDATA[/^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^(?:|ich )lade die Datei "(?P<path>[^"]*)" in "(?P<field>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
+        <trans-unit id="i-should-be-on-page">
+            <source><![CDATA[/^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>
+            <target><![CDATA[/^(?:|ich )sollte auf "(?P<page>[^"]+)" sein$/]]></target>
+        </trans-unit>
+       <trans-unit id="the-url-should-match">
+            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"([^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^die Webadresse sollte mit (?P<pattern>"([^"]|\\")*") übereinstimmen$/]]></target>
+        </trans-unit>
+        <trans-unit id="the-response-status-code-should-be">
+            <source><![CDATA[/^the response status code should be (?P<code>\d+)$/]]></source>
+            <target><![CDATA[/^die Status-Code-Rückmeldung sollte (?P<code>\d+) sein$/]]></target>
+        </trans-unit>
+        <trans-unit id="the-response-status-code-should-not-be">
+            <source><![CDATA[/^the response status code should not be (?P<code>\d+)$/]]></source>
+            <target><![CDATA[/^die Status-Code-Rückmeldung sollte nicht (?P<code>\d+) sein$/]]></target>
+        </trans-unit>
         <trans-unit id="i-should-see-text">
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^(?:|ich )sollte "(?P<text>(?:[^"]|\\")*)" sehen$/]]></target>
-        </trans-unit>
-        <trans-unit id="the-response-should-contain">
-            <source><![CDATA[/^the response should contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^die Rückmeldung sollte "(?P<text>(?:[^"]|\\")*)" enthalten$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-not-see-text">
             <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^(?:|ich )sollte nicht "(?P<text>(?:[^"]|\\")*)" sehen$/]]></target>
         </trans-unit>
-        <trans-unit id="the-response-should-not-contain">
+        <trans-unit id="i-should-see-text-matching">
+            <source><![CDATA[/^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^(?:|ich )sollte folgenden Text sehen (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+        </trans-unit>
+        <trans-unit id="i-should-not-see-text-matching">
+            <source><![CDATA[/^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^(?:|ich )sollte nicht folgenden Text sehen (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+        </trans-unit>
+        <trans-unit id="the-response-should-contain">
+            <source><![CDATA[/^the response should contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
+            <target><![CDATA[/^die Rückmeldung sollte "(?P<text>(?:[^"]|\\")*)" enthalten$/]]></target>
+        </trans-unit>
+       <trans-unit id="the-response-should-not-contain">
             <source><![CDATA[/^the response should not contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^die Rückmeldung sollte nicht "(?P<text>(?:[^"]|\\")*)" enthalten$/]]></target>
+        </trans-unit>
+        <trans-unit id="i-should-see-text-in-element">
+            <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
+            <target><![CDATA[/^(?:|ich )sollte "(?P<text>(?:[^"]|\\")*)" im "(?P<element>[^"]*)" Element sehen$/]]></target>
+        </trans-unit>
+         <trans-unit id="i-should-not-see-text-in-element">
+            <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
+            <target><![CDATA[/^(?:|ich )sollte nicht "(?P<text>(?:[^"]|\\")*)" im "(?P<element>[^"]*)" Element sehen$/]]></target>
+        </trans-unit>
+        <trans-unit id="the-element-should-contain">
+            <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
+            <target><![CDATA[/^das "(?P<element>[^"]*)" Element sollte "(?P<value>(?:[^"]|\\")*)" enthalten$/]]></target>
+        </trans-unit>
+        <trans-unit id="the-element-should-not-contain">
+            <source><![CDATA[/^the "(?P<element>[^"]*)" element should not contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
+            <target><![CDATA[/^das "(?P<element>[^"]*)" Element sollte nicht "(?P<value>(?:[^"]|\\")*)" enthalten$/]]></target>
+        </trans-unit>
+        <trans-unit id="i-should-see-element">
+            <source><![CDATA[/^(?:|I )should see an? "(?P<element>[^"]*)" element$/]]></source>
+            <target><![CDATA[/^(?:|ich )sollte ein "(?P<element>[^"]*)" Element sehen$/]]></target>
+        </trans-unit>
+        <trans-unit id="i-should-not-see-element">
+            <source><![CDATA[/^(?:|I )should not see an? "(?P<element>[^"]*)" element$/]]></source>
+            <target><![CDATA[/^(?:|ich )sollte kein "(?P<element>[^"]*)" Element sehen$/]]></target>
         </trans-unit>
         <trans-unit id="the-field-should-contain-value">
             <source><![CDATA[/^the "(?P<field>(?:[^"]|\\")*)" field should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
@@ -94,41 +150,9 @@
             <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should not be checked$/]]></source>
             <target><![CDATA[/^die "(?P<checkbox>(?:[^"]|\\")*)" checkbox sollte nicht aktiviert sein$/]]></target>
         </trans-unit>
-        <trans-unit id="i-should-be-on-page">
-            <source><![CDATA[/^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>
-            <target><![CDATA[/^(?:|ich )sollte auf "(?P<page>[^"]+)" sein$/]]></target>
-        </trans-unit>
-        <trans-unit id="the-url-should-match">
-            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"([^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^die Webadresse sollte mit (?P<pattern>"([^"]|\\")*") übereinstimmen$/]]></target>
-        </trans-unit>
-        <trans-unit id="the-element-should-contain">
-            <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^das "(?P<element>[^"]*)" Element sollte "(?P<value>(?:[^"]|\\")*)" enthalten$/]]></target>
-        </trans-unit>
-        <trans-unit id="i-should-see-text-in-element">
-            <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
-            <target><![CDATA[/^(?:|ich )sollte "(?P<text>(?:[^"]|\\")*)" im "(?P<element>[^"]*)" Element sehen$/]]></target>
-        </trans-unit>
-        <trans-unit id="i-should-see-element">
-            <source><![CDATA[/^(?:|I )should see an? "(?P<element>[^"]*)" element$/]]></source>
-            <target><![CDATA[/^(?:|ich )sollte ein "(?P<element>[^"]*)" Element sehen$/]]></target>
-        </trans-unit>
-        <trans-unit id="i-should-not-see-element">
-            <source><![CDATA[/^(?:|I )should not see an? "(?P<element>[^"]*)" element$/]]></source>
-            <target><![CDATA[/^(?:|ich )sollte kein "(?P<element>[^"]*)" Element sehen$/]]></target>
-        </trans-unit>
         <trans-unit id="i-should-see-num-elements">
             <source><![CDATA[/^(?:|I )should see (?P<num>\d+) "(?P<element>[^"]*)" elements?$/]]></source>
             <target><![CDATA[/^(?:|ich )sollte (?P<num>\d+) "(?P<element>[^"]*)" Elemente? sehen$/]]></target>
-        </trans-unit>
-        <trans-unit id="the-response-status-code-should-be">
-            <source><![CDATA[/^the response status code should be (?P<code>\d+)$/]]></source>
-            <target><![CDATA[/^die Status-Code-Rückmeldung sollte (?P<code>\d+) sein$/]]></target>
-        </trans-unit>
-        <trans-unit id="the-response-status-code-should-not-be">
-            <source><![CDATA[/^the response status code should not be (?P<code>\d+)$/]]></source>
-            <target><![CDATA[/^die Status-Code-Rückmeldung sollte nicht (?P<code>\d+) sein$/]]></target>
         </trans-unit>
         <trans-unit id="print-last-response">
             <source><![CDATA[/^print last response$/]]></source>

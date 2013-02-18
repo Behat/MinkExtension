@@ -198,6 +198,16 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
     }
 
     /**
+     * Checks, that current page is the homepage.
+     *
+     * @Then /^(?:|I )should be on (?:|the )homepage$/
+     */
+    public function assertHomepage()
+    {
+        $this->assertSession()->addressEquals($this->locatePath('/'));
+    }
+
+    /**
      * Checks, that current page PATH matches regular expression.
      *
      * @Then /^the (?i)url(?-i) should match (?P<pattern>"([^"]|\\")*")$/

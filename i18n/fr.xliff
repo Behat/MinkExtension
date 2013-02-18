@@ -114,7 +114,7 @@
             <source><![CDATA[/^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>
             <target><![CDATA[/^(?:|je )devrais être sur "(?P<page>[^"]+)"$/]]></target>
         </trans-unit>
-        <trans-unit id="i-should-be-on-homepages">
+        <trans-unit id="i-should-be-on-homepage">
             <source><![CDATA[/^(?:|I )should be on (?:|the )homepage$/]]></source>
             <target><![CDATA[/^(?:|je )devrais être sur la page d'accueil$/]]></target>
         </trans-unit>

@@ -12,8 +12,6 @@
         }
     ],
 
-    "minimum-stability": "dev",
-
     "require": {
         "php":          ">=5.3.2",
         "behat/behat":  ">=2.4,<2.5-dev",
@@ -21,10 +19,16 @@
     },
 
     "require-dev": {
-        "behat/mink-goutte-driver": "*"
+        "behat/mink-goutte-driver": "1.0.*"
     },
 
     "autoload": {
         "psr-0": { "Behat\\MinkExtension": "src/" }
+    },
+
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
     }
 }

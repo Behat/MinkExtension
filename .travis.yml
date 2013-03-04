@@ -4,12 +4,18 @@ php:
   - 5.3
   - 5.4
 
+env:
+  - SYMFONY_VERSION='2.1.*'
+  - SYMFONY_VERSION='2.2.*@dev'
+
 branches:
   only:
     - master
 
 before_script:
   - curl http://getcomposer.org/installer | php
-  - php composer.phar install --dev
+  - php composer.phar require --no-update symfony/symfony=$SYMFONY_VERSION
+  - php composer.phar install --dev --prefer-source
+  - export PATH=./vendor/bin:$PATH
 
-script: vendor/bin/behat -fprogress
+script: behat -fprogress

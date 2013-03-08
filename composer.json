@@ -14,13 +14,13 @@
 
     "require": {
         "php":          ">=5.3.2",
-        "behat/behat":  ">=2.4,<2.5-dev",
-        "behat/mink":   ">=1.4,<1.5-dev"
+        "behat/behat":  "~2.4.5",
+        "behat/mink":   "~1.4.3"
     },
 
     "require-dev": {
-        "fabpot/goutte":             "1.0.*@dev",
-        "behat/mink-goutte-driver":  "1.0.*"
+        "fabpot/goutte":             "~1.0.1",
+        "behat/mink-goutte-driver":  "~1.0.7"
     },
 
     "autoload": {

@@ -237,8 +237,7 @@ the following parameters to avoid the validation error triggered by Guzzle :
         Behat\MinkExtension\Extension:
           goutte:
             guzzle_parameters:
-              curl.CURLOPT_SSL_VERIFYPEER: false
-              curl.CURLOPT_CERTINFO: false
+              ssl.certificate_authority: false
 
 * ``Selenium2Driver`` - default javascript driver. It is used by default for
   ``@javascript`` tagged scenarios, which means that if you didn't changed

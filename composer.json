@@ -19,8 +19,7 @@
     },
 
     "require-dev": {
-        "fabpot/goutte":             "~1.0.1",
-        "behat/mink-goutte-driver":  "~1.0.7"
+        "behat/mink-goutte-driver": "~1.0.7"
     },
 
     "autoload": {

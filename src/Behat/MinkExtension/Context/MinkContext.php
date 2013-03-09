@@ -412,6 +412,16 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
     }
 
     /**
+     * Prints current URL to console.
+     *
+     * @Then /^print current URL$/
+     */
+    public function printCurrentUrl()
+    {
+        $this->printDebug($this->getSession()->getCurrentUrl());
+    }
+
+    /**
      * Prints last response to console.
      *
      * @Then /^print last response$/

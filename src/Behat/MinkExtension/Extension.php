@@ -271,6 +271,18 @@ class Extension implements ExtensionInterface
                                         thenUnset()->
                                     end()->
                                 end()->
+                                arrayNode('firefox')->
+                                    children()->
+                                        scalarNode('profile')->
+                                            validate()->
+                                            ifTrue(function ($v) {
+                                                return !file_exists($v);
+                                            })->
+                                                thenInvalid('Cannot find profile zip file %s')->
+                                            end()->
+                                        end()->
+                                    end()->
+                                end()->
                                 arrayNode('chrome')->
                                     children()->
                                         arrayNode('switches')->

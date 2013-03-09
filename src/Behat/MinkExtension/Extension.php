@@ -247,6 +247,9 @@ class Extension implements ExtensionInterface
                                 scalarNode('deviceType')->
                                     defaultValue(isset($config['selenium2']['capabilities']['deviceType']) ? $config['selenium2']['capabilities']['deviceType'] : 'tablet')->
                                 end()->
+                                   scalarNode('selenium-version')->
+                                    defaultValue(isset($config['selenium2']['capabilities']['selenium-version']) ? $config['selenium2']['capabilities']['selenium-version'] : '2.31.0')->
+                                end()->
                                 booleanNode('javascriptEnabled')->end()->
                                 booleanNode('databaseEnabled')->end()->
                                 booleanNode('locationContextEnabled')->end()->

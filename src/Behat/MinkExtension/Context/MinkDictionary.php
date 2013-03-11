@@ -47,6 +47,16 @@ trait MinkDictionary
     }
 
     /**
+     * Returns the parameters provided for Mink.
+     *
+     * @return array
+     */
+    public function getMinkParameters()
+    {
+        return $this->minkParameters;
+    }
+
+    /**
      * Sets parameters provided for Mink.
      *
      * @param array $parameters
@@ -66,6 +76,18 @@ trait MinkDictionary
     public function getMinkParameter($name)
     {
         return isset($this->minkParameters[$name]) ? $this->minkParameters[$name] : null;
+    }
+
+    /**
+     * Applies the given parameter to the Mink configuration. Consider that all parameters get reset for each
+     * feature context.
+     *
+     * @param string $name  The key of the parameter
+     * @param string $value The value of the parameter
+     */
+    public function setMinkParameter($name, $value)
+    {
+        $this->minkParameters[$name] = $value;
     }
 
     /**

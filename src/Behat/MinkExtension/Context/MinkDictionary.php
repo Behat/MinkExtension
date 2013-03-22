@@ -303,7 +303,7 @@ trait MinkDictionary
      */
     public function assertUrlRegExp($pattern)
     {
-        $this->assertSession()->addressMatches($pattern);
+        $this->assertSession()->addressMatches($this->fixStepArgument($pattern));
     }
 
     /**
@@ -453,6 +453,8 @@ trait MinkDictionary
      */
     public function assertFieldContains($field, $value)
     {
+        $field = $this->fixStepArgument($field);
+        $value = $this->fixStepArgument($value);
         $this->assertSession()->fieldValueEquals($field, $value);
     }
 
@@ -463,6 +465,8 @@ trait MinkDictionary
      */
     public function assertFieldNotContains($field, $value)
     {
+        $field = $this->fixStepArgument($field);
+        $value = $this->fixStepArgument($value);
         $this->assertSession()->fieldValueNotEquals($field, $value);
     }
 
@@ -474,7 +478,7 @@ trait MinkDictionary
      */
     public function assertCheckboxChecked($checkbox)
     {
-        $this->assertSession()->checkboxChecked($checkbox);
+        $this->assertSession()->checkboxChecked($this->fixStepArgument($checkbox));
     }
 
     /**
@@ -486,7 +490,7 @@ trait MinkDictionary
      */
     public function assertCheckboxNotChecked($checkbox)
     {
-        $this->assertSession()->checkboxNotChecked($checkbox);
+        $this->assertSession()->checkboxNotChecked($this->fixStepArgument($checkbox));
     }
 
     /**

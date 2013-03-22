@@ -215,7 +215,7 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      */
     public function assertUrlRegExp($pattern)
     {
-        $this->assertSession()->addressMatches($pattern);
+        $this->assertSession()->addressMatches($this->fixStepArgument($pattern));
     }
 
     /**
@@ -365,6 +365,8 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      */
     public function assertFieldContains($field, $value)
     {
+        $field = $this->fixStepArgument($field);
+        $value = $this->fixStepArgument($value);
         $this->assertSession()->fieldValueEquals($field, $value);
     }
 
@@ -375,6 +377,8 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      */
     public function assertFieldNotContains($field, $value)
     {
+        $field = $this->fixStepArgument($field);
+        $value = $this->fixStepArgument($value);
         $this->assertSession()->fieldValueNotEquals($field, $value);
     }
 
@@ -386,7 +390,7 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      */
     public function assertCheckboxChecked($checkbox)
     {
-        $this->assertSession()->checkboxChecked($checkbox);
+        $this->assertSession()->checkboxChecked($this->fixStepArgument($checkbox));
     }
 
     /**
@@ -398,7 +402,7 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      */
     public function assertCheckboxNotChecked($checkbox)
     {
-        $this->assertSession()->checkboxNotChecked($checkbox);
+        $this->assertSession()->checkboxNotChecked($this->fixStepArgument($checkbox));
     }
 
     /**

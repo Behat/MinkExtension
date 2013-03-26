@@ -42,6 +42,10 @@
             <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^(?:|я )заполняю поле "(?P<field>(?:[^"]|\\")*)" значением "(?P<value>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
+        <trans-unit id="i-fill-in-field-with">
+            <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with:$/]]></source>
+            <target><![CDATA[/^(?:|я )заполняю поле "(?P<field>(?:[^"]|\\")*)" значениями:$/]]></target>
+        </trans-unit>
         <trans-unit id="i-fill-in-value-for-field">
             <source><![CDATA[/^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^(?:|я )ввожу "(?P<value>(?:[^"]|\\")*)" в поле "(?P<field>(?:[^"]|\\")*)"$/]]></target>
@@ -106,13 +110,29 @@
             <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should be checked$/]]></source>
             <target><![CDATA[/^галочка "(?P<checkbox>(?:[^"]|\\")*)" должна быть отмечена$/]]></target>
         </trans-unit>
+        <trans-unit id="the-checkbox-should-is-checked">
+            <source><![CDATA[/^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" (?:is|should be) checked$/]]></source>
+            <target><![CDATA[/^галочка "(?P<checkbox>(?:[^"]|\\")*)" отмечена$/]]></target>
+        </trans-unit>
+        <trans-unit id="the-checkbox-should-be-unchecked">
+            <source><![CDATA[/^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" should (?:be unchecked|not be checked)$/]]></source>
+            <target><![CDATA[/^галочка "(?P<checkbox>(?:[^"]|\\")*)" не должна быть отмечена$/]]></target>
+        </trans-unit>
         <trans-unit id="the-checkbox-should-not-be-checked">
             <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should not be checked$/]]></source>
             <target><![CDATA[/^галочка "(?P<checkbox>(?:[^"]|\\")*)" не должна быть отмечена$/]]></target>
         </trans-unit>
+        <trans-unit id="the-checkbox-is-unchecked">
+            <source><![CDATA[/^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" is (?:unchecked|not checked)$/]]></source>
+            <target><![CDATA[/^галочка "(?P<checkbox>(?:[^"]|\\")*)" должна быть не отмечена$/]]></target>
+        </trans-unit>
         <trans-unit id="i-should-be-on-page">
             <source><![CDATA[/^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>
             <target><![CDATA[/^(?:|я )должен быть на странице "(?P<page>[^"]+)"$/]]></target>
+        </trans-unit>
+        <trans-unit id="i-should-be-on-homepage">
+            <source><![CDATA[/^(?:|I )should be on (?:|the )homepage$/]]></source>
+            <target><![CDATA[/^(?:|я )должен быть на главной странице/]]></target>
         </trans-unit>
         <trans-unit id="the-url-should-match">
             <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"([^"]|\\")*")$/]]></source>
@@ -153,6 +173,10 @@
         <trans-unit id="the-response-status-code-should-not-be">
             <source><![CDATA[/^the response status code should not be (?P<code>\d+)$/]]></source>
             <target><![CDATA[/^код ответа сервера не должен быть (?P<code>\d+)$/]]></target>
+        </trans-unit>
+        <trans-unit id="print-current-URL">
+            <source><![CDATA[/^print current URL$/]]></source>
+            <target><![CDATA[/^покажи текущий URL$/]]></target>
         </trans-unit>
         <trans-unit id="print-last-response">
             <source><![CDATA[/^print last response$/]]></source>

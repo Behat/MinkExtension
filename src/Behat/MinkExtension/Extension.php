@@ -185,6 +185,12 @@ class Extension implements ExtensionInterface
                         scalarNode('port')->
                             defaultValue(isset($config['sahi']['port']) ? $config['sahi']['port'] : 9999)->
                         end()->
+                        scalarNode('browser')->
+                            defaultValue(isset($config['sahi']['browser']) ? $config['sahi']['browser'] : null)->
+                        end()->
+                        scalarNode('limit')->
+                            defaultValue(isset($config['sahi']['limit']) ? $config['sahi']['limit'] : 600)->
+                        end()->
                     end()->
                 end()->
                 arrayNode('zombie')->

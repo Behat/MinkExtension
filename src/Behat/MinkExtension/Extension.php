@@ -253,8 +253,11 @@ class Extension implements ExtensionInterface
                                 scalarNode('deviceType')->
                                     defaultValue(isset($config['selenium2']['capabilities']['deviceType']) ? $config['selenium2']['capabilities']['deviceType'] : 'tablet')->
                                 end()->
-                                   scalarNode('selenium-version')->
+                                scalarNode('selenium-version')->
                                     defaultValue(isset($config['selenium2']['capabilities']['selenium-version']) ? $config['selenium2']['capabilities']['selenium-version'] : '2.31.0')->
+                                end()->
+                                scalarNode('max-duration')->
+                                    defaultValue(isset($config['selenium2']['capabilities']['max-duration']) ? $config['selenium2']['capabilities']['max-duration'] : '300')->
                                 end()->
                                 booleanNode('javascriptEnabled')->end()->
                                 booleanNode('databaseEnabled')->end()->
@@ -265,6 +268,11 @@ class Extension implements ExtensionInterface
                                 booleanNode('rotatable')->end()->
                                 booleanNode('acceptSslCerts')->end()->
                                 booleanNode('nativeEvents')->end()->
+                                booleanNode('passed')->end()->
+                                booleanNode('record-video')->end()->
+                                booleanNode('record-screenshots')->end()->
+                                booleanNode('capture-html')->end()->
+                                booleanNode('disable-popup-handler')->end()->
                                 arrayNode('proxy')->
                                     children()->
                                         scalarNode('proxyType')->end()->

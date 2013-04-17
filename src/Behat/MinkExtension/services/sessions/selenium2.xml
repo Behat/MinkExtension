@@ -17,7 +17,7 @@
             <parameter key="deviceOrientation" type="string">portrait</parameter>
             <parameter key="deviceType" type="string">tablet</parameter>
             <parameter key="selenium-version" type="string">2.31.0</parameter>
-            <parameter key="max-duration" type="integer">300</parameter>
+            <parameter key="max-duration">300</parameter>
         </parameter>
         <parameter key="behat.mink.selenium2.wd_host">http://localhost:4444/wd/hub</parameter>
 

@@ -244,6 +244,9 @@ class Extension implements ExtensionInterface
                                 scalarNode('browser')->
                                     defaultValue(isset($config['selenium2']['capabilities']['browser']) ? $config['selenium2']['capabilities']['browser'] : 'firefox')->
                                 end()->
+                                scalarNode('ignoreZoomSetting')->
+                                    defaultValue(isset($config['selenium2']['capabilities']['ignoreZoomSetting']) ? $config['selenium2']['capabilities']['ignoreZoomSetting'] : 'false')->
+                                end()->
                                 scalarNode('name')->
                                     defaultValue(isset($config['selenium2']['capabilities']['name']) ? $config['selenium2']['capabilities']['name'] : 'Behat Test')->
                                 end()->

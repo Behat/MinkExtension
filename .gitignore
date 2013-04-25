@@ -2,3 +2,6 @@
 *.phar
 composer.lock
 vendor
+.project
+.settings
+.buildpath

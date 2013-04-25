@@ -189,6 +189,53 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
     }
 
     /**
+     * @Given /^(?:|I )press ok on alert$/
+     * @Given /^(?:|I )press ok on confirmation$/
+     * @Given /^(?:|I )press ok on input popup$/
+     */
+    public function acceptPopup()
+    {
+        $this->getSession()->acceptPopup();
+    }
+
+    /**
+     * @Given /^(?:|I ) press cancel on confirmation$/
+     * @Given /^(?:|I ) press cancel on input popup$/
+     */
+    public function dismissPopup()
+    {
+        $this->getSession()->dismissPopup();
+    }
+
+    /**
+     * @Given /^(?:|I ) type "([^"]*)" into input popup$/
+     */
+    public function typeInput($text)
+    {
+        $this->getSession()->setPopupText($text);
+    }
+
+    /**
+     * @Given /^the alert message should contain "([^"]*)"$/
+     * @Given /^the confirmation message should contain "([^"]*)"$/
+     * @Given /^the prompt message should contain "([^"]*)"$/
+     */
+    public function assertPopupContains($text)
+    {
+        $this->assertSession()->popupContains($text);
+    }
+
+    /**
+     * @Given /^the alert message should not contain "([^"]*)"$/
+     * @Given /^the confirmation message should not contain "([^"]*)"$/
+     * @Given /^the prompt message should not contain "([^"]*)"$/
+     */
+    public function assertPopupNotContains($text)
+    {
+        $this->assertSession()->popupNotContains();
+    }
+
+    /**
      * Checks, that current page PATH is equal to specified.
      *
      * @Then /^(?:|I )should be on "(?P<page>[^"]+)"$/

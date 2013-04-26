@@ -287,8 +287,8 @@ trait MinkDictionary
     }
 
     /**
-     * @Given /^(?:|I ) press cancel on confirmation$/
-     * @Given /^(?:|I ) press cancel on input popup$/
+     * @Given /^(?:|I )press cancel on confirmation$/
+     * @Given /^(?:|I )press cancel on input popup$/
      */
     public function dismissPopup()
     {
@@ -296,7 +296,7 @@ trait MinkDictionary
     }
 
     /**
-     * @Given /^(?:|I ) type "([^"]*)" into input popup$/
+     * @Given /^(?:|I )type "([^"]*)" into input popup$/
      */
     public function typeInput($text)
     {

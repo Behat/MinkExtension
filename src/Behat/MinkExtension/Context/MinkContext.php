@@ -208,11 +208,11 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
     }
 
     /**
-     * @Given /^(?:|I )type "([^"]*)" into input popup$/
+     * @Given /^(?:|I )type "([^"]*)" into prompt box$/
      */
-    public function typeInput($text)
+    public function typePrompt($text)
     {
-        $this->getSession()->setPopupText($text);
+        $this->getSession()->setPromptText($text);
     }
 
     /**

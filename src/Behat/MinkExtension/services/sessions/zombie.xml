@@ -12,6 +12,9 @@
         <parameter key="behat.mink.zombie.port">8124</parameter>
         <parameter key="behat.mink.zombie.auto_server">true</parameter>
         <parameter key="behat.mink.zombie.node_bin">node</parameter>
+        <parameter key="behat.mink.zombie.server_path">null</parameter>
+        <parameter key="behat.mink.zombie.threshold">2000000</parameter>
+        <parameter key="behat.mink.zombie.node_modules_path"></parameter>
 
     </parameters>
     <services>
@@ -37,6 +40,9 @@
             <argument>%behat.mink.zombie.host%</argument>
             <argument>%behat.mink.zombie.port%</argument>
             <argument>%behat.mink.zombie.node_bin%</argument>
+            <argument>%behat.mink.zombie.server_path%</argument>
+            <argument>%behat.mink.zombie.threshold%</argument>
+            <argument>%behat.mink.zombie.node_modules_path%</argument>
         </service>
 
     </services>

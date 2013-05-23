@@ -207,6 +207,15 @@ class Extension implements ExtensionInterface
                         scalarNode('node_bin')->
                             defaultValue(isset($config['zombie']['node_bin']) ? $config['zombie']['node_bin'] : 'node')->
                         end()->
+                        scalarNode('server_path')->
+                            defaultValue(isset($config['zombie']['server_path']) ? $config['zombie']['server_path'] : null)->
+                        end()->
+                        scalarNode('threshold')->
+                            defaultValue(isset($config['zombie']['threshold']) ? $config['zombie']['threshold'] : 2000000)->
+                        end()->
+                        scalarNode('node_modules_path')->
+                            defaultValue(isset($config['zombie']['node_modules_path']) ? $config['zombie']['node_modules_path'] : '')->
+                        end()->
                     end()->
                 end()->
                 arrayNode('selenium')->

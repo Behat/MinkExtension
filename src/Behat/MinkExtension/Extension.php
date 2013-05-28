@@ -313,6 +313,7 @@ class Extension implements ExtensionInterface
                                             prototype('scalar')->end()->
                                         end()->
                                         arrayNode('prefs')->
+                                            useAttributeAsKey('key')->
                                             prototype('scalar')->end()->
                                         end()->
                                     end()->

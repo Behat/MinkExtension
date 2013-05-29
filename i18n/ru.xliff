@@ -186,6 +186,54 @@
             <source><![CDATA[/^show last response$/]]></source>
             <target><![CDATA[/^покажи последний ответ сервера$/]]></target>
         </trans-unit>
+        <trans-unit id="press-ok-on-alert">
+            <source><![CDATA[/^(?:|I )press ok on alert$/]]></source>
+            <target><![CDATA[/^(?:|я )нажимаю ОК на предупреждении$/]]></target>
+        </trans-unit>
+        <trans-unit id="press-ok-on-confirmation">
+            <source><![CDATA[/^(?:|I )press ok on confirmation$/]]></source>
+            <target><![CDATA[/^(?:|я )нажимаю ОК на подтверждении$/]]></target>
+        </trans-unit>
+        <trans-unit id="press-ok-on-input-popup">
+            <source><![CDATA[/^(?:|I )press ok on input popup$/]]></source>
+            <target><![CDATA[/^(?:|я )нажимаю ОК на вводе$/]]></target>
+        </trans-unit>
+        <trans-unit id="press-cancel-on-confirmation">
+            <source><![CDATA[/^(?:|I )press cancel on confirmation$/]]></source>
+            <target><![CDATA[/^(?:|я )нажимаю отмена на подтверждении$/]]></target>
+        </trans-unit>
+        <trans-unit id="press-cancel-on-input-popup">
+            <source><![CDATA[/^(?:|I )press cancel on input popup$/]]></source>
+            <target><![CDATA[/^(?:|я )нажимаю отмена на вводе$/]]></target>
+        </trans-unit>
+        <trans-unit id="type-into-prompt-box">
+            <source><![CDATA[/^(?:|I )type "([^"]*)" into prompt box$/]]></source>
+            <target><![CDATA[/^(?:|я )ввожу "([^"]*)" в окошко ввода$/]]></target>
+        </trans-unit>
+        <trans-unit id="the-alert-message-should-contain">
+            <source><![CDATA[/^the alert message should contain "([^"]*)"$/]]></source>
+            <target><![CDATA[/^предупреждение должно содержать "([^"]*)"$/]]></target>
+        </trans-unit>
+        <trans-unit id="the-confirmation-message-should-contain">
+            <source><![CDATA[/^the confirmation message should contain "([^"]*)"$/]]></source>
+            <target><![CDATA[/^подтверждение должно содержать "([^"]*)"$/]]></target>
+        </trans-unit>
+        <trans-unit id="the-prompt-message-should-contain">
+            <source><![CDATA[/^the prompt message should contain "([^"]*)"$/]]></source>
+            <target><![CDATA[/^окошко ввода должно содержать "([^"]*)"$/]]></target>
+        </trans-unit>
+        <trans-unit id="the-alert-message-should-not-contain">
+            <source><![CDATA[/^the alert message should not contain "([^"]*)"$/]]></source>
+            <target><![CDATA[/^предупреждение не должно содержать "([^"]*)"$/]]></target>
+        </trans-unit>
+        <trans-unit id="the-confirmation-message-should-not-contain">
+            <source><![CDATA[/^the confirmation message should not contain "([^"]*)"$/]]></source>
+            <target><![CDATA[/^подтверждение не должно содержать "([^"]*)"$/]]></target>
+        </trans-unit>
+        <trans-unit id="the-prompt-message-should-not-contain">
+            <source><![CDATA[/^the prompt message should not contain "([^"]*)"$/]]></source>
+            <target><![CDATA[/^окошко ввода не должно содержать "([^"]*)"$/]]></target>
+        </trans-unit>
     </body>
   </file>
 </xliff>

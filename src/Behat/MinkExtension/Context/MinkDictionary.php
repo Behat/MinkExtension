@@ -277,6 +277,53 @@ trait MinkDictionary
     }
 
     /**
+     * @Given /^(?:|I )press ok on alert$/
+     * @Given /^(?:|I )press ok on confirmation$/
+     * @Given /^(?:|I )press ok on input popup$/
+     */
+    public function acceptDialog()
+    {
+        $this->getSession()->acceptDialog();
+    }
+
+    /**
+     * @Given /^(?:|I )press cancel on confirmation$/
+     * @Given /^(?:|I )press cancel on input popup$/
+     */
+    public function dismissDialog()
+    {
+        $this->getSession()->dismissDialog();
+    }
+
+    /**
+     * @Given /^(?:|I )type "([^"]*)" into prompt box$/
+     */
+    public function typePrompt($text)
+    {
+        $this->getSession()->setPromptText($text);
+    }
+
+    /**
+     * @Given /^the alert message should contain "([^"]*)"$/
+     * @Given /^the confirmation message should contain "([^"]*)"$/
+     * @Given /^the prompt message should contain "([^"]*)"$/
+     */
+    public function assertDialogContains($text)
+    {
+        $this->assertSession()->dialogContains($text);
+    }
+
+    /**
+     * @Given /^the alert message should not contain "([^"]*)"$/
+     * @Given /^the confirmation message should not contain "([^"]*)"$/
+     * @Given /^the prompt message should not contain "([^"]*)"$/
+     */
+    public function assertDialogNotContains($text)
+    {
+        $this->assertSession()->dialogNotContains();
+    }
+
+    /**
      * Checks, that current page PATH is equal to specified.
      *
      * @Then /^(?:|I )should be on "(?P<page>[^"]+)"$/

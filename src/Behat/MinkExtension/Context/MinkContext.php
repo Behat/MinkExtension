@@ -193,18 +193,18 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      * @Given /^(?:|I )press ok on confirmation$/
      * @Given /^(?:|I )press ok on input popup$/
      */
-    public function acceptPopup()
+    public function acceptDialog()
     {
-        $this->getSession()->acceptPopup();
+        $this->getSession()->acceptDialog();
     }
 
     /**
      * @Given /^(?:|I )press cancel on confirmation$/
      * @Given /^(?:|I )press cancel on input popup$/
      */
-    public function dismissPopup()
+    public function dismissDialog()
     {
-        $this->getSession()->dismissPopup();
+        $this->getSession()->dismissDialog();
     }
 
     /**
@@ -220,9 +220,9 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      * @Given /^the confirmation message should contain "([^"]*)"$/
      * @Given /^the prompt message should contain "([^"]*)"$/
      */
-    public function assertPopupContains($text)
+    public function assertDialogContains($text)
     {
-        $this->assertSession()->popupContains($text);
+        $this->assertSession()->dialogContains($text);
     }
 
     /**
@@ -230,9 +230,9 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      * @Given /^the confirmation message should not contain "([^"]*)"$/
      * @Given /^the prompt message should not contain "([^"]*)"$/
      */
-    public function assertPopupNotContains($text)
+    public function assertDialogNotContains($text)
     {
-        $this->assertSession()->popupNotContains();
+        $this->assertSession()->dialogNotContains();
     }
 
     /**

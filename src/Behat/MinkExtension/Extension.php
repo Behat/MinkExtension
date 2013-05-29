@@ -321,7 +321,20 @@ class Extension implements ExtensionInterface
                                         arrayNode('extensions')->
                                             prototype('scalar')->end()->
                                         end()->
+                                        arrayNode('prefs')->
+                                            useAttributeAsKey('key')->
+                                            prototype('scalar')->end()->
+                                        end()->
                                     end()->
+                                         validate()->
+                                         ifTrue(function ($v) {
+                                             return empty($v['prefs']);
+                                         })->
+                                         then(function ($v) {
+                                             unset($v['prefs']);
+                                             return $v;
+                                         })->
+                                     end()->
                                 end()->
                             end()->
                         end()->

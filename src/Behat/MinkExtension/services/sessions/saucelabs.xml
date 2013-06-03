@@ -7,7 +7,13 @@
         <parameter key="behat.mink.driver.saucelabs.class">Behat\Mink\Driver\Selenium2Driver</parameter>
 
         <parameter key="behat.mink.saucelabs.browser">%behat.mink.browser_name%</parameter>
-        <parameter key="behat.mink.saucelabs.capabilities" type="collection"></parameter>
+        <parameter key="behat.mink.saucelabs.capabilities" type="collection">
+            <parameter key="name" type="string">Behat feature suite</parameter>
+            <parameter key="version" type="string">21</parameter>
+            <parameter key="platform" type="string">Linux</parameter>
+            <parameter key="selenium-version" type="string">2.31.0</parameter>
+            <parameter key="max-duration">300</parameter>
+        </parameter>
         <parameter key="behat.mink.saucelabs.wd_host">https://USERNAME:ACCESS_KEY@ondemand.saucelabs.com/wd/hub</parameter>
 
     </parameters>

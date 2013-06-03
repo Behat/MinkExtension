@@ -99,31 +99,6 @@ class Extension implements ExtensionInterface
             }
 
             $loader->load('sessions/saucelabs.xml');
-
-            $http = 'https';
-            $host = 'ondemand.saucelabs.com';
-            if ($config['saucelabs']['connect']) {
-                $http = 'http';
-                $host = 'localhost:4445';
-            }
-
-            $username  = $config['saucelabs']['username'];
-            $accessKey = $config['saucelabs']['access_key'];
-
-            $container->setParameter('behat.mink.saucelabs.wd_host', sprintf(
-                '%s://%s:%s@%s/wd/hub', $http, $username, $accessKey, $host
-            ));
-            $container->setParameter('behat.mink.saucelabs.browser',
-                $config['saucelabs']['capabilities']['browser_name']
-            );
-
-            if ($config['saucelabs']['travis']) {
-                $capabilities = $container->getParameter('behat.mink.saucelabs.capabilities');
-                $capabilities['tunnel-identifier'] = getenv('TRAVIS_JOB_NUMBER');
-                $capabilities['build'] = getenv('TRAVIS_BUILD_NUMBER');
-
-                $container->setParameter('behat.mink.saucelabs.capabilities');
-            }
         }
 
         $minkParameters = array();
@@ -141,6 +116,29 @@ class Extension implements ExtensionInterface
             }
         }
         $container->setParameter('behat.mink.parameters', $minkParameters);
+
+        if (isset($config['saucelabs'])) {
+            $capabilities = $container->getParameter('behat.mink.saucelabs.capabilities');
+
+            if ($config['saucelabs']['travis']) {
+                $capabilities['tunnel-identifier'] = getenv('TRAVIS_JOB_NUMBER');
+                $capabilities['build'] = getenv('TRAVIS_BUILD_NUMBER');
+            }
+
+            $container->setParameter('behat.mink.saucelabs.capabilities', $capabilities);
+
+            $host = 'ondemand.saucelabs.com';
+            if ($config['saucelabs']['connect']) {
+                $host = 'localhost:4445';
+            }
+
+            $username  = $config['saucelabs']['username'];
+            $accessKey = $config['saucelabs']['access_key'];
+
+            $container->setParameter('behat.mink.saucelabs.wd_host', sprintf(
+                '%s:%s@%s/wd/hub', $username, $accessKey, $host
+            ));
+        }
 
         if (isset($config['base_url'])) {
             $container->setParameter('behat.mink.base_url', $config['base_url']);
@@ -378,10 +376,13 @@ class Extension implements ExtensionInterface
                         booleanNode('connect')->
                             defaultValue(isset($config['saucelabs']['connect']) ? 'true' === $config['saucelabs']['connect'] : false)->
                         end()->
+                        scalarNode('browser')->
+                            defaultValue(isset($config['saucelabs']['browser']) ? $config['saucelabs']['browser'] : 'firefox')->
+                        end()->
                         arrayNode('capabilities')->
                             children()->
-                                scalarNode('browser')->
-                                    defaultValue(isset($config['saucelabs']['browser']) ? $config['saucelabs']['browser'] : 'firefox')->
+                                scalarNode('name')->
+                                    defaultValue(isset($config['saucelabs']['name']) ? $config['saucelabs']['name'] : 'Behat feature suite')->
                                 end()->
                                 scalarNode('platform')->
                                     defaultValue(isset($config['saucelabs']['platform']) ? $config['saucelabs']['platform'] : 'Linux')->

@@ -120,9 +120,10 @@ class Extension implements ExtensionInterface
         if (isset($config['saucelabs'])) {
             $capabilities = $container->getParameter('behat.mink.saucelabs.capabilities');
 
-            if ($config['saucelabs']['travis']) {
+            if (getenv('TRAVIS_JOB_NUMBER')) {
                 $capabilities['tunnel-identifier'] = getenv('TRAVIS_JOB_NUMBER');
                 $capabilities['build'] = getenv('TRAVIS_BUILD_NUMBER');
+                $capabilities['tags'] = array('CI', 'PHP'.phpversion());
             }
 
             $container->setParameter('behat.mink.saucelabs.capabilities', $capabilities);
@@ -369,9 +370,6 @@ class Extension implements ExtensionInterface
                         end()->
                         scalarNode('access_key')->
                             defaultValue(getenv('SAUCE_ACCESS_KEY'))->
-                        end()->
-                        booleanNode('travis')->
-                            defaultValue(isset($config['saucelabs']['travis']) ? 'true' === $config['saucelabs']['travis'] : false)->
                         end()->
                         booleanNode('connect')->
                             defaultValue(isset($config['saucelabs']['connect']) ? 'true' === $config['saucelabs']['connect'] : false)->

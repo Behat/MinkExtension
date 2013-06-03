@@ -91,6 +91,40 @@ class Extension implements ExtensionInterface
 
             $loader->load('sessions/selenium2.xml');
         }
+        if (isset($config['saucelabs'])) {
+            if (!class_exists('Behat\\Mink\\Driver\\Selenium2Driver')) {
+                throw new \RuntimeException(
+                    'Install MinkSelenium2Driver in order to activate saucelabs session.'
+                );
+            }
+
+            $loader->load('sessions/saucelabs.xml');
+
+            $http = 'https';
+            $host = 'ondemand.saucelabs.com';
+            if ($config['saucelabs']['connect']) {
+                $http = 'http';
+                $host = 'localhost:4445';
+            }
+
+            $username  = $config['saucelabs']['username'];
+            $accessKey = $config['saucelabs']['access_key'];
+
+            $container->setParameter('behat.mink.saucelabs.wd_host', sprintf(
+                '%s://%s:%s@%s/wd/hub', $http, $username, $accessKey, $host
+            ));
+            $container->setParameter('behat.mink.saucelabs.browser',
+                $config['saucelabs']['capabilities']['browser_name']
+            );
+
+            if ($config['saucelabs']['travis']) {
+                $capabilities = $container->getParameter('behat.mink.saucelabs.capabilities');
+                $capabilities['tunnel-identifier'] = getenv('TRAVIS_JOB_NUMBER');
+                $capabilities['build'] = getenv('TRAVIS_BUILD_NUMBER');
+
+                $container->setParameter('behat.mink.saucelabs.capabilities');
+            }
+        }
 
         $minkParameters = array();
         foreach ($config as $ns => $tlValue) {
@@ -327,6 +361,41 @@ class Extension implements ExtensionInterface
                         end()->
                         scalarNode('wd_host')->
                             defaultValue(isset($config['selenium2']['wd_host']) ? $config['selenium2']['wd_host'] : 'http://localhost:4444/wd/hub')->
+                        end()->
+                    end()->
+                end()->
+                arrayNode('saucelabs')->
+                    children()->
+                        scalarNode('username')->
+                            defaultValue(getenv('SAUCE_USERNAME'))->
+                        end()->
+                        scalarNode('access_key')->
+                            defaultValue(getenv('SAUCE_ACCESS_KEY'))->
+                        end()->
+                        booleanNode('travis')->
+                            defaultValue(isset($config['saucelabs']['travis']) ? 'true' === $config['saucelabs']['travis'] : false)->
+                        end()->
+                        booleanNode('connect')->
+                            defaultValue(isset($config['saucelabs']['connect']) ? 'true' === $config['saucelabs']['connect'] : false)->
+                        end()->
+                        arrayNode('capabilities')->
+                            children()->
+                                scalarNode('browser')->
+                                    defaultValue(isset($config['saucelabs']['browser']) ? $config['saucelabs']['browser'] : 'firefox')->
+                                end()->
+                                scalarNode('platform')->
+                                    defaultValue(isset($config['saucelabs']['platform']) ? $config['saucelabs']['platform'] : 'Linux')->
+                                end()->
+                                scalarNode('version')->
+                                    defaultValue(isset($config['saucelabs']['version']) ? $config['saucelabs']['version'] : '21')->
+                                end()->
+                                scalarNode('deviceType')->
+                                    defaultValue(isset($config['saucelabs']['deviceType']) ? $config['saucelabs']['deviceType'] : null)->
+                                end()->
+                                scalarNode('deviceOrientation')->
+                                    defaultValue(isset($config['saucelabs']['deviceOrientation']) ? $config['saucelabs']['deviceOrientation'] : null)->
+                                end()->
+                            end()->
                         end()->
                     end()->
                 end()->

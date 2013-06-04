@@ -119,11 +119,12 @@ class Extension implements ExtensionInterface
 
         if (isset($config['saucelabs'])) {
             $capabilities = $container->getParameter('behat.mink.saucelabs.capabilities');
+            $capabilities['tags'] = array(php_uname('n'), 'PHP '.phpversion());
 
             if (getenv('TRAVIS_JOB_NUMBER')) {
                 $capabilities['tunnel-identifier'] = getenv('TRAVIS_JOB_NUMBER');
                 $capabilities['build'] = getenv('TRAVIS_BUILD_NUMBER');
-                $capabilities['tags'] = array('CI', 'PHP'.phpversion());
+                $capabilities['tags'] = array('Travis-CI', 'PHP '.phpversion());
             }
 
             $container->setParameter('behat.mink.saucelabs.capabilities', $capabilities);

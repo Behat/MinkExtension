@@ -41,6 +41,13 @@ class FailureShowListener implements EventSubscriberInterface
     }
 
     /**
+     * Prevents Mink object from getting into serialized strings.
+     */
+    public function __sleep() {
+        return array();
+    }
+
+    /**
      * Returns an array of event names this subscriber wants to listen to.
      *
      * The array keys are event names and the value can be:

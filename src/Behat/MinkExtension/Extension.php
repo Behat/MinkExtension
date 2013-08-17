@@ -344,6 +344,7 @@ class Extension implements ExtensionInterface
                                                 thenInvalid('Cannot find profile zip file %s')->
                                             end()->
                                         end()->
+                                        scalarNode('binary')->end()->
                                     end()->
                                 end()->
                                 arrayNode('chrome')->

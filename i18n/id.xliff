@@ -76,11 +76,11 @@
         </trans-unit>
         <trans-unit id="i-should-see-text">
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|saya )melihat (?:|teks |pesan )"(?P<text>(?:[^"]|\\")*)"$/]]></target>
+            <target><![CDATA[/^(?:|saya )harus melihat (?:|teks |pesan )"(?P<text>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-text-matching">
             <source><![CDATA[/^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^(?:|saya )melihat teks yang cocok dengan (?:|pola )(?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+            <target><![CDATA[/^(?:|saya )harus melihat teks yang cocok dengan (?:|pola )(?P<pattern>"(?:[^"]|\\")*")$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-not-see-text-matching">
             <source><![CDATA[/^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
@@ -100,7 +100,7 @@
         </trans-unit>
         <trans-unit id="the-field-should-contain-value">
             <source><![CDATA[/^the "(?P<field>(?:[^"]|\\")*)" field should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^isian "(?P<field>(?:[^"]|\\")*)" memiliki nilai "(?P<value>(?:[^"]|\\")*)"$/]]></target>
+            <target><![CDATA[/^isian "(?P<field>(?:[^"]|\\")*)" harus memiliki nilai "(?P<value>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-field-should-not-contain-value">
             <source><![CDATA[/^the "(?P<field>(?:[^"]|\\")*)" field should not contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
@@ -120,7 +120,7 @@
         </trans-unit>
         <trans-unit id="the-checkbox-is-unchecked">
             <source><![CDATA[/^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" is (?:unchecked|not checked)$/]]></source>
-            <target><![CDATA[/^pilihan "(?P<checkbox>(?:[^"]|\\")*)" (?:seharusnya|harus) tidak dicentang$/]]></target>
+            <target><![CDATA[/^pilihan "(?P<checkbox>(?:[^"]|\\")*)" (?:seharusnya |harus )tidak dicentang$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-be-on-page">
             <source><![CDATA[/^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>
@@ -136,7 +136,7 @@
         </trans-unit>
         <trans-unit id="the-element-should-contain">
             <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^elemen "(?P<element>[^"]*)" memiliki nilai "(?P<value>(?:[^"]|\\")*)"$/]]></target>
+            <target><![CDATA[/^elemen "(?P<element>[^"]*)" harus memiliki nilai "(?P<value>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-element-should-not-contain">
             <source><![CDATA[/^the "(?P<element>[^"]*)" element should not contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
@@ -144,7 +144,7 @@
         </trans-unit>
         <trans-unit id="i-should-see-text-in-element">
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
-            <target><![CDATA[/^(?:|saya )melihat (?:|teks )"(?P<text>(?:[^"]|\\")*)" pada elemen "(?P<element>[^"]*)"$/]]></target>
+            <target><![CDATA[/^(?:|saya )harus melihat (?:|teks )"(?P<text>(?:[^"]|\\")*)" pada elemen "(?P<element>[^"]*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-not-see-text-in-element">
             <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
@@ -152,7 +152,7 @@
         </trans-unit>
         <trans-unit id="i-should-see-element">
             <source><![CDATA[/^(?:|I )should see an? "(?P<element>[^"]*)" element$/]]></source>
-            <target><![CDATA[/^(?:|saya )melihat elemen "(?P<element>[^"]*)"$/]]></target>
+            <target><![CDATA[/^(?:|saya )harus melihat elemen "(?P<element>[^"]*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-not-see-element">
             <source><![CDATA[/^(?:|I )should not see an? "(?P<element>[^"]*)" element$/]]></source>
@@ -160,7 +160,7 @@
         </trans-unit>
         <trans-unit id="i-should-see-num-elements">
             <source><![CDATA[/^(?:|I )should see (?P<num>\d+) "(?P<element>[^"]*)" elements?$/]]></source>
-            <target><![CDATA[/^(?:|saya )melihat (?P<num>\d+) elemen "(?P<element>[^"]*)"$/]]></target>
+            <target><![CDATA[/^(?:|saya )harus melihat (?P<num>\d+) elemen "(?P<element>[^"]*)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-response-status-code-should-be">
             <source><![CDATA[/^the response status code should be (?P<code>\d+)$/]]></source>

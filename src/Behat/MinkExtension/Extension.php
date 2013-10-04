@@ -397,6 +397,9 @@ class Extension implements ExtensionInterface
                                 scalarNode('deviceOrientation')->
                                     defaultValue(isset($config['saucelabs']['deviceOrientation']) ? $config['saucelabs']['deviceOrientation'] : null)->
                                 end()->
+                                scalarNode('max_duration')->
+                                    defaultValue(isset($config['saucelabs']['capabilities']['max-duration']) ? $config['saucelabs']['capabilities']['max-duration'] : '300')->
+                                end()->
                             end()->
                         end()->
                     end()->

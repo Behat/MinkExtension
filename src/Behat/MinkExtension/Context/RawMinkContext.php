@@ -144,6 +144,11 @@ class RawMinkContext extends BehatContext implements MinkAwareInterface
         // No effect in other environments.
         $filename = $filename ?: sprintf('%s_%s_%s.%s', $this->getMinkParameter('browser_name'), date('c'), uniqid('', true), 'png');
         $filepath = $filepath ? $filepath : (ini_get('upload_tmp_dir') ? ini_get('upload_tmp_dir') : sys_get_temp_dir());
-        file_put_contents($filepath . '/' . $filename, $this->getSession()->getScreenshot());
+
+        /** @var DriverInterface $driver */
+        $driver = $this->getSession()->getDriver();
+        if (method_exists($driver, 'getScreenshot')) {
+            file_put_contents($filepath . '/' . $filename, $driver->getScreenshot());
+        }
     }
 }

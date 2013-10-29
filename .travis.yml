@@ -1,6 +1,6 @@
 language: php
 
-php: 
+php:
   - 5.3
   - 5.4
   - 5.5
@@ -13,10 +13,6 @@ env:
 matrix:
   allow_failures:
     - env: "SYMFONY_VERSION='2.3.*@dev'"
-
-branches:
-  only:
-    - master
 
 before_script:
   - curl http://getcomposer.org/installer | php

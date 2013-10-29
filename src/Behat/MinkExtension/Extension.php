@@ -427,4 +427,9 @@ class Extension implements ExtensionInterface
 
         return $config;
     }
+
+    public function getName()
+    {
+        return 'mink';
+    }
 }

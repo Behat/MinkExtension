@@ -43,7 +43,7 @@
         <service id="behat.mink.context.initializer" class="%behat.mink.context.initializer.class%">
             <argument type="service" id="behat.mink" />
             <argument>%behat.mink.parameters%</argument>
-            <tag name="behat.context.initializer" />
+            <tag name="context.initializer" />
         </service>
 
         <service id="behat.mink.listener.sessions_listener" class="%behat.mink.listener.sessions_listener.class%">

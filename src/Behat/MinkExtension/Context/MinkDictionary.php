@@ -547,7 +547,7 @@ trait MinkDictionary
      *
      * @return array
      */
-    public function getMinkTranslationResources()
+    public static function getMinkTranslationResources()
     {
         return glob(__DIR__.'/../../../../i18n/*.xliff');
     }

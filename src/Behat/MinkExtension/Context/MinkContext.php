@@ -4,7 +4,7 @@ namespace Behat\MinkExtension\Context;
 
 use Behat\Gherkin\Node\TableNode;
 
-use Behat\Behat\Context\TranslatedContextInterface,
+use Behat\Behat\Context\TranslatableContextInterface,
     Behat\Behat\Event\ScenarioEvent;
 
 /*
@@ -21,7 +21,7 @@ use Behat\Behat\Context\TranslatedContextInterface,
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class MinkContext extends RawMinkContext implements TranslatedContextInterface
+class MinkContext extends RawMinkContext implements TranslatableContextInterface
 {
     /**
      * Opens homepage.
@@ -459,9 +459,9 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      *
      * @return array
      */
-    public function getTranslationResources()
+    public static function getTranslationResources()
     {
-        return $this->getMinkTranslationResources();
+        return self::getMinkTranslationResources();
     }
 
     /**
@@ -469,7 +469,7 @@ class MinkContext extends RawMinkContext implements TranslatedContextInterface
      *
      * @return array
      */
-    public function getMinkTranslationResources()
+    public static function getMinkTranslationResources()
     {
         return glob(__DIR__.'/../../../../i18n/*.xliff');
     }

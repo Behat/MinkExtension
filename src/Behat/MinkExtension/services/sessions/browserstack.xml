@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+
+        <parameter key="behat.mink.driver.browserstack.class">Behat\Mink\Driver\Selenium2Driver</parameter>
+
+        <parameter key="behat.mink.browserstack.browser">%behat.mink.browser_name%</parameter>
+        <parameter key="behat.mink.browserstack.capabilities" type="collection">
+            <parameter key="name" type="string">Behat feature suite</parameter>
+            <parameter key="version" type="string">21</parameter>
+            <parameter key="platform" type="string">WINDOWS</parameter>
+            <parameter key="selenium-version" type="string">2.31.0</parameter>
+            <parameter key="max-duration">300</parameter>
+        </parameter>
+        <parameter key="behat.mink.browserstack.tunnel" type="string">false</parameter>
+        <parameter key="behat.mink.browserstack.debug" type="string">false</parameter>
+        <parameter key="behat.mink.browserstack.wd_host">https://USERNAME:ACCESS_KEY@hub.browserstack.com/wd/hub</parameter>
+    </parameters>
+    <services>
+
+        <service id="behat.mink.session.browserstack" class="%behat.mink.session.class%">
+            <argument type="service">
+                <service class="%behat.mink.driver.browserstack.class%">
+                    <argument>%behat.mink.browserstack.browser%</argument>
+                    <argument>%behat.mink.browserstack.capabilities%</argument>
+                    <argument>%behat.mink.browserstack.wd_host%</argument>
+                </service>
+            </argument>
+            <argument type="service" id="behat.mink.selector.handler" />
+            <tag name="behat.mink.session" alias="browserstack" />
+        </service>
+
+    </services>
+</container>

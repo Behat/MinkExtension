@@ -363,6 +363,12 @@ class Extension implements ExtensionInterface
                         scalarNode('wd_host')->
                             defaultValue(isset($config['selenium2']['wd_host']) ? $config['selenium2']['wd_host'] : 'http://localhost:4444/wd/hub')->
                         end()->
+                        arrayNode('timeouts')->
+                            children()->
+                                scalarNode('implicit')->end()->
+                                scalarNode('script')->end()->
+                            end()->
+                        end()->
                     end()->
                 end()->
                 arrayNode('saucelabs')->

@@ -19,6 +19,7 @@
             <parameter key="selenium-version" type="string">2.31.0</parameter>
             <parameter key="max-duration">300</parameter>
         </parameter>
+        <parameter key="behat.mink.selenium2.timeouts" type="collection"/>
         <parameter key="behat.mink.selenium2.wd_host">http://localhost:4444/wd/hub</parameter>
 
     </parameters>
@@ -30,6 +31,9 @@
                     <argument>%behat.mink.selenium2.browser%</argument>
                     <argument>%behat.mink.selenium2.capabilities%</argument>
                     <argument>%behat.mink.selenium2.wd_host%</argument>
+                    <call method="setTimeouts">
+                        <argument>%behat.mink.selenium2.timeouts%</argument>
+                    </call>
                 </service>
             </argument>
             <argument type="service" id="behat.mink.selector.handler" />

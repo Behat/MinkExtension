@@ -3,11 +3,9 @@
 namespace Behat\MinkExtension\Context\Initializer;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Context\Initializer\ContextInitializer,
-    Behat\Behat\Context\ContextInterface;
+use Behat\Behat\Context\Initializer\ContextInitializer;
 
 use Behat\Mink\Mink;
-
 use Behat\MinkExtension\Context\MinkAwareInterface;
 
 /*

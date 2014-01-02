@@ -2,7 +2,8 @@
 
 namespace Behat\MinkExtension\Context\Initializer;
 
-use Behat\Behat\Context\Initializer\InitializerInterface,
+use Behat\Behat\Context\Context;
+use Behat\Behat\Context\Initializer\ContextInitializer,
     Behat\Behat\Context\ContextInterface;
 
 use Behat\Mink\Mink;
@@ -23,7 +24,7 @@ use Behat\MinkExtension\Context\MinkAwareInterface;
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class MinkAwareInitializer implements InitializerInterface
+class MinkAwareInitializer implements ContextInitializer
 {
     private $mink;
     private $parameters;
@@ -43,11 +44,11 @@ class MinkAwareInitializer implements InitializerInterface
     /**
      * Checks if initializer supports provided context.
      *
-     * @param ContextInterface $context
+     * @param Context $context
      *
      * @return Boolean
      */
-    public function supports(ContextInterface $context)
+    public function supportsContext(Context $context)
     {
         // if context/subcontext implements MinkAwareInterface
         if ($context instanceof MinkAwareInterface) {
@@ -68,9 +69,9 @@ class MinkAwareInitializer implements InitializerInterface
     /**
      * Initializes provided context.
      *
-     * @param ContextInterface $context
+     * @param Context $context
      */
-    public function initialize(ContextInterface $context)
+    public function initializeContext(Context $context)
     {
         $context->setMink($this->mink);
         $context->setMinkParameters($this->parameters);

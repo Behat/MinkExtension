@@ -2,10 +2,8 @@
 
 namespace Behat\MinkExtension\Context;
 
+use Behat\Behat\Context\TranslatableContext;
 use Behat\Gherkin\Node\TableNode;
-
-use Behat\Behat\Context\TranslatableContextInterface,
-    Behat\Behat\Event\ScenarioEvent;
 
 /*
  * This file is part of the Behat\MinkExtension.
@@ -21,7 +19,7 @@ use Behat\Behat\Context\TranslatableContextInterface,
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class MinkContext extends RawMinkContext implements TranslatableContextInterface
+class MinkContext extends RawMinkContext implements TranslatableContext
 {
     /**
      * Opens homepage.

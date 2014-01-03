@@ -2,7 +2,7 @@
 
 namespace Behat\MinkExtension\Context;
 
-use Behat\Behat\Context\ContextInterface;
+use Behat\Behat\Context\Context;
 
 use Behat\Mink\Mink,
     Behat\Mink\WebAssert,
@@ -22,7 +22,7 @@ use Behat\Mink\Mink,
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class RawMinkContext implements MinkAwareInterface, ContextInterface
+class RawMinkContext implements MinkAwareInterface, Context
 {
     private $mink;
     private $minkParameters;

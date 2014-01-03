@@ -2,12 +2,14 @@
 
 namespace Behat\MinkExtension;
 
+use Behat\MinkExtension\Compiler\SelectorsPass;
+use Behat\MinkExtension\Compiler\SessionsPass;
 use Symfony\Component\Config\FileLocator,
     Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition,
     Symfony\Component\DependencyInjection\ContainerBuilder,
     Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-use Behat\Behat\Extension\ExtensionInterface;
+use Behat\Testwork\ServiceContainer\Extension as BaseExtension;
 
 /*
  * This file is part of the Behat\MinkExtension
@@ -23,15 +25,12 @@ use Behat\Behat\Extension\ExtensionInterface;
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class Extension implements ExtensionInterface
+class Extension implements BaseExtension
 {
     /**
-     * Loads a specific configuration.
-     *
-     * @param array            $config    Extension configuration hash (from behat.yml)
-     * @param ContainerBuilder $container ContainerBuilder instance
+     * {@inheritDoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(ContainerBuilder $container, array $config)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/services'));
         $loader->load('core.xml');
@@ -159,11 +158,9 @@ class Extension implements ExtensionInterface
     }
 
     /**
-     * Setups configuration for current extension.
-     *
-     * @param ArrayNodeDefinition $builder
+     * {@inheritDoc}
      */
-    public function getConfig(ArrayNodeDefinition $builder)
+    public function configure(ArrayNodeDefinition $builder)
     {
         $config = $this->loadEnvironmentConfiguration();
 
@@ -406,16 +403,23 @@ class Extension implements ExtensionInterface
     }
 
     /**
-     * Returns compiler passes used by mink extension.
-     *
-     * @return array
+     * {@inheritDoc}
      */
-    public function getCompilerPasses()
+    public function getConfigKey()
     {
-        return array(
-            new Compiler\SelectorsPass(),
-            new Compiler\SessionsPass(),
-        );
+        return 'mink';
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function process(ContainerBuilder $container)
+    {
+        $sessionsPass = new SessionsPass();
+        $selectorPass = new SelectorsPass();
+
+        $sessionsPass->process($container);
+        $selectorPass->process($container);
     }
 
     protected function loadEnvironmentConfiguration()
@@ -428,8 +432,4 @@ class Extension implements ExtensionInterface
         return $config;
     }
 
-    public function getName()
-    {
-        return 'mink';
-    }
 }

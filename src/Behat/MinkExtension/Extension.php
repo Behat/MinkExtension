@@ -10,14 +10,14 @@
 
 namespace Behat\MinkExtension;
 
-use Behat\MinkExtension\Compiler\SelectorsPass;
-use Behat\MinkExtension\Compiler\SessionsPass;
-use Symfony\Component\Config\FileLocator,
-    Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition,
-    Symfony\Component\DependencyInjection\ContainerBuilder,
-    Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-
+use Behat\Behat\Context\ServiceContainer\ContextExtension;
+use Behat\Testwork\EventDispatcher\ServiceContainer\EventDispatcherExtension;
+use Behat\Testwork\ServiceContainer\Exception\ProcessingException;
 use Behat\Testwork\ServiceContainer\Extension as BaseExtension;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Mink extension for Behat class.
@@ -26,16 +26,19 @@ use Behat\Testwork\ServiceContainer\Extension as BaseExtension;
  */
 class Extension implements BaseExtension
 {
+    const MINK_ID = 'mink';
+    const SELECTORS_HANDLER_ID = 'mink.selectors_handler';
+
+    const SESSION_TAG = 'mink.session';
+    const SELECTOR_TAG = 'mink.selector';
+
     /**
      * {@inheritDoc}
      */
     public function load(ContainerBuilder $container, array $config)
     {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/services'));
-        $loader->load('core.xml');
-
         if (isset($config['mink_loader'])) {
-            $basePath = $container->getParameter('behat.paths.base');
+            $basePath = $container->getParameter('paths.base');
 
             if (file_exists($basePath.DIRECTORY_SEPARATOR.$config['mink_loader'])) {
                 require($basePath.DIRECTORY_SEPARATOR.$config['mink_loader']);
@@ -44,116 +47,45 @@ class Extension implements BaseExtension
             }
         }
 
-        if (isset($config['goutte'])) {
-            if (!class_exists('Behat\\Mink\\Driver\\GoutteDriver')) {
-                throw new \RuntimeException(
-                    'Install MinkGoutteDriver in order to activate goutte session.'
-                );
-            }
-
-            $loader->load('sessions/goutte.xml');
-        }
-        if (isset($config['sahi'])) {
-            if (!class_exists('Behat\\Mink\\Driver\\SahiDriver')) {
-                throw new \RuntimeException(
-                    'Install MinkSahiDriver in order to activate sahi session.'
-                );
-            }
-
-            $loader->load('sessions/sahi.xml');
-        }
-        if (isset($config['zombie'])) {
-            if (!class_exists('Behat\\Mink\\Driver\\ZombieDriver')) {
-                throw new \RuntimeException(
-                    'Install MinkZombieDriver in order to activate zombie session.'
-                );
-            }
-
-            $loader->load('sessions/zombie.xml');
-        }
-        if (isset($config['selenium'])) {
-            if (!class_exists('Behat\\Mink\\Driver\\SeleniumDriver')) {
-                throw new \RuntimeException(
-                    'Install MinkSeleniumDriver in order to activate selenium session.'
-                );
-            }
-
-            $loader->load('sessions/selenium.xml');
-        }
-        if (isset($config['selenium2'])) {
-            if (!class_exists('Behat\\Mink\\Driver\\Selenium2Driver')) {
-                throw new \RuntimeException(
-                    'Install MinkSelenium2Driver in order to activate selenium2 session.'
-                );
-            }
-
-            $loader->load('sessions/selenium2.xml');
-        }
-        if (isset($config['saucelabs'])) {
-            if (!class_exists('Behat\\Mink\\Driver\\Selenium2Driver')) {
-                throw new \RuntimeException(
-                    'Install MinkSelenium2Driver in order to activate saucelabs session.'
-                );
-            }
-
-            $loader->load('sessions/saucelabs.xml');
-        }
-
-        $minkParameters = array();
-        foreach ($config as $ns => $tlValue) {
-            if (!is_array($tlValue)) {
-                $minkParameters[$ns] = $tlValue;
-            } else {
-                foreach ($tlValue as $name => $value) {
-                    if ('guzzle_parameters' === $name) {
-                        $value['redirect.disable'] = true;
-                    }
-
-                    $container->setParameter("behat.mink.$ns.$name", $value);
-                }
-            }
-        }
-        $container->setParameter('behat.mink.parameters', $minkParameters);
-
-        if (isset($config['saucelabs'])) {
-            $capabilities = $container->getParameter('behat.mink.saucelabs.capabilities');
-            $capabilities['tags'] = array(php_uname('n'), 'PHP '.phpversion());
-
-            if (getenv('TRAVIS_JOB_NUMBER')) {
-                $capabilities['tunnel-identifier'] = getenv('TRAVIS_JOB_NUMBER');
-                $capabilities['build'] = getenv('TRAVIS_BUILD_NUMBER');
-                $capabilities['tags'] = array('Travis-CI', 'PHP '.phpversion());
-            }
-
-            $container->setParameter('behat.mink.saucelabs.capabilities', $capabilities);
-
-            $host = 'ondemand.saucelabs.com';
-            if ($config['saucelabs']['connect']) {
-                $host = 'localhost:4445';
-            }
-
-            $username  = $config['saucelabs']['username'];
-            $accessKey = $config['saucelabs']['access_key'];
-
-            $container->setParameter('behat.mink.saucelabs.wd_host', sprintf(
-                '%s:%s@%s/wd/hub', $username, $accessKey, $host
-            ));
-        }
-
-        if (isset($config['base_url'])) {
-            $container->setParameter('behat.mink.base_url', $config['base_url']);
-        }
-        $container->setParameter('behat.mink.default_session', $config['default_session']);
-        $container->setParameter('behat.mink.javascript_session', $config['javascript_session']);
-        $container->setParameter('behat.mink.browser_name', $config['browser_name']);
-
-        $minkReflection = new \ReflectionClass('Behat\Mink\Mink');
-        $minkLibPath    = realpath(dirname($minkReflection->getFilename()) . '/../../../');
-        $container->setParameter('mink.paths.lib', $minkLibPath);
+        $this->loadMink($container);
+        $this->loadContextInitializer($container);
+        $this->loadSelectorsHandler($container);
+        $this->loadSessionsListener($container);
 
         if ($config['show_auto']) {
-            $loader->load('failure_show_listener.xml');
+            $this->loadFailureShowListener($container);
         }
+
+        if (isset($config['goutte'])) {
+            $this->loadGoutteSession($container, $config['goutte']);
+            unset($config['goutte']);
+        }
+        if (isset($config['sahi'])) {
+            $this->loadSahiSession($container, $config['sahi']);
+            unset($config['sahi']);
+        }
+        if (isset($config['zombie'])) {
+            $this->loadZombieSession($container, $config['zombie']);
+            unset($config['zombie']);
+        }
+        if (isset($config['selenium'])) {
+            $this->loadSeleniumSession($container, $config['selenium']);
+            unset($config['zombie']);
+        }
+        if (isset($config['selenium2'])) {
+            $this->loadSelenium2Session($container, $config['selenium2']);
+            unset($config['selenium2']);
+        }
+        if (isset($config['saucelabs'])) {
+            $this->loadSaucelabsSession($container, $config['saucelabs']);
+            unset($config['saucelabs']);
+        }
+
+        $container->setParameter('mink.parameters', $config);
+        $container->setParameter('mink.base_url', $config['base_url']);
+        $container->setParameter('mink.default_session', $config['default_session']);
+        $container->setParameter('mink.javascript_session', $config['javascript_session']);
+        $container->setParameter('mink.browser_name', $config['browser_name']);
     }
 
     /**
@@ -161,244 +93,160 @@ class Extension implements BaseExtension
      */
     public function configure(ArrayNodeDefinition $builder)
     {
-        $config = $this->loadEnvironmentConfiguration();
+        $builder
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('mink_loader')->defaultNull()->end()
+                ->scalarNode('base_url')->defaultNull()->end()
+                ->scalarNode('files_path')->defaultNull()->end()
+                ->booleanNode('show_auto')->defaultFalse()->end()
+                ->scalarNode('show_cmd')->defaultNull()->end()
+                ->scalarNode('show_tmp_dir')->defaultValue(sys_get_temp_dir())->end()
+                ->scalarNode('default_session')->defaultValue('goutte')->end()
+                ->scalarNode('javascript_session')->defaultValue('selenium2')->end()
+                ->scalarNode('browser_name')->defaultValue('firefox')->end()
+                ->arrayNode('goutte')
+                    ->children()
+                        ->arrayNode('server_parameters')
+                            ->useAttributeAsKey('key')
+                            ->prototype('variable')->end()
+                        ->end()
+                        ->arrayNode('guzzle_parameters')
+                            ->useAttributeAsKey('key')
+                            ->prototype('variable')->end()
+                            ->validate()
+                                ->always()
+                                ->then(function ($v) {
+                                    $v['redirect.disable'] = true;
 
-        $builder->
-            children()->
-                scalarNode('mink_loader')->
-                    defaultValue(isset($config['mink_loader']) ? $config['mink_loader'] : null)->
-                end()->
-                scalarNode('base_url')->
-                    defaultValue(isset($config['base_url']) ? $config['base_url'] : null)->
-                end()->
-                scalarNode('files_path')->
-                    defaultValue(isset($config['files_path']) ? $config['files_path'] : null)->
-                end()->
-                booleanNode('show_auto')->
-                    defaultValue(isset($config['show_auto']) ? 'true' === $config['show_auto'] : false)->
-                end()->
-                scalarNode('show_cmd')->
-                    defaultValue(isset($config['show_cmd']) ? $config['show_cmd'] : null)->
-                end()->
-                scalarNode('show_tmp_dir')->
-                    defaultValue(isset($config['show_tmp_dir']) ? $config['show_tmp_dir'] : sys_get_temp_dir())->
-                end()->
-                scalarNode('default_session')->
-                    defaultValue(isset($config['default_session']) ? $config['default_session'] : 'goutte')->
-                end()->
-                scalarNode('javascript_session')->
-                    defaultValue(isset($config['javascript_session']) ? $config['javascript_session'] : 'selenium2')->
-                end()->
-                scalarNode('browser_name')->
-                    defaultValue(isset($config['browser_name']) ? $config['browser_name'] : 'firefox')->
-                end()->
-                arrayNode('goutte')->
-                    children()->
-                        arrayNode('server_parameters')->
-                            useAttributeAsKey('key')->
-                            prototype('variable')->end()->
-                        end()->
-                        arrayNode('guzzle_parameters')->
-                            useAttributeAsKey('key')->
-                            prototype('variable')->end()->
-                        end()->
-                    end()->
-                end()->
-                arrayNode('sahi')->
-                    children()->
-                        scalarNode('sid')->
-                            defaultValue(isset($config['sahi']['sid']) ? $config['sahi']['sid'] : null)->
-                        end()->
-                        scalarNode('host')->
-                            defaultValue('localhost')->
-                        end()->
-                        scalarNode('port')->
-                            defaultValue(isset($config['sahi']['port']) ? $config['sahi']['port'] : 9999)->
-                        end()->
-                        scalarNode('browser')->
-                            defaultValue(isset($config['sahi']['browser']) ? $config['sahi']['browser'] : null)->
-                        end()->
-                        scalarNode('limit')->
-                            defaultValue(isset($config['sahi']['limit']) ? $config['sahi']['limit'] : 600)->
-                        end()->
-                    end()->
-                end()->
-                arrayNode('zombie')->
-                    children()->
-                        scalarNode('host')->
-                            defaultValue(isset($config['zombie']['host']) ? $config['zombie']['host'] : '127.0.0.1')->
-                        end()->
-                        scalarNode('port')->
-                            defaultValue(isset($config['zombie']['port']) ? $config['zombie']['port'] : 8124)->
-                        end()->
-                        scalarNode('auto_server')->
-                            defaultValue(isset($config['zombie']['auto_server']) ? $config['zombie']['auto_server'] : true)->
-                        end()->
-                        scalarNode('node_bin')->
-                            defaultValue(isset($config['zombie']['node_bin']) ? $config['zombie']['node_bin'] : 'node')->
-                        end()->
-                        scalarNode('server_path')->
-                            defaultValue(isset($config['zombie']['server_path']) ? $config['zombie']['server_path'] : null)->
-                        end()->
-                        scalarNode('threshold')->
-                            defaultValue(isset($config['zombie']['threshold']) ? $config['zombie']['threshold'] : 2000000)->
-                        end()->
-                        scalarNode('node_modules_path')->
-                            defaultValue(isset($config['zombie']['node_modules_path']) ? $config['zombie']['node_modules_path'] : '')->
-                        end()->
-                    end()->
-                end()->
-                arrayNode('selenium')->
-                    children()->
-                        scalarNode('host')->
-                            defaultValue(isset($config['selenium']['host']) ? $config['selenium']['host'] : '127.0.0.1')->
-                        end()->
-                        scalarNode('port')->
-                            defaultValue(isset($config['selenium']['port']) ? $config['selenium']['port'] : 4444)->
-                        end()->
-                        scalarNode('browser')->
-                            defaultValue(isset($config['selenium']['browser']) ? $config['selenium']['browser'] : '*%behat.mink.browser_name%')->
-                        end()->
-                    end()->
-                end()->
-                arrayNode('selenium2')->
-                    children()->
-                        scalarNode('browser')->
-                            defaultValue(isset($config['selenium2']['browser']) ? $config['selenium2']['browser'] : '%behat.mink.browser_name%')->
-                        end()->
-                        arrayNode('capabilities')->
-                            normalizeKeys(false)->
-                            children()->
-                                scalarNode('browserName')->
-                                    defaultValue(isset($config['selenium2']['capabilities']['browserName']) ? $config['selenium2']['capabilities']['browserName'] : 'firefox')->
-                                end()->
-                                scalarNode('version')->
-                                    defaultValue(isset($config['selenium2']['capabilities']['version']) ? $config['selenium2']['capabilities']['version'] : "9")->
-                                end()->
-                                scalarNode('platform')->
-                                    defaultValue(isset($config['selenium2']['capabilities']['platform']) ? $config['selenium2']['capabilities']['platform'] : 'ANY')->
-                                end()->
-                                scalarNode('browserVersion')->
-                                    defaultValue(isset($config['selenium2']['capabilities']['browserVersion']) ? $config['selenium2']['capabilities']['browserVersion'] : "9")->
-                                end()->
-                                scalarNode('browser')->
-                                    defaultValue(isset($config['selenium2']['capabilities']['browser']) ? $config['selenium2']['capabilities']['browser'] : 'firefox')->
-                                end()->
-                                scalarNode('ignoreZoomSetting')->
-                                    defaultValue(isset($config['selenium2']['capabilities']['ignoreZoomSetting']) ? $config['selenium2']['capabilities']['ignoreZoomSetting'] : 'false')->
-                                end()->
-                                scalarNode('name')->
-                                    defaultValue(isset($config['selenium2']['capabilities']['name']) ? $config['selenium2']['capabilities']['name'] : 'Behat Test')->
-                                end()->
-                                scalarNode('deviceOrientation')->
-                                    defaultValue(isset($config['selenium2']['capabilities']['deviceOrientation']) ? $config['selenium2']['capabilities']['deviceOrientation'] : 'portrait')->
-                                end()->
-                                scalarNode('deviceType')->
-                                    defaultValue(isset($config['selenium2']['capabilities']['deviceType']) ? $config['selenium2']['capabilities']['deviceType'] : 'tablet')->
-                                end()->
-                                scalarNode('selenium-version')->
-                                    defaultValue(isset($config['selenium2']['capabilities']['selenium-version']) ? $config['selenium2']['capabilities']['selenium-version'] : '2.31.0')->
-                                end()->
-                                scalarNode('max-duration')->
-                                    defaultValue(isset($config['selenium2']['capabilities']['max-duration']) ? $config['selenium2']['capabilities']['max-duration'] : '300')->
-                                end()->
-                                booleanNode('javascriptEnabled')->end()->
-                                booleanNode('databaseEnabled')->end()->
-                                booleanNode('locationContextEnabled')->end()->
-                                booleanNode('applicationCacheEnabled')->end()->
-                                booleanNode('browserConnectionEnabled')->end()->
-                                booleanNode('webStorageEnabled')->end()->
-                                booleanNode('rotatable')->end()->
-                                booleanNode('acceptSslCerts')->end()->
-                                booleanNode('nativeEvents')->end()->
-                                booleanNode('passed')->end()->
-                                booleanNode('record-video')->end()->
-                                booleanNode('record-screenshots')->end()->
-                                booleanNode('capture-html')->end()->
-                                booleanNode('disable-popup-handler')->end()->
-                                arrayNode('proxy')->
-                                    children()->
-                                        scalarNode('proxyType')->end()->
-                                        scalarNode('proxyAuthconfigUrl')->end()->
-                                        scalarNode('ftpProxy')->end()->
-                                        scalarNode('httpProxy')->end()->
-                                        scalarNode('sslProxy')->end()->
-                                    end()->
-                                    validate()->
-                                        ifTrue(function ($v) {
+                                    return $v;
+                                })
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('sahi')
+                    ->children()
+                        ->scalarNode('sid')->defaultNull()->end()
+                        ->scalarNode('host')->defaultValue('localhost')->end()
+                        ->scalarNode('port')->defaultValue(9999)->end()
+                        ->scalarNode('browser')->defaultNull()->end()
+                        ->scalarNode('limit')->defaultValue(600)->end()
+                    ->end()
+                ->end()
+                ->arrayNode('zombie')
+                    ->children()
+                        ->scalarNode('host')->defaultValue('127.0.0.1')->end()
+                        ->scalarNode('port')->defaultValue(8124)->end()
+                        ->booleanNode('auto_server')->defaultValue(true)->end()
+                        ->scalarNode('node_bin')->defaultValue('node')->end()
+                        ->scalarNode('server_path')->defaultNull()->end()
+                        ->scalarNode('threshold')->defaultValue(2000000)->end()
+                        ->scalarNode('node_modules_path')->defaultValue('')->end()
+                    ->end()
+                ->end()
+                ->arrayNode('selenium')
+                    ->children()
+                        ->scalarNode('host')->defaultValue('127.0.0.1')->end()
+                        ->scalarNode('port')->defaultValue(4444)->end()
+                        ->scalarNode('browser')->defaultValue('*%mink.browser_name%')->end()
+                    ->end()
+                ->end()
+                ->arrayNode('selenium2')
+                    ->children()
+                        ->scalarNode('browser')->defaultValue('%mink.browser_name%')->end()
+                        ->arrayNode('capabilities')
+                            ->addDefaultsIfNotSet()
+                            ->normalizeKeys(false)
+                            ->children()
+                                ->scalarNode('browserName')->defaultValue('firefox')->end()
+                                ->scalarNode('version')->defaultValue('9')->end()
+                                ->scalarNode('platform')->defaultValue('ANY')->end()
+                                ->scalarNode('browserVersion')->defaultValue('9')->end()
+                                ->scalarNode('browser')->defaultValue('firefox')->end()
+                                ->scalarNode('ignoreZoomSetting')->defaultValue('false')->end()
+                                ->scalarNode('name')->defaultValue('Behat Test')->end()
+                                ->scalarNode('deviceOrientation')->defaultValue('portrait')->end()
+                                ->scalarNode('deviceType')->defaultValue('tablet')->end()
+                                ->scalarNode('selenium-version')->defaultValue('2.31.0')->end()
+                                ->scalarNode('max-duration')->defaultValue('300')->end()
+                                ->booleanNode('javascriptEnabled')->end()
+                                ->booleanNode('databaseEnabled')->end()
+                                ->booleanNode('locationContextEnabled')->end()
+                                ->booleanNode('applicationCacheEnabled')->end()
+                                ->booleanNode('browserConnectionEnabled')->end()
+                                ->booleanNode('webStorageEnabled')->end()
+                                ->booleanNode('rotatable')->end()
+                                ->booleanNode('acceptSslCerts')->end()
+                                ->booleanNode('nativeEvents')->end()
+                                ->booleanNode('passed')->end()
+                                ->booleanNode('record-video')->end()
+                                ->booleanNode('record-screenshots')->end()
+                                ->booleanNode('capture-html')->end()
+                                ->booleanNode('disable-popup-handler')->end()
+                                ->arrayNode('proxy')
+                                    ->children()
+                                        ->scalarNode('proxyType')->end()
+                                        ->scalarNode('proxyAuthconfigUrl')->end()
+                                        ->scalarNode('ftpProxy')->end()
+                                        ->scalarNode('httpProxy')->end()
+                                        ->scalarNode('sslProxy')->end()
+                                    ->end()
+                                    ->validate()
+                                        ->ifTrue(function ($v) {
                                             return empty($v);
-                                        })->
-                                        thenUnset()->
-                                    end()->
-                                end()->
-                                arrayNode('firefox')->
-                                    children()->
-                                        scalarNode('profile')->
-                                            validate()->
-                                            ifTrue(function ($v) {
-                                                return !file_exists($v);
-                                            })->
-                                                thenInvalid('Cannot find profile zip file %s')->
-                                            end()->
-                                        end()->
-                                        scalarNode('binary')->end()->
-                                    end()->
-                                end()->
-                                arrayNode('chrome')->
-                                    children()->
-                                        arrayNode('switches')->
-                                            prototype('scalar')->end()->
-                                        end()->
-                                        scalarNode('binary')->end()->
-                                        arrayNode('extensions')->
-                                            prototype('scalar')->end()->
-                                        end()->
-                                    end()->
-                                end()->
-                            end()->
-                        end()->
-                        scalarNode('wd_host')->
-                            defaultValue(isset($config['selenium2']['wd_host']) ? $config['selenium2']['wd_host'] : 'http://localhost:4444/wd/hub')->
-                        end()->
-                    end()->
-                end()->
-                arrayNode('saucelabs')->
-                    children()->
-                        scalarNode('username')->
-                            defaultValue(getenv('SAUCE_USERNAME'))->
-                        end()->
-                        scalarNode('access_key')->
-                            defaultValue(getenv('SAUCE_ACCESS_KEY'))->
-                        end()->
-                        booleanNode('connect')->
-                            defaultValue(isset($config['saucelabs']['connect']) ? 'true' === $config['saucelabs']['connect'] : false)->
-                        end()->
-                        scalarNode('browser')->
-                            defaultValue(isset($config['saucelabs']['browser']) ? $config['saucelabs']['browser'] : 'firefox')->
-                        end()->
-                        arrayNode('capabilities')->
-                            children()->
-                                scalarNode('name')->
-                                    defaultValue(isset($config['saucelabs']['name']) ? $config['saucelabs']['name'] : 'Behat feature suite')->
-                                end()->
-                                scalarNode('platform')->
-                                    defaultValue(isset($config['saucelabs']['platform']) ? $config['saucelabs']['platform'] : 'Linux')->
-                                end()->
-                                scalarNode('version')->
-                                    defaultValue(isset($config['saucelabs']['version']) ? $config['saucelabs']['version'] : '21')->
-                                end()->
-                                scalarNode('deviceType')->
-                                    defaultValue(isset($config['saucelabs']['deviceType']) ? $config['saucelabs']['deviceType'] : null)->
-                                end()->
-                                scalarNode('deviceOrientation')->
-                                    defaultValue(isset($config['saucelabs']['deviceOrientation']) ? $config['saucelabs']['deviceOrientation'] : null)->
-                                end()->
-                            end()->
-                        end()->
-                    end()->
-                end()->
-            end()->
-        end();
+                                        })
+                                        ->thenUnset()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('firefox')
+                                    ->children()
+                                        ->scalarNode('profile')
+                                            ->validate()
+                                                ->ifTrue(function ($v) {
+                                                    return !file_exists($v);
+                                                })
+                                                ->thenInvalid('Cannot find profile zip file %s')
+                                            ->end()
+                                        ->end()
+                                        ->scalarNode('binary')->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('chrome')
+                                    ->children()
+                                        ->arrayNode('switches')->prototype('scalar')->end()->end()
+                                        ->scalarNode('binary')->end()
+                                        ->arrayNode('extensions')->prototype('scalar')->end()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->scalarNode('wd_host')->defaultValue('http://localhost:4444/wd/hub')->end()
+                    ->end()
+                ->end()
+                ->arrayNode('saucelabs')
+                    ->children()
+                        ->scalarNode('username')->defaultValue(getenv('SAUCE_USERNAME'))->end()
+                        ->scalarNode('access_key')->defaultValue(getenv('SAUCE_ACCESS_KEY'))->end()
+                        ->booleanNode('connect')->defaultFalse()->end()
+                        ->scalarNode('browser')->defaultValue('firefox')->end()
+                        ->arrayNode('capabilities')
+                            ->addDefaultsIfNotSet()
+                            ->normalizeKeys(false)
+                            ->children()
+                                ->scalarNode('name')->defaultValue('Behat feature suite')->end()
+                                ->scalarNode('platform')->defaultValue('Linux')->end()
+                                ->scalarNode('version')->defaultValue('21')->end()
+                                ->scalarNode('selenium-version')->defaultValue('2.31.0')->end()
+                                ->scalarNode('max-duration')->defaultValue('300')->end()
+                                ->scalarNode('deviceType')->defaultNull()->end()
+                                ->scalarNode('deviceOrientation')->defaultNull()->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ->end();
     }
 
     /**
@@ -414,21 +262,242 @@ class Extension implements BaseExtension
      */
     public function process(ContainerBuilder $container)
     {
-        $sessionsPass = new SessionsPass();
-        $selectorPass = new SelectorsPass();
-
-        $sessionsPass->process($container);
-        $selectorPass->process($container);
+        $this->processSessions($container);
+        $this->processSelectors($container);
     }
 
-    protected function loadEnvironmentConfiguration()
+    private function loadMink(ContainerBuilder $container)
     {
-        $config = array();
-        if ($envConfig = getenv('MINK_EXTENSION_PARAMS')) {
-            parse_str($envConfig, $config);
+        $container->setDefinition(self::MINK_ID, new Definition('Behat\Mink\Mink'));
+    }
+
+    private function loadContextInitializer(ContainerBuilder $container)
+    {
+        $definition = new Definition('Behat\MinkExtension\Context\Initializer\MinkAwareInitializer', array(
+            new Reference(self::MINK_ID),
+            '%mink.parameters%',
+        ));
+        $definition->addTag(ContextExtension::INITIALIZER_TAG, array('priority' => 0));
+        $container->setDefinition('mink.context_initializer', $definition);
+    }
+
+    private function loadSelectorsHandler(ContainerBuilder $container)
+    {
+        $container->setDefinition(self::SELECTORS_HANDLER_ID, new Definition('Behat\Mink\Selector\SelectorsHandler'));
+
+        $cssSelectorDefinition = new Definition('Behat\Mink\Selector\CssSelector');
+        $cssSelectorDefinition->addTag(self::SELECTOR_TAG, array('alias' => 'css'));
+        $container->setDefinition(self::SELECTOR_TAG . '.css', $cssSelectorDefinition);
+
+        $namedSelectorDefinition = new Definition('Behat\Mink\Selector\NamedSelector');
+        $namedSelectorDefinition->addTag(self::SELECTOR_TAG, array('alias' => 'named'));
+        $container->setDefinition(self::SELECTOR_TAG . '.named', $namedSelectorDefinition);
+    }
+
+    private function loadSessionsListener(ContainerBuilder $container)
+    {
+        $definition = new Definition('Behat\MinkExtension\Listener\SessionsListener', array(
+            new Reference(self::MINK_ID),
+            '%mink.parameters%',
+        ));
+        $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, array('priority' => 0));
+        $container->setDefinition('mink.listener.sessions', $definition);
+    }
+
+    private function loadFailureShowListener(ContainerBuilder $container)
+    {
+        $definition = new Definition('Behat\MinkExtension\Listener\FailureShowListener', array(
+            new Reference(self::MINK_ID),
+            '%mink.parameters%',
+        ));
+        $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, array('priority' => 0));
+        $container->setDefinition('mink.listener.failure_show', $definition);
+    }
+
+    private function loadGoutteSession(ContainerBuilder $container, array $config)
+    {
+        if (!class_exists('Behat\Mink\Driver\GoutteDriver')) {
+            throw new \RuntimeException(
+                'Install MinkGoutteDriver in order to activate goutte session.'
+            );
         }
 
-        return $config;
+        $clientDefinition = new Definition('Behat\Mink\Driver\Goutte\Client', array(
+            $config['server_parameters'],
+        ));
+        $clientDefinition->addMethodCall('setClient', array(
+            new Definition('Guzzle\Http\Client', array(
+                null,
+                $config['guzzle_parameters'],
+            )),
+        ));
+
+        $driverDefinition = new Definition('Behat\Mink\Driver\GoutteDriver', array(
+            $clientDefinition,
+        ));
+        $this->loadSession($container, $driverDefinition, 'goutte');
     }
 
+    private function loadSahiSession(ContainerBuilder $container, array $config)
+    {
+        if (!class_exists('Behat\Mink\Driver\SahiDriver')) {
+            throw new \RuntimeException(
+                'Install MinkSahiDriver in order to activate sahi session.'
+            );
+        }
+
+        $driverDefinition = new Definition('Behat\Mink\Driver\SahiDriver', array(
+            '%mink.browser_name%',
+            new Definition('Behat\SahiClient\Client', array(
+                new Definition('Behat\SahiClient\Connection', array(
+                    $config['sid'],
+                    $config['host'],
+                    $config['port'],
+                    $config['browser'],
+                    $config['limit'],
+                )),
+            )),
+        ));
+        $this->loadSession($container, $driverDefinition, 'sahi');
+    }
+
+    private function loadZombieSession(ContainerBuilder $container, array $config)
+    {
+        if (!class_exists('Behat\Mink\Driver\ZombieDriver')) {
+            throw new \RuntimeException(
+                'Install MinkZombieDriver in order to activate zombie session.'
+            );
+        }
+
+        $driverDefinition = new Definition('Behat\Mink\Driver\ZombieDriver', array(
+            new Definition('Behat\Mink\Driver\NodeJS\Server\ZombieServer', array(
+                $config['host'],
+                $config['port'],
+                $config['node_bin'],
+                $config['server_path'],
+                $config['threshold'],
+                $config['node_modules_path'],
+            )),
+            new Definition('Behat\Mink\Driver\NodeJS\Connection', array(
+                $config['host'],
+                $config['port'],
+            )),
+            $config['auto_server'],
+        ));
+        $this->loadSession($container, $driverDefinition, 'zombie');
+    }
+
+    private function loadSeleniumSession(ContainerBuilder $container, array $config)
+    {
+        if (!class_exists('Behat\Mink\Driver\SeleniumDriver')) {
+            throw new \RuntimeException(
+                'Install MinkSeleniumDriver in order to activate selenium session.'
+            );
+        }
+
+        $driverDefinition = new Definition('Behat\Mink\Driver\SeleniumDriver', array(
+            $config['browser'],
+            '%mink.base_url%',
+            new Definition('Selenium\Client', array(
+                $config['host'],
+                $config['port'],
+            )),
+        ));
+        $this->loadSession($container, $driverDefinition, 'selenium');
+    }
+
+    private function loadSelenium2Session(ContainerBuilder $container, array $config)
+    {
+        if (!class_exists('Behat\Mink\Driver\Selenium2Driver')) {
+            throw new \RuntimeException(
+                'Install MinkSelenium2Driver in order to activate selenium2 session.'
+            );
+        }
+
+        $driverDefinition = new Definition('Behat\Mink\Driver\Selenium2Driver', array(
+            $config['browser'],
+            $config['capabilities'],
+            $config['wd_host'],
+        ));
+        $this->loadSession($container, $driverDefinition, 'selenium2');
+    }
+
+    private function loadSaucelabsSession(ContainerBuilder $container, array $config)
+    {
+        if (!class_exists('Behat\Mink\Driver\Selenium2Driver')) {
+            throw new \RuntimeException(
+                'Install MinkSelenium2Driver in order to activate saucelabs session.'
+            );
+        }
+        $capabilities = $config['capabilities'];
+        $capabilities['tags'] = array(php_uname('n'), 'PHP '.phpversion());
+
+        if (getenv('TRAVIS_JOB_NUMBER')) {
+            $capabilities['tunnel-identifier'] = getenv('TRAVIS_JOB_NUMBER');
+            $capabilities['build'] = getenv('TRAVIS_BUILD_NUMBER');
+            $capabilities['tags'] = array('Travis-CI', 'PHP '.phpversion());
+        }
+
+        $host = 'ondemand.saucelabs.com';
+        if ($config['connect']) {
+            $host = 'localhost:4445';
+        }
+
+        $driverDefinition = new Definition('Behat\Mink\Driver\Selenium2Driver', array(
+            $config['browser'],
+            $capabilities,
+            sprintf('%s:%s@%s/wd/hub', $config['username'], $config['access_key'], $host),
+        ));
+        $this->loadSession($container, $driverDefinition, 'saucelabs');
+    }
+
+    private function loadSession(ContainerBuilder $container, Definition $driverDefinition, $alias)
+    {
+        $definition = new Definition('Behat\Mink\Session', array(
+            $driverDefinition,
+            new Reference(self::SELECTORS_HANDLER_ID),
+        ));
+        $definition->addTag(self::SESSION_TAG, array('alias' => $alias));
+        $container->setDefinition(self::SESSION_TAG . '.' . $alias, $definition);
+    }
+
+    private function processSessions(ContainerBuilder $container)
+    {
+        $handlerDefinition = $container->getDefinition(self::MINK_ID);
+
+        foreach ($container->findTaggedServiceIds(self::SESSION_TAG) as $id => $tags) {
+            foreach ($tags as $tag) {
+                if (!isset($tag['alias'])) {
+                    throw new ProcessingException(sprintf(
+                        'All `%s` tags should have an `alias` attribute, but `%s` service has none.',
+                        $tag,
+                        $id
+                    ));
+                }
+                $handlerDefinition->addMethodCall(
+                    'registerSession', array($tag['alias'], new Reference($id))
+                );
+            }
+        }
+    }
+
+    private function processSelectors(ContainerBuilder $container)
+    {
+        $handlerDefinition = $container->getDefinition(self::SELECTORS_HANDLER_ID);
+
+        foreach ($container->findTaggedServiceIds(self::SELECTOR_TAG) as $id => $tags) {
+            foreach ($tags as $tag) {
+                if (!isset($tag['alias'])) {
+                    throw new ProcessingException(sprintf(
+                        'All `%s` tags should have an `alias` attribute, but `%s` service has none.',
+                        $tag,
+                        $id
+                    ));
+                }
+                $handlerDefinition->addMethodCall(
+                    'registerSelector', array($tag['alias'], new Reference($id))
+                );
+            }
+        }
+    }
 }

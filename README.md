@@ -6,7 +6,7 @@ Status](https://secure.travis-ci.org/Behat/MinkExtension.png?branch=master)](htt
 Provides integration layer:
 
 * Additional services for Behat (`Mink`, `Sessions`, `Drivers`).
-* `Behat\MinkExtension\Context\MinkAwareInterface` which provides `Mink`
+* `Behat\MinkExtension\Context\MinkAwareContext` which provides `Mink`
   instance for your contexts or subcontexts.
 * Base `Behat\MinkExtension\Context\MinkContext` context which provides base
   step definitions and hooks for your contexts or subcontexts. Or it could be

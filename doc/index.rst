@@ -13,7 +13,7 @@ Basically, MinkExtension is an integration layer between Behat 2.4+ and Mink 1.4
 and it provides:
 
 * Additional services for Behat (``Mink``, ``Sessions``, ``Drivers``).
-* ``Behat\MinkExtension\Context\MinkAwareInterface`` which provides ``Mink``
+* ``Behat\MinkExtension\Context\MinkAwareContext`` which provides ``Mink``
   instance for your contexts or subcontexts.
 * Base ``Behat\MinkExtension\Context\MinkContext`` context which provides base
   step definitions and hooks for your contexts or subcontexts. Or it could be
@@ -37,7 +37,7 @@ You should first download 3 phar archives:
 * `mink_extension.phar <http://behat.org/downloads/mink_extension.phar>`_
   - integration extension
 
-After downloading and placing them into project directory, you need to 
+After downloading and placing them into project directory, you need to
 activate ``mink_extension.phar`` in your ``behat.yml``:
 
 .. code-block:: yaml
@@ -193,7 +193,7 @@ After installing extension, there would be 6 usage options available for you:
             }
         }
 
-6. Implementing ``Behat\MinkExtension\Context\MinkAwareInterface`` with your context or its
+6. Implementing ``Behat\MinkExtension\Context\MinkAwareContext`` with your context or its
    subcontexts.
 
 There's common things between last 5 methods. In each of those, target context will implement
@@ -226,12 +226,12 @@ with support for 5 drivers out of the box:
                     goutte: ~
 
 .. Tips : HTTPS and self-signed certificate
-In case you use Behat/Mink/Goutte to test your application, and want to test an 
-application secured with HTTPS, but with a self-signed certificate, you can use 
+In case you use Behat/Mink/Goutte to test your application, and want to test an
+application secured with HTTPS, but with a self-signed certificate, you can use
 the following parameters to avoid the validation error triggered by Guzzle :
 
   .. code-block:: yaml
-    
+
     default:
       extensions:
         Behat\MinkExtension\Extension:

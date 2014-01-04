@@ -10,6 +10,7 @@
 
 namespace Behat\MinkExtension\Context;
 
+use Behat\Behat\Context\Context;
 use Behat\Mink\Mink;
 
 /**
@@ -17,7 +18,7 @@ use Behat\Mink\Mink;
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-interface MinkAwareInterface
+interface MinkAwareContext extends Context
 {
     /**
      * Sets Mink instance.

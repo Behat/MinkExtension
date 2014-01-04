@@ -10,8 +10,6 @@
 
 namespace Behat\MinkExtension\Context;
 
-use Behat\Behat\Context\Context;
-
 use Behat\Mink\Mink;
 use Behat\Mink\WebAssert;
 use Behat\Mink\Session;
@@ -22,7 +20,7 @@ use Behat\Mink\Session;
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class RawMinkContext implements MinkAwareInterface, Context
+class RawMinkContext implements MinkAwareContext
 {
     private $mink;
     private $minkParameters;

@@ -14,7 +14,7 @@ use Behat\Behat\Context\Context;
 use Behat\Behat\Context\Initializer\ContextInitializer;
 
 use Behat\Mink\Mink;
-use Behat\MinkExtension\Context\MinkAwareInterface;
+use Behat\MinkExtension\Context\MinkAwareContext;
 
 /**
  * Mink aware contexts initializer.
@@ -48,8 +48,8 @@ class MinkAwareInitializer implements ContextInitializer
      */
     public function supportsContext(Context $context)
     {
-        // if context/subcontext implements MinkAwareInterface
-        if ($context instanceof MinkAwareInterface) {
+        // if context/subcontext implements MinkAwareContext
+        if ($context instanceof MinkAwareContext) {
             return true;
         }
 

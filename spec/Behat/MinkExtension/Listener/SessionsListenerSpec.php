@@ -83,6 +83,15 @@ class SessionsListenerSpec extends ObjectBehavior
         $this->prepareDefaultMinkSession($event);
     }
 
+    function it_stops_the_sessions_for_insulated_features($event, $mink, $feature)
+    {
+        $feature->hasTag('insulated')->willReturn(true);
+        $mink->stopSessions()->shouldBeCalled();
+        $mink->setDefaultSessionName('goutte')->shouldBeCalled();
+
+        $this->prepareDefaultMinkSession($event);
+    }
+
     function it_stops_the_sessions_at_the_end_of_the_exercise($mink)
     {
         $mink->stopSessions()->shouldBeCalled();

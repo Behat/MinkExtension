@@ -76,7 +76,7 @@ class SessionsListener implements EventSubscriberInterface
             }
         }
 
-        if ($scenario->hasTag('insulated')) {
+        if ($scenario->hasTag('insulated') || $feature->hasTag('insulated')) {
             $this->mink->stopSessions();
         } else {
             $this->mink->resetSessions();

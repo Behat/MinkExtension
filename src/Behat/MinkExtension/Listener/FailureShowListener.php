@@ -65,7 +65,7 @@ class FailureShowListener implements EventSubscriberInterface
             return;
         }
 
-        if (!$event->getTestResult()->getCallResult()->getException() instanceof MinkException) {
+        if (!$event->getTestResult()->getException() instanceof MinkException) {
             return;
         }
 

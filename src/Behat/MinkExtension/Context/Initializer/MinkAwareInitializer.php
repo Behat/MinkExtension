@@ -40,20 +40,29 @@ class MinkAwareInitializer implements ContextInitializer
     }
 
     /**
-     * Checks if initializer supports provided context.
+     * Initializes provided context.
+     *
+     * @param Context $context
+     */
+    public function initializeContext(Context $context)
+    {
+        if (!$context instanceof MinkAwareContext && !$this->usesMinkDictionary($context)) {
+            return;
+        }
+
+        $context->setMink($this->mink);
+        $context->setMinkParameters($this->parameters);
+    }
+
+    /**
+     * Checks whether the context uses the MinkDictionary trait.
      *
      * @param Context $context
      *
      * @return Boolean
      */
-    public function supportsContext(Context $context)
+    private function usesMinkDictionary(Context $context)
     {
-        // if context/subcontext implements MinkAwareContext
-        if ($context instanceof MinkAwareContext) {
-            return true;
-        }
-
-        // if context/subcontext uses MinkDictionary trait
         $refl = new \ReflectionObject($context);
         if (method_exists($refl, 'getTraitNames')) {
             if (in_array('Behat\\MinkExtension\\Context\\MinkDictionary', $refl->getTraitNames())) {
@@ -62,16 +71,5 @@ class MinkAwareInitializer implements ContextInitializer
         }
 
         return false;
-    }
-
-    /**
-     * Initializes provided context.
-     *
-     * @param Context $context
-     */
-    public function initializeContext(Context $context)
-    {
-        $context->setMink($this->mink);
-        $context->setMinkParameters($this->parameters);
     }
 }

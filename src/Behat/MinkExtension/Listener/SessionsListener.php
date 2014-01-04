@@ -10,6 +10,8 @@
 
 namespace Behat\MinkExtension\Listener;
 
+use Behat\Behat\Tester\Event\AbstractScenarioTested;
+use Behat\Behat\Tester\Event\ExampleTested;
 use Behat\Behat\Tester\Event\ScenarioTested;
 use Behat\Mink\Mink;
 use Behat\Testwork\Tester\Event\ExerciseCompleted;
@@ -45,6 +47,7 @@ class SessionsListener implements EventSubscriberInterface
     {
         return array(
             ScenarioTested::BEFORE   => array('prepareDefaultMinkSession', 10),
+            ExampleTested::BEFORE    => array('prepareDefaultMinkSession', 10),
             ExerciseCompleted::AFTER => array('tearDownMinkSessions', -10)
         );
     }
@@ -60,9 +63,9 @@ class SessionsListener implements EventSubscriberInterface
      * `@insulated` tag will cause Mink to stop current sessions before scenario
      * instead of just soft-resetting them
      *
-     * @param ScenarioTested $event
+     * @param AbstractScenarioTested $event
      */
-    public function prepareDefaultMinkSession(ScenarioTested $event)
+    public function prepareDefaultMinkSession(AbstractScenarioTested $event)
     {
         $scenario = $event->getScenario();
         $feature  = $event->getFeature();

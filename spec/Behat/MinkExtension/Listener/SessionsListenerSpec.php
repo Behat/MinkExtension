@@ -7,7 +7,6 @@ use Behat\Gherkin\Node\FeatureNode;
 use Behat\Gherkin\Node\ScenarioNode;
 use Behat\Mink\Mink;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class SessionsListenerSpec extends ObjectBehavior
 {

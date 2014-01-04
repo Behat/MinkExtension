@@ -131,10 +131,10 @@ class RawMinkContext implements MinkAwareContext
     /**
      * Save a screenshot of the current window to the file system.
      *
-     * @param  string  $filename Desired filename, defaults to
-     *   <browser_name>_<ISO 8601 date>_<randomId>.png
-     * @param  string  $filepath Desired filepath, defaults to
-     *   upload_tmp_dir, falls back to sys_get_temp_dir()
+     * @param string $filename Desired filename, defaults to
+     *                         <browser_name>_<ISO 8601 date>_<randomId>.png
+     * @param string $filepath Desired filepath, defaults to
+     *                         upload_tmp_dir, falls back to sys_get_temp_dir()
      */
     public function saveScreenshot($filename = null, $filepath = null)
     {

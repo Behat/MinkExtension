@@ -19,14 +19,9 @@ class MinkAwareInitializerSpec extends ObjectBehavior
         $this->shouldHaveType('Behat\Behat\Context\Initializer\ContextInitializer');
     }
 
-    function it_supports_mink_aware_contexts(MinkAwareContext $context)
+    function it_does_nothing_for_basic_contexts(Context $context)
     {
-        $this->supportsContext($context)->shouldBe(true);
-    }
-
-    function it_does_not_support_basic_contexts(Context $context)
-    {
-        $this->supportsContext($context)->shouldBe(false);
+        $this->initializeContext($context);
     }
 
     function it_injects_mink_and_parameters_in_mink_aware_contexts(MinkAwareContext $context, $mink)

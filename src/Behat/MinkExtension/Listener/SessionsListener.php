@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * This file is part of the Behat MinkExtension.
+ * (c) Konstantin Kudryashov <ever.zet@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Behat\MinkExtension\Listener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -8,14 +16,6 @@ use Behat\Behat\Event\ScenarioEvent,
     Behat\Behat\Event\OutlineEvent;
 
 use Behat\Mink\Mink;
-
-/*
- * This file is part of the Behat\MinkExtension.
- * (c) Konstantin Kudryashov <ever.zet@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 /**
  * Mink sessions listener.

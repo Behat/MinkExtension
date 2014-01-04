@@ -1,19 +1,18 @@
 <?php
 
+/*
+ * This file is part of the Behat MinkExtension.
+ * (c) Konstantin Kudryashov <ever.zet@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Behat\MinkExtension\Compiler;
 
 use Symfony\Component\DependencyInjection\Reference,
     Symfony\Component\DependencyInjection\ContainerBuilder,
     Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-
-/*
- * This file is part of the Behat\MinkExtension
- *
- * (c) Konstantin Kudryashov <ever.zet@gmail.com>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
 
 /**
  * Behat\Mink container compilation pass.

@@ -9,7 +9,7 @@ and languages provide functional testing tools. Today we’ll talk about how to
 use Behat for functional testing of web applications. `Mink <http://mink.behat.org>`_
 is a tool exactly for that and this extension provides integration for it.
 
-Basically, MinkExtension is an integration layer between Behat 2.4+ and Mink 1.4+
+Basically, MinkExtension is an integration layer between Behat 2.5 and Mink 1.4+
 and it provides:
 
 * Additional services for Behat (``Mink``, ``Sessions``, ``Drivers``).
@@ -24,7 +24,7 @@ Installation
 
 This extension requires:
 
-* Behat 2.4+
+* Behat 2.5
 * Mink 1.4+
 
 Through PHAR
@@ -37,7 +37,7 @@ You should first download 3 phar archives:
 * `mink_extension.phar <http://behat.org/downloads/mink_extension.phar>`_
   - integration extension
 
-After downloading and placing them into project directory, you need to 
+After downloading and placing them into project directory, you need to
 activate ``mink_extension.phar`` in your ``behat.yml``:
 
 .. code-block:: yaml
@@ -226,12 +226,12 @@ with support for 5 drivers out of the box:
                     goutte: ~
 
 .. Tips : HTTPS and self-signed certificate
-In case you use Behat/Mink/Goutte to test your application, and want to test an 
-application secured with HTTPS, but with a self-signed certificate, you can use 
+In case you use Behat/Mink/Goutte to test your application, and want to test an
+application secured with HTTPS, but with a self-signed certificate, you can use
 the following parameters to avoid the validation error triggered by Guzzle :
 
   .. code-block:: yaml
-    
+
     default:
       extensions:
         Behat\MinkExtension\Extension:

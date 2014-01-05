@@ -1,20 +1,19 @@
 <?php
 
-namespace Behat\MinkExtension\Context;
-
-use Behat\Gherkin\Node\TableNode;
-
-use Behat\Mink\Mink,
-    Behat\Mink\Session,
-    Behat\Mink\WebAssert;
-
 /*
- * This file is part of the Behat\MinkExtension.
+ * This file is part of the Behat MinkExtension.
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+namespace Behat\MinkExtension\Context;
+
+use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Mink;
+use Behat\Mink\Session;
+use Behat\Mink\WebAssert;
 
 /**
  * Mink steps dictionary for Behat BDD tool.

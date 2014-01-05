@@ -1,21 +1,21 @@
 <?php
 
-namespace Behat\MinkExtension\Listener;
-
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-
-use Behat\Behat\Event\ScenarioEvent,
-    Behat\Behat\Event\OutlineEvent;
-
-use Behat\Mink\Mink;
-
 /*
- * This file is part of the Behat\MinkExtension.
+ * This file is part of the Behat MinkExtension.
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+namespace Behat\MinkExtension\Listener;
+
+use Behat\Behat\Tester\Event\AbstractScenarioTested;
+use Behat\Behat\Tester\Event\ExampleTested;
+use Behat\Behat\Tester\Event\ScenarioTested;
+use Behat\Mink\Mink;
+use Behat\Testwork\Tester\Event\ExerciseCompleted;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Mink sessions listener.
@@ -41,29 +41,14 @@ class SessionsListener implements EventSubscriberInterface
     }
 
     /**
-     * Returns an array of event names this subscriber wants to listen to.
-     *
-     * The array keys are event names and the value can be:
-     *
-     *  * The method name to call (priority defaults to 0)
-     *  * An array composed of the method name to call and the priority
-     *  * An array of arrays composed of the method names to call and respective
-     *    priorities, or 0 if unset
-     *
-     * For instance:
-     *
-     *  * array('eventName' => 'methodName')
-     *  * array('eventName' => array('methodName', $priority))
-     *  * array('eventName' => array(array('methodName1', $priority), array('methodName2'))
-     *
-     * @return array The event names to listen to
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
         return array(
-            'beforeScenario'       => array('prepareDefaultMinkSession', 10),
-            'beforeOutlineExample' => array('prepareDefaultMinkSession', 10),
-            'afterSuite'           => array('tearDownMinkSessions', -10)
+            ScenarioTested::BEFORE   => array('prepareDefaultMinkSession', 10),
+            ExampleTested::BEFORE    => array('prepareDefaultMinkSession', 10),
+            ExerciseCompleted::AFTER => array('tearDownMinkSessions', -10)
         );
     }
 
@@ -78,14 +63,15 @@ class SessionsListener implements EventSubscriberInterface
      * `@insulated` tag will cause Mink to stop current sessions before scenario
      * instead of just soft-resetting them
      *
-     * @param ScenarioEvent|OutlineExampleEvent $event
+     * @param AbstractScenarioTested $event
      */
-    public function prepareDefaultMinkSession($event)
+    public function prepareDefaultMinkSession(AbstractScenarioTested $event)
     {
-        $scenario = $event instanceof ScenarioEvent ? $event->getScenario() : $event->getOutline();
+        $scenario = $event->getScenario();
+        $feature  = $event->getFeature();
         $session  = $this->parameters['default_session'];
 
-        foreach ($scenario->getTags() as $tag) {
+        foreach (array_merge($feature->getTags(), $scenario->getTags()) as $tag) {
             if ('javascript' === $tag) {
                 $session = $this->parameters['javascript_session'];
             } elseif (preg_match('/^mink\:(.+)/', $tag, $matches)) {
@@ -93,7 +79,7 @@ class SessionsListener implements EventSubscriberInterface
             }
         }
 
-        if ($scenario->hasTag('insulated')) {
+        if ($scenario->hasTag('insulated') || $feature->hasTag('insulated')) {
             $this->mink->stopSessions();
         } else {
             $this->mink->resetSessions();

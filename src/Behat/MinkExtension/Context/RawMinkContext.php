@@ -1,20 +1,18 @@
 <?php
 
-namespace Behat\MinkExtension\Context;
-
-use Behat\Behat\Context\Context;
-
-use Behat\Mink\Mink,
-    Behat\Mink\WebAssert,
-    Behat\Mink\Session;
-
 /*
- * This file is part of the Behat\MinkExtension.
+ * This file is part of the Behat MinkExtension.
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+namespace Behat\MinkExtension\Context;
+
+use Behat\Mink\Mink;
+use Behat\Mink\WebAssert;
+use Behat\Mink\Session;
 
 /**
  * Raw Mink context for Behat BDD tool.
@@ -22,7 +20,7 @@ use Behat\Mink\Mink,
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class RawMinkContext implements MinkAwareInterface, Context
+class RawMinkContext implements MinkAwareContext
 {
     private $mink;
     private $minkParameters;
@@ -133,10 +131,10 @@ class RawMinkContext implements MinkAwareInterface, Context
     /**
      * Save a screenshot of the current window to the file system.
      *
-     * @param  string  $filename Desired filename, defaults to
-     *   <browser_name>_<ISO 8601 date>_<randomId>.png
-     * @param  string  $filepath Desired filepath, defaults to
-     *   upload_tmp_dir, falls back to sys_get_temp_dir()
+     * @param string $filename Desired filename, defaults to
+     *                         <browser_name>_<ISO 8601 date>_<randomId>.png
+     * @param string $filepath Desired filepath, defaults to
+     *                         upload_tmp_dir, falls back to sys_get_temp_dir()
      */
     public function saveScreenshot($filename = null, $filepath = null)
     {

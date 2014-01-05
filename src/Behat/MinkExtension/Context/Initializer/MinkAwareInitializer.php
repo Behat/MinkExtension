@@ -1,20 +1,20 @@
 <?php
 
+/*
+ * This file is part of the Behat MinkExtension.
+ * (c) Konstantin Kudryashov <ever.zet@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Behat\MinkExtension\Context\Initializer;
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\Initializer\ContextInitializer;
 
 use Behat\Mink\Mink;
-use Behat\MinkExtension\Context\MinkAwareInterface;
-
-/*
- * This file is part of the Behat\MinkExtension.
- * (c) Konstantin Kudryashov <ever.zet@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+use Behat\MinkExtension\Context\MinkAwareContext;
 
 /**
  * Mink aware contexts initializer.
@@ -40,20 +40,29 @@ class MinkAwareInitializer implements ContextInitializer
     }
 
     /**
-     * Checks if initializer supports provided context.
+     * Initializes provided context.
+     *
+     * @param Context $context
+     */
+    public function initializeContext(Context $context)
+    {
+        if (!$context instanceof MinkAwareContext && !$this->usesMinkDictionary($context)) {
+            return;
+        }
+
+        $context->setMink($this->mink);
+        $context->setMinkParameters($this->parameters);
+    }
+
+    /**
+     * Checks whether the context uses the MinkDictionary trait.
      *
      * @param Context $context
      *
      * @return Boolean
      */
-    public function supportsContext(Context $context)
+    private function usesMinkDictionary(Context $context)
     {
-        // if context/subcontext implements MinkAwareInterface
-        if ($context instanceof MinkAwareInterface) {
-            return true;
-        }
-
-        // if context/subcontext uses MinkDictionary trait
         $refl = new \ReflectionObject($context);
         if (method_exists($refl, 'getTraitNames')) {
             if (in_array('Behat\\MinkExtension\\Context\\MinkDictionary', $refl->getTraitNames())) {
@@ -62,16 +71,5 @@ class MinkAwareInitializer implements ContextInitializer
         }
 
         return false;
-    }
-
-    /**
-     * Initializes provided context.
-     *
-     * @param Context $context
-     */
-    public function initializeContext(Context $context)
-    {
-        $context->setMink($this->mink);
-        $context->setMinkParameters($this->parameters);
     }
 }

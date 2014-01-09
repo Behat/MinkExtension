@@ -2,7 +2,7 @@ default:
   suites:
     default:
       path: %paths.base%/features
-      context: Behat\MinkExtension\Context\MinkContext
+      contexts: [Behat\MinkExtension\Context\MinkContext]
   extensions:
     Behat\MinkExtension\Extension:
       base_url: http://en.wikipedia.org/

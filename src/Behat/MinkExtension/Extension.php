@@ -13,7 +13,8 @@ namespace Behat\MinkExtension;
 use Behat\Behat\Context\ServiceContainer\ContextExtension;
 use Behat\Testwork\EventDispatcher\ServiceContainer\EventDispatcherExtension;
 use Behat\Testwork\ServiceContainer\Exception\ProcessingException;
-use Behat\Testwork\ServiceContainer\Extension as BaseExtension;
+use Behat\Testwork\ServiceContainer\Extension as ExtensionInterface;
+use Behat\Testwork\ServiceContainer\ExtensionManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -24,7 +25,7 @@ use Symfony\Component\DependencyInjection\Reference;
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
-class Extension implements BaseExtension
+class Extension implements ExtensionInterface
 {
     const MINK_ID = 'mink';
     const SELECTORS_HANDLER_ID = 'mink.selectors_handler';
@@ -255,6 +256,13 @@ class Extension implements BaseExtension
     public function getConfigKey()
     {
         return 'mink';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function initialize(ExtensionManager $extensionManager)
+    {
     }
 
     /**

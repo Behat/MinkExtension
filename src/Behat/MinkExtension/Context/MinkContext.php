@@ -420,7 +420,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      */
     public function printCurrentUrl()
     {
-        $this->printDebug($this->getSession()->getCurrentUrl());
+        echo $this->getSession()->getCurrentUrl();
     }
 
     /**
@@ -430,7 +430,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      */
     public function printLastResponse()
     {
-        $this->printDebug(
+        echo (
             $this->getSession()->getCurrentUrl()."\n\n".
             $this->getSession()->getPage()->getContent()
         );

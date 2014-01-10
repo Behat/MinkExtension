@@ -97,7 +97,28 @@ class Extension implements ExtensionInterface
      */
     public function configure(ArrayNodeDefinition $builder)
     {
+        // Rewrite keys to define a shortcut way without allowing conflicts with real keys
+        $renamedKeys = array_diff(
+            array_keys($this->driverFactories),
+            array('mink_loader', 'base_url', 'files_path', 'show_auto', 'show_cmd', 'show_tmp_dir', 'default_session', 'javascript_session', 'browser_name', 'sessions')
+        );
+
         $builder
+            ->beforeNormalization()
+                ->always()
+                ->then(function ($v) use ($renamedKeys) {
+                    foreach ($renamedKeys as $driverType) {
+                        if (!array_key_exists($driverType, $v) || isset($v['sessions'][$driverType])) {
+                            continue;
+                        }
+
+                        $v['sessions'][$driverType][$driverType] = $v[$driverType];
+                        unset($v[$driverType]);
+                    }
+
+                    return $v;
+                })
+            ->end()
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('mink_loader')->defaultNull()->end()

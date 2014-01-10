@@ -23,6 +23,7 @@ use Behat\Testwork\ServiceContainer\Exception\ProcessingException;
 use Behat\Testwork\ServiceContainer\Extension as ExtensionInterface;
 use Behat\Testwork\ServiceContainer\ExtensionManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -217,10 +218,18 @@ class Extension implements ExtensionInterface
 
         if (null === $javascriptSession && !empty($javascriptSessions)) {
             $javascriptSession = $javascriptSessions[0];
+        } elseif (null !== $javascriptSession && !in_array($javascriptSession, $javascriptSessions)) {
+            throw new InvalidConfigurationException(sprintf(
+                'The javascript session must be one of the enabled javascript sessions (%s), but got %s',
+                json_encode($javascriptSessions),
+                $javascriptSession
+            ));
         }
 
         if (null === $defaultSession) {
             $defaultSession = !empty($nonJavascriptSessions) ? $nonJavascriptSessions[0] : $javascriptSessions[0];
+        } elseif (!isset($config['sessions'][$defaultSession])) {
+            throw new InvalidConfigurationException(sprintf('The default session must be one of the enabled sessions, but got %s', $defaultSession));
         }
 
         $container->setParameter('mink.default_session', $defaultSession);

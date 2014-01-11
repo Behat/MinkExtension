@@ -3,7 +3,6 @@
 namespace spec\Behat\MinkExtension\ServiceContainer\Driver;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class Selenium2FactorySpec extends ObjectBehavior
 {

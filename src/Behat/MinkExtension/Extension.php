@@ -171,6 +171,7 @@ class Extension implements ExtensionInterface
                                 ->scalarNode('deviceType')->defaultValue('tablet')->end()
                                 ->scalarNode('selenium-version')->defaultValue('2.31.0')->end()
                                 ->scalarNode('max-duration')->defaultValue('300')->end()
+                                ->scalarNode('resolution')->defaultNull()->end()
                                 ->booleanNode('javascriptEnabled')->end()
                                 ->booleanNode('databaseEnabled')->end()
                                 ->booleanNode('locationContextEnabled')->end()

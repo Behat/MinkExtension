@@ -6,13 +6,14 @@ use Behat\Behat\Tester\Event\ScenarioTested;
 use Behat\Gherkin\Node\FeatureNode;
 use Behat\Gherkin\Node\ScenarioNode;
 use Behat\Mink\Mink;
+use Behat\Testwork\ServiceContainer\Exception\ProcessingException;
 use PhpSpec\ObjectBehavior;
 
 class SessionsListenerSpec extends ObjectBehavior
 {
     function let(Mink $mink, ScenarioTested $event, FeatureNode $feature, ScenarioNode $scenario)
     {
-        $this->beConstructedWith($mink, array('default_session' => 'goutte', 'javascript_session' => 'selenium2'));
+        $this->beConstructedWith($mink, 'goutte', 'selenium2');
 
         $event->getFeature()->willReturn($feature);
         $event->getScenario()->willReturn($scenario);
@@ -52,6 +53,15 @@ class SessionsListenerSpec extends ObjectBehavior
         $mink->setDefaultSessionName('selenium2')->shouldBeCalled();
 
         $this->prepareDefaultMinkSession($event);
+    }
+
+    function it_fails_when_the_javascript_session_is_used_but_not_defined($event, $mink, $feature)
+    {
+        $this->beConstructedWith($mink, 'goutte', null);
+        $feature->getTags()->willReturn(array('javascript'));
+
+        $this->shouldThrow(new ProcessingException('The @javascript tag cannot be used without enabling a javascript session'))
+            ->duringPrepareDefaultMinkSession($event);
     }
 
     function it_switches_to_a_named_session($event, $mink, $scenario)

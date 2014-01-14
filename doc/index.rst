@@ -60,7 +60,9 @@ The easiest way to keep your suite updated is to use `Composer <http://getcompos
           extensions:
             Behat\MinkExtension\Extension:
               base_url:  'http://example.com'
-              goutte:    ~
+              sessions:
+                default:
+                  goutte: ~
 
 Usage
 -----
@@ -161,22 +163,58 @@ Configuration
 MinkExtension comes with flexible configuration system, that gives you
 ability to configure Mink inside Behat to fulfil all your needs.
 
-Drivers
-~~~~~~~
+Sessions
+--------
 
-First of all, there's drivers enabling configuration. MinkExtension comes
-with support for 6 drivers out of the box:
-
-* ``GoutteDriver`` - default headless driver. It is used by default, which means
-  that if you didn't changed ``default_session`` (another parameter) - you should
-  always enable it.  In order to enable it, modify your ``behat.yml`` profile:
+You can register as many Mink session as you want. For each session, you
+will need to choose the driver you want to use.
 
     .. code-block:: yaml
 
         default:
             extensions:
                 Behat\MinkExtension\Extension:
-                    goutte: ~
+                    sessions:
+                        first_session:
+                            selenium2: ~
+                        second_session:
+                            goutte: ~
+                        third_session:
+                            selenium2: ~
+
+MinkExtension will set the default Mink session for each scenario based on
+the configuration settings ``default_session`` and ``javascript_session``
+and on scenario tags:
+
+* A scenario tagged with ``@mink:foo`` will use ``foo`` as default session;
+* A scenario tagged with ``@javascript`` will use the javascript session as default session;
+* Other scenarios will use the default session.
+
+If it is not configured explicitly, the javascript session is set to the first
+session using a javascript driver in the order of the configuration (it would
+be ``first_session`` in the example above as ``selenium2`` supports Javascript).
+If it is not configured explicitly, the default session is set to the first
+session using a non-javascript driver if any, or to the first javascript session
+otherwise (it would be ``second_session`` above as ``goutte`` does not support
+javascript).
+
+Drivers
+~~~~~~~
+
+First of all, there's drivers enabling configuration. MinkExtension comes
+with support for 6 drivers out of the box:
+
+* ``GoutteDriver`` - headless driver without JavaScript support. In order to use
+  it, modify your ``behat.yml`` profile:
+
+    .. code-block:: yaml
+
+        default:
+            extensions:
+                Behat\MinkExtension\Extension:
+                    sessions:
+                        my_session:
+                            goutte: ~
 
 .. Tips : HTTPS and self-signed certificate
 In case you use Behat/Mink/Goutte to test your application, and want to test an
@@ -188,28 +226,38 @@ the following parameters to avoid the validation error triggered by Guzzle :
     default:
       extensions:
         Behat\MinkExtension\Extension:
-          goutte:
-            guzzle_parameters:
-              ssl.certificate_authority: false
+          sessions:
+            my_session:
+              goutte:
+                guzzle_parameters:
+                  ssl.certificate_authority: false
 
-* ``Selenium2Driver`` - default javascript driver. It is used by default for
-  ``@javascript`` tagged scenarios, which means that if you didn't changed
-  ``javascript_session`` (another parameter) - you should always enable it (only
-  if you use ``@javascript`` scenarios, of course).  In order to enable it,
-  modify your ``behat.yml`` profile:
+* ``Selenium2Driver`` - javascript driver. In order to use it, modify your
+  ``behat.yml`` profile:
 
     .. code-block:: yaml
 
         default:
             extensions:
                 Behat\MinkExtension\Extension:
-                    selenium2: ~
+                    sessions:
+                        my_session:
+                            selenium2: ~
 
 * ``SaucelabsDriver`` - special flavor of the Selenium2Driver configured to use the
-  selenium2 hosted installation of saucelabs.com. You could use it by setting it in
-  ``javascript_session`` to ``saucelabs`` and by marking scenarios as ``@javascript``
-  or simply by marking scenarios with ``mink:saucelabs`` (no need to switch
-  ``javascript_session`` in this case). In order to enable it, modify your ``behat.yml``
+  selenium2 hosted installation of saucelabs.com. In order to use it, modify your
+  ``behat.yml`` profile:
+
+    .. code-block:: yaml
+
+        default:
+            extensions:
+                Behat\MinkExtension\Extension:
+                    sessions:
+                        my_session:
+                            saucelabs: ~
+
+* ``SeleniumDriver`` - javascript driver. In order to use it, modify your ``behat.yml``
   profile:
 
     .. code-block:: yaml
@@ -217,12 +265,11 @@ the following parameters to avoid the validation error triggered by Guzzle :
         default:
             extensions:
                 Behat\MinkExtension\Extension:
-                    saucelabs: ~
+                    sessions:
+                        my_session:
+                            selenium: ~
 
-* ``SeleniumDriver`` - another javascript driver. You could use it by setting it
-  in ``javascript_session`` to ``selenium`` and by marking scenarios as ``@javascript``
-  or simply by marking scenarios with ``mink:selenium`` (no need to switch
-  ``javascript_session`` in this case). In order to enable it, modify your ``behat.yml``
+* ``SahiDriver`` - javascript driver. In order to use it, modify your ``behat.yml``
   profile:
 
     .. code-block:: yaml
@@ -230,33 +277,21 @@ the following parameters to avoid the validation error triggered by Guzzle :
         default:
             extensions:
                 Behat\MinkExtension\Extension:
-                    selenium: ~
+                    sessions:
+                        my_session:
+                            sahi: ~
 
-* ``SahiDriver`` - another javascript driver. You could use it by setting it
-  in ``javascript_session`` to ``sahi`` and by marking scenarios as ``@javascript``
-  or simply by marking scenarios with ``mink:sahi`` (no need to switch
-  ``javascript_session`` in this case). In order to enable it, modify your ``behat.yml``
-  profile:
-
-    .. code-block:: yaml
-
-        default:
-            extensions:
-                Behat\MinkExtension\Extension:
-                    sahi: ~
-
-* ``ZombieDriver`` - zombie.js javascript headless driver. You could use it by setting it
-  in ``javascript_session`` to ``zombie`` and by marking scenarios as ``@javascript``
-  or simply by marking scenarios with ``mink:zombie`` (no need to switch
-  ``javascript_session`` in this case). In order to enable it, modify your ``behat.yml``
-  profile:
+* ``ZombieDriver`` - zombie.js javascript headless driver. In order to use it, modify
+  your ``behat.yml`` profile:
 
     .. code-block:: yaml
 
         default:
             extensions:
                 Behat\MinkExtension\Extension:
-                    zombie: ~
+                    sessions:
+                        default:
+                            zombie: ~
 
 .. note::
 
@@ -300,9 +335,9 @@ There's other useful parameters, that you can use to configure your suite:
 * ``browser_name`` - meta-option, that defines which browser to use for Sahi,
   Selenium and Selenium2 drivers.
 * ``default_session`` - defines default session (driver) to be used for all
-  untagged scenarios. Could be any enabled driver name. Defaults to ``goutte``
+  untagged scenarios. Could be any enabled session name.
 * ``javascript_session`` - defines javascript session (driver) (the one, which
-  will be used for ``@javascript`` tagged scenarios). Could be any enabled driver
-  name. Defaults to ``selenium2``
+  will be used for ``@javascript`` tagged scenarios). Could be any enabled session
+  name.
 * ``mink_loader`` - path to a file loaded to make Mink available (useful when
   using the PHAR archive for Mink, useless when using Composer)

@@ -14,6 +14,7 @@ use Behat\Behat\Tester\Event\AbstractScenarioTested;
 use Behat\Behat\Tester\Event\ExampleTested;
 use Behat\Behat\Tester\Event\ScenarioTested;
 use Behat\Mink\Mink;
+use Behat\Testwork\ServiceContainer\Exception\ProcessingException;
 use Behat\Testwork\Tester\Event\ExerciseCompleted;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -26,18 +27,21 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class SessionsListener implements EventSubscriberInterface
 {
     private $mink;
-    private $parameters;
+    private $defaultSession;
+    private $javascriptSession;
 
     /**
      * Initializes initializer.
      *
-     * @param Mink  $mink
-     * @param array $parameters
+     * @param Mink        $mink
+     * @param string      $defaultSession
+     * @param string|null $javascriptSession
      */
-    public function __construct(Mink $mink, array $parameters)
+    public function __construct(Mink $mink, $defaultSession, $javascriptSession)
     {
-        $this->mink       = $mink;
-        $this->parameters = $parameters;
+        $this->mink              = $mink;
+        $this->defaultSession    = $defaultSession;
+        $this->javascriptSession = $javascriptSession;
     }
 
     /**
@@ -64,16 +68,22 @@ class SessionsListener implements EventSubscriberInterface
      * instead of just soft-resetting them
      *
      * @param AbstractScenarioTested $event
+     *
+     * @throws ProcessingException when the @javascript tag is used without a javascript session
      */
     public function prepareDefaultMinkSession(AbstractScenarioTested $event)
     {
         $scenario = $event->getScenario();
         $feature  = $event->getFeature();
-        $session  = $this->parameters['default_session'];
+        $session  = $this->defaultSession;
 
         foreach (array_merge($feature->getTags(), $scenario->getTags()) as $tag) {
             if ('javascript' === $tag) {
-                $session = $this->parameters['javascript_session'];
+                if (null === $this->javascriptSession) {
+                    throw new ProcessingException('The @javascript tag cannot be used without enabling a javascript session');
+                }
+
+                $session = $this->javascriptSession;
             } elseif (preg_match('/^mink\:(.+)/', $tag, $matches)) {
                 $session = $matches[1];
             }

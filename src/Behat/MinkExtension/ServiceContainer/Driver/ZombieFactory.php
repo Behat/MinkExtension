@@ -40,7 +40,6 @@ class ZombieFactory implements DriverFactory
             ->children()
                 ->scalarNode('host')->defaultValue('127.0.0.1')->end()
                 ->scalarNode('port')->defaultValue(8124)->end()
-                ->booleanNode('auto_server')->defaultTrue()->end()
                 ->scalarNode('node_bin')->defaultValue('node')->end()
                 ->scalarNode('server_path')->defaultNull()->end()
                 ->scalarNode('threshold')->defaultValue(2000000)->end()
@@ -69,11 +68,6 @@ class ZombieFactory implements DriverFactory
                 $config['threshold'],
                 $config['node_modules_path'],
             )),
-            new Definition('Behat\Mink\Driver\NodeJS\Connection', array(
-                $config['host'],
-                $config['port'],
-            )),
-            $config['auto_server'],
         ));
     }
 }

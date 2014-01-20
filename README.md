@@ -1,7 +1,7 @@
 # MinkExtension
 
 [![Build
-Status](https://secure.travis-ci.org/Behat/MinkExtension.png?branch=master)](http://travis-ci.org/Behat/MinkExtension)
+Status](https://travis-ci.org/Behat/MinkExtension.png?branch=master)](http://travis-ci.org/Behat/MinkExtension)
 
 Provides integration layer:
 

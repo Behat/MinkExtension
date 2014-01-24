@@ -126,6 +126,10 @@
             <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^l'élément "(?P<element>[^"]*)" devrait contenir "(?P<value>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
+        <trans-unit id="the-element-should-not-contain">
+            <source><![CDATA[/^the "(?P<element>[^"]*)" element should not contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
+            <target><![CDATA[/^l'élément "(?P<element>[^"]*)" ne devrait pas contenir "(?P<value>(?:[^"]|\\")*)"$/]]></target>
+        </trans-unit>
         <trans-unit id="i-should-see-text-in-element">
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
             <target><![CDATA[/^(?:|je )devrais voir "(?P<text>(?:[^"]|\\")*)" dans l'élément "(?P<element>[^"]*)"$/]]></target>

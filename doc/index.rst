@@ -124,32 +124,7 @@ After installing extension, there would be 6 usage options available for you:
         It will cause ``RedundantException``. So, you can inherit from ``MinkContext``
         only with one of your context/subcontext classes.
 
-4. If you're on the php 5.4+, you can simply use ``Behat\MinkExtension\Context\MinkDictionary``
-   trait inside your ``FeatureContext``. This trait will provide all the needed methods,
-   hooks and definitions for you to start. You can use this trait **only once** inside
-   your feature context tree, and it cannot be used at the same time than the ``MinkContext``.
-
-    .. code-block:: php
-
-        <?php
-
-        use Behat\Behat\Context\BehatContext;
-        use Behat\MinkExtension\Context\MinkDictionary;
-
-        class FeatureContext extends BehatContext
-        {
-            use MinkDictionary;
-
-            /**
-             * @Then /^I wait for the suggestion box to appear$/
-             */
-            public function iWaitForTheSuggestionBoxToAppear()
-            {
-                $this->getSession()->wait(5000, "$('.suggestions-results').children().length > 0");
-            }
-        }
-
-5. Implementing ``Behat\MinkExtension\Context\MinkAwareContext`` with your context.
+4. Implementing ``Behat\MinkExtension\Context\MinkAwareContext`` with your context.
 
 There's common things these methods. In each of those, target context will implement
 ``setMink(Mink $mink)`` and ``setMinkParameters(array $parameters)`` methods. Those methods would

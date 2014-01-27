@@ -68,7 +68,7 @@
         </trans-unit>
         <trans-unit id="i-attach-the-file-to-field">
             <source><![CDATA[/^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|j' )attache le fichier "(?P<path>[^"]*)" à "(?P<field>(?:[^"]|\\")*)"$/]]></target>
+            <target><![CDATA[/^(?:|j')attache le fichier "(?P<path>[^"]*)" à "(?P<field>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-text">
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/]]></source>

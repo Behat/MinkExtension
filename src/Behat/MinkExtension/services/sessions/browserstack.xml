@@ -13,6 +13,7 @@
             <parameter key="platform" type="string">WINDOWS</parameter>
             <parameter key="selenium-version" type="string">2.31.0</parameter>
             <parameter key="max-duration">300</parameter>
+            <parameter key="acceptSslCerts">false</parameter>
         </parameter>
         <parameter key="behat.mink.browserstack.tunnel" type="string">false</parameter>
         <parameter key="behat.mink.browserstack.debug" type="string">false</parameter>

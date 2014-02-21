@@ -472,6 +472,9 @@ class Extension implements ExtensionInterface
                                 scalarNode('device')->
                                     defaultValue(isset($config['browserstack']['device']) ? $config['browserstack']['device'] : null)->
                                 end()->
+                                scalarNode('acceptSslCerts')->
+                                    defaultValue(isset($config['browserstack']['acceptSslCerts']) ? $config['browserstack']['acceptSslCerts'] : null)->
+                                end()->
                             end()->
                         end()->
                     end()->

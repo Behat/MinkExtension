@@ -14,8 +14,8 @@
 
     "require": {
         "php":          ">=5.3.2",
-        "behat/behat":  "~3.0-RC2@dev",
-        "behat/mink":   ">=1.4.3,<1.6-dev",
+        "behat/behat":  "~3.0-RC3@dev",
+        "behat/mink":   "~1.5",
         "symfony/config": "~2.2"
     },
 

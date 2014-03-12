@@ -32,4 +32,4 @@ before_script:
 
 script:
   - phpspec run -f pretty
-  - behat -fprogress
+  - behat -fprogress --strict

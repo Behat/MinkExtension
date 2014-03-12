@@ -10,12 +10,12 @@
 
 namespace Behat\MinkExtension\Listener;
 
-use Behat\Behat\Tester\Event\AbstractScenarioTested;
-use Behat\Behat\Tester\Event\ExampleTested;
-use Behat\Behat\Tester\Event\ScenarioTested;
+use Behat\Behat\EventDispatcher\Event\ExampleTested;
+use Behat\Behat\EventDispatcher\Event\ScenarioLikeTested;
+use Behat\Behat\EventDispatcher\Event\ScenarioTested;
 use Behat\Mink\Mink;
+use Behat\Testwork\EventDispatcher\Event\ExerciseCompleted;
 use Behat\Testwork\ServiceContainer\Exception\ProcessingException;
-use Behat\Testwork\Tester\Event\ExerciseCompleted;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -67,11 +67,11 @@ class SessionsListener implements EventSubscriberInterface
      * `@insulated` tag will cause Mink to stop current sessions before scenario
      * instead of just soft-resetting them
      *
-     * @param AbstractScenarioTested $event
+     * @param ScenarioLikeTested $event
      *
      * @throws ProcessingException when the @javascript tag is used without a javascript session
      */
-    public function prepareDefaultMinkSession(AbstractScenarioTested $event)
+    public function prepareDefaultMinkSession(ScenarioLikeTested $event)
     {
         $scenario = $event->getScenario();
         $feature  = $event->getFeature();

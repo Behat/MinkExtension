@@ -10,8 +10,9 @@
 
 namespace Behat\MinkExtension\Listener;
 
-use Behat\Behat\Tester\Event\StepTested;
-use Behat\Testwork\Tester\Result\TestResult;
+use Behat\Behat\EventDispatcher\Event\AfterStepTested;
+use Behat\Behat\EventDispatcher\Event\StepTested;
+use Behat\Testwork\Tester\Result\ExceptionResult;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Behat\Mink\Mink;
 use Behat\Mink\Exception\Exception as MinkException;
@@ -51,21 +52,26 @@ class FailureShowListener implements EventSubscriberInterface
 
     /**
      * Shows last response of failed step with preconfigured command.
+     *
      * Configuration is based on `behat.yml`:
      *
      * `show_auto` enable this listener (default to false)
      * `show_cmd` command to run (`open %s` to open default browser on Mac)
      * `show_tmp_dir` folder where to store temp files (default is system temp)
      *
-     * @param StepTested $event
+     * @param AfterStepTested $event
+     *
+     * @throws \RuntimeException if show_cmd is not configured
      */
-    public function showFailedStepResponse(StepTested $event)
+    public function showFailedStepResponse(AfterStepTested $event)
     {
-        if (TestResult::FAILED !== $event->getResultCode()) {
+        $testResult = $event->getTestResult();
+
+        if (!$testResult instanceof ExceptionResult) {
             return;
         }
 
-        if (!$event->getTestResult()->getException() instanceof MinkException) {
+        if (!$testResult->getException() instanceof MinkException) {
             return;
         }
 

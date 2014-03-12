@@ -2,7 +2,7 @@
 
 namespace spec\Behat\MinkExtension\Listener;
 
-use Behat\Behat\Tester\Event\ScenarioTested;
+use Behat\Behat\EventDispatcher\Event\ScenarioTested;
 use Behat\Gherkin\Node\FeatureNode;
 use Behat\Gherkin\Node\ScenarioNode;
 use Behat\Mink\Mink;

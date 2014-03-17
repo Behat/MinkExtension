@@ -77,6 +77,7 @@ class Extension implements ExtensionInterface
 
         $this->loadMink($container);
         $this->loadContextInitializer($container);
+        $this->loadSpecInitializer($container);
         $this->loadSelectorsHandler($container);
         $this->loadSessions($container, $config);
         $this->loadSessionsListener($container);
@@ -197,6 +198,16 @@ class Extension implements ExtensionInterface
         ));
         $definition->addTag(ContextExtension::INITIALIZER_TAG, array('priority' => 0));
         $container->setDefinition('mink.context_initializer', $definition);
+    }
+
+    private function loadSpecInitializer(ContainerBuilder $container)
+    {
+        $definition = new Definition('Behat\MinkExtension\Spec\Initializer\MinkAwareInitializer', array(
+            new Reference(self::MINK_ID),
+            '%mink.parameters%',
+        ));
+        $definition->addTag(\Funk\Tester\ServiceContainer\TesterExtension::INITIALIZER_TAG, array('priority' => 0));
+        $container->setDefinition('mink.spec_initializer', $definition);
     }
 
     private function loadSelectorsHandler(ContainerBuilder $container)

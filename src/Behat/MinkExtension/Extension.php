@@ -18,6 +18,7 @@ use Behat\MinkExtension\ServiceContainer\Driver\SaucelabsFactory;
 use Behat\MinkExtension\ServiceContainer\Driver\Selenium2Factory;
 use Behat\MinkExtension\ServiceContainer\Driver\SeleniumFactory;
 use Behat\MinkExtension\ServiceContainer\Driver\ZombieFactory;
+use Behat\MinkExtension\ServiceContainer\Driver\BrowserstackFactory;
 use Behat\Testwork\EventDispatcher\ServiceContainer\EventDispatcherExtension;
 use Behat\Testwork\ServiceContainer\Exception\ProcessingException;
 use Behat\Testwork\ServiceContainer\Extension as ExtensionInterface;
@@ -53,6 +54,7 @@ class Extension implements ExtensionInterface
         $this->registerDriverFactory(new Selenium2Factory());
         $this->registerDriverFactory(new SaucelabsFactory());
         $this->registerDriverFactory(new ZombieFactory());
+        $this->registerDriverFactory(new BrowserstackFactory());
     }
 
     public function registerDriverFactory(DriverFactory $driverFactory)

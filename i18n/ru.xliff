@@ -118,9 +118,13 @@
             <source><![CDATA[/^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" should (?:be unchecked|not be checked)$/]]></source>
             <target><![CDATA[/^галочка "(?P<checkbox>(?:[^"]|\\")*)" не должна быть отмечена$/]]></target>
         </trans-unit>
+        <trans-unit id="the-checkbox-should-not-be-checked">
+            <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should not be checked$/]]></source>
+            <target><![CDATA[/^галочка "(?P<checkbox>(?:[^"]|\\")*)" должна быть не отмечена$/]]></target>
+        </trans-unit>
         <trans-unit id="the-checkbox-is-unchecked">
             <source><![CDATA[/^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" is (?:unchecked|not checked)$/]]></source>
-            <target><![CDATA[/^галочка "(?P<checkbox>(?:[^"]|\\")*)" должна быть не отмечена$/]]></target>
+            <target><![CDATA[/^галочка "(?P<checkbox>(?:[^"]|\\")*)" не отмечена$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-be-on-page">
             <source><![CDATA[/^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>

@@ -20,7 +20,8 @@
     },
 
     "require-dev": {
-        "behat/mink-goutte-driver": "~1.0"
+        "behat/mink-goutte-driver": "~1.0",
+        "adezandee/mink-ghost-driver": "dev-master"
     },
 
     "autoload": {

@@ -91,6 +91,15 @@ class Extension implements ExtensionInterface
 
             $loader->load('sessions/selenium2.xml');
         }
+        if (isset($config['phantomjs'])) {
+            if (!class_exists('Behat\\Mink\\Driver\\GhostDriver')) {
+                throw new \RuntimeException(
+                    'Install GhostDriver in order to activate phantomjs session.'
+                );
+            }
+
+            $loader->load('sessions/phantomjs.xml');
+        }
         if (isset($config['saucelabs'])) {
             if (!class_exists('Behat\\Mink\\Driver\\Selenium2Driver')) {
                 throw new \RuntimeException(
@@ -363,6 +372,39 @@ class Extension implements ExtensionInterface
                         end()->
                         scalarNode('wd_host')->
                             defaultValue(isset($config['selenium2']['wd_host']) ? $config['selenium2']['wd_host'] : 'http://localhost:4444/wd/hub')->
+                        end()->
+                    end()->
+                end()->
+                arrayNode('phantomjs')->
+                    children()->
+                        scalarNode('wd_host')->
+                            defaultValue(isset($config['phantomjs']['wd_host']) ? $config['phantomjs']['wd_host'] : 'http://localhost:8910/wd/hub')->
+                        end()->
+                        arrayNode('settings')->
+                            normalizeKeys(false)->
+                            children()->
+                                booleanNode('javascriptEnabled')->end()->
+                                booleanNode('loadImages')->end()->
+                                booleanNode('localToRemoteUrlAccessEnabled')->end()->
+                                scalarNode('userAgent')->
+                                    defaultValue(isset($config['phantomjs']['settings']['userAgent']) ? $config['phantomjs']['settings']['userAgent'] : 'Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.7 Safari/534.34')->
+                                end()->
+                                scalarNode('userName')->end()->
+                                scalarNode('password')->end()->
+                                booleanNode('XSSAuditingEnabled')->end()->
+                                booleanNode('webSecurityEnabled')->end()->
+                                scalarNode('resourceTimeout')->
+                                    defaultValue(isset($config['phantomjs']['settings']['resourceTimeout']) ? $config['phantomjs']['settings']['resourceTimeout'] : "300")->
+                                end()->
+                            end()->
+                        end()->
+                        arrayNode('custom_headers')->
+                            prototype('array')
+                                ->children()
+                                    ->scalarNode('name')->isRequired()->end()
+                                    ->scalarNode('value')->isRequired()->end()
+                                ->end()
+                            ->end()->
                         end()->
                     end()->
                 end()->

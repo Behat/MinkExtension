@@ -18,6 +18,11 @@ before_script:
   - curl http://getcomposer.org/installer | php
   - php composer.phar require --no-update symfony/symfony=$SYMFONY_VERSION
   - php composer.phar install --dev --prefer-source
+  - phantomjs -v
+  - phantomjs -w > /tmp/webdriver_output.txt &
   - export PATH=./vendor/bin:$PATH
 
 script: behat -fprogress
+
+after_failures:
+  - cat /tmp/webdriver_output.txt

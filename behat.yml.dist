@@ -2,4 +2,12 @@ default:
   extensions:
     Behat\MinkExtension\Extension:
       base_url: http://en.wikipedia.org/
+      javascript_session: phantomjs
       goutte:   ~
+      phantomjs:
+        # Run PhantomJS (`phantomjs -w &`) before to get the proxy
+        #settings:
+        #    { loadImages: false, userName: login, password: password }
+        custom_headers:
+          - { name: test_header, value: test_header }
+          - { name: xhaus-custom-header1, value: 42 }

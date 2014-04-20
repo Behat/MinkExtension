@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+
+        <parameter key="behat.mink.driver.phantomjs.class">Behat\Mink\Driver\GhostDriver</parameter>
+
+        <parameter key="behat.mink.phantomjs.wd_host">http://localhost:8910/wd/hub</parameter>
+        <parameter key="behat.mink.phantomjs.settings" type="collection">
+            <parameter key="javascriptEnabled">true</parameter>
+            <parameter key="loadImages">true</parameter>
+            <parameter key="localToRemoteUrlAccessEnabled">false</parameter>
+            <parameter key="userAgent" type="string">Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.7 Safari/534.34</parameter>
+            <parameter key="userName" type="string" />
+            <parameter key="password" type="string" />
+            <parameter key="XSSAuditingEnabled">false</parameter>
+            <parameter key="webSecurityEnabled">true</parameter>
+            <parameter key="resourceTimeout" type="string">300</parameter>
+        </parameter>
+        <parameter key="behat.mink.phantomjs.custom_headers" type="collection" />
+
+    </parameters>
+    <services>
+
+        <service id="behat.mink.session.phantomjs" class="%behat.mink.session.class%">
+            <argument type="service">
+                <service class="%behat.mink.driver.phantomjs.class%">
+                    <argument>%behat.mink.phantomjs.wd_host%</argument>
+                    <argument>%behat.mink.phantomjs.settings%</argument>
+                    <argument>%behat.mink.phantomjs.custom_headers%</argument>
+                </service>
+            </argument>
+            <argument type="service" id="behat.mink.selector.handler" />
+            <tag name="behat.mink.session" alias="phantomjs" />
+        </service>
+
+    </services>
+</container>

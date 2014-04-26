@@ -12,14 +12,14 @@ namespace Behat\MinkExtension\ServiceContainer\Driver;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-class SaucelabsFactory extends Selenium2Factory
+class SauceLabsFactory extends Selenium2Factory
 {
     /**
      * {@inheritdoc}
      */
     public function getDriverName()
     {
-        return 'saucelabs';
+        return 'sauce_labs';
     }
 
     /**

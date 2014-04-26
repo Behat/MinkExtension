@@ -230,7 +230,7 @@ the following parameters to avoid the validation error triggered by Guzzle :
                         my_session:
                             selenium2: ~
 
-* ``SaucelabsDriver`` - special flavor of the Selenium2Driver configured to use the
+* ``SauceLabsDriver`` - special flavor of the Selenium2Driver configured to use the
   selenium2 hosted installation of saucelabs.com. In order to use it, modify your
   ``behat.yml`` profile:
 
@@ -241,7 +241,20 @@ the following parameters to avoid the validation error triggered by Guzzle :
                 Behat\MinkExtension\Extension:
                     sessions:
                         my_session:
-                            saucelabs: ~
+                            sauce_labs: ~
+
+* ``BrowserStackDriver`` - special flavor of the Selenium2Driver configured to use the
+  selenium2 hosted installation of browserstack.com. In order to use it, modify your
+  ``behat.yml`` profile:
+
+    .. code-block:: yaml
+
+        default:
+            extensions:
+                Behat\MinkExtension\Extension:
+                    sessions:
+                        my_session:
+                            browser_stack: ~
 
 * ``SeleniumDriver`` - javascript driver. In order to use it, modify your ``behat.yml``
   profile:

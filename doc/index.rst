@@ -144,18 +144,18 @@ Sessions
 You can register as many Mink session as you want. For each session, you
 will need to choose the driver you want to use.
 
-    .. code-block:: yaml
+.. code-block:: yaml
 
-        default:
-            extensions:
-                Behat\MinkExtension\Extension:
-                    sessions:
-                        first_session:
-                            selenium2: ~
-                        second_session:
-                            goutte: ~
-                        third_session:
-                            selenium2: ~
+    default:
+        extensions:
+            Behat\MinkExtension\Extension:
+                sessions:
+                    first_session:
+                        selenium2: ~
+                    second_session:
+                        goutte: ~
+                    third_session:
+                        selenium2: ~
 
 MinkExtension will set the default Mink session for each scenario based on
 the configuration settings ``default_session`` and ``javascript_session``
@@ -164,6 +164,17 @@ and on scenario tags:
 * A scenario tagged with ``@mink:foo`` will use ``foo`` as default session;
 * A scenario tagged with ``@javascript`` will use the javascript session as default session;
 * Other scenarios will use the default session.
+
+The default session and the default javascript session can also be configured for
+each suite:
+
+.. code-block:: yaml
+
+    default:
+        suites:
+            first:
+                mink_session: foo
+                mink_javascript_session: sahi
 
 If it is not configured explicitly, the javascript session is set to the first
 session using a javascript driver in the order of the configuration (it would

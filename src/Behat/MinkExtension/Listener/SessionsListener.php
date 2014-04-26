@@ -16,6 +16,8 @@ use Behat\Behat\EventDispatcher\Event\ScenarioTested;
 use Behat\Mink\Mink;
 use Behat\Testwork\EventDispatcher\Event\ExerciseCompleted;
 use Behat\Testwork\ServiceContainer\Exception\ProcessingException;
+use Behat\Testwork\Suite\Exception\SuiteConfigurationException;
+use Behat\Testwork\Suite\Suite;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -31,17 +33,24 @@ class SessionsListener implements EventSubscriberInterface
     private $javascriptSession;
 
     /**
+     * @var string[] The available javascript sessions
+     */
+    private $availableJavascriptSessions;
+
+    /**
      * Initializes initializer.
      *
      * @param Mink        $mink
      * @param string      $defaultSession
      * @param string|null $javascriptSession
+     * @param string[]    $availableJavascriptSessions
      */
-    public function __construct(Mink $mink, $defaultSession, $javascriptSession)
+    public function __construct(Mink $mink, $defaultSession, $javascriptSession, array $availableJavascriptSessions = array())
     {
         $this->mink              = $mink;
         $this->defaultSession    = $defaultSession;
         $this->javascriptSession = $javascriptSession;
+        $this->availableJavascriptSessions = $availableJavascriptSessions;
     }
 
     /**
@@ -75,18 +84,18 @@ class SessionsListener implements EventSubscriberInterface
     {
         $scenario = $event->getScenario();
         $feature  = $event->getFeature();
-        $session  = $this->defaultSession;
+        $session  = null;
 
         foreach (array_merge($feature->getTags(), $scenario->getTags()) as $tag) {
             if ('javascript' === $tag) {
-                if (null === $this->javascriptSession) {
-                    throw new ProcessingException('The @javascript tag cannot be used without enabling a javascript session');
-                }
-
-                $session = $this->javascriptSession;
+                $session = $this->getJavascriptSession($event->getSuite());
             } elseif (preg_match('/^mink\:(.+)/', $tag, $matches)) {
                 $session = $matches[1];
             }
+        }
+
+        if (null === $session) {
+            $session = $this->getDefaultSession($event->getSuite());
         }
 
         if ($scenario->hasTag('insulated') || $feature->hasTag('insulated')) {
@@ -104,5 +113,65 @@ class SessionsListener implements EventSubscriberInterface
     public function tearDownMinkSessions()
     {
         $this->mink->stopSessions();
+    }
+
+    private function getDefaultSession(Suite $suite)
+    {
+        if (!$suite->hasSetting('mink_session')) {
+            return $this->defaultSession;
+        }
+
+        $session = $suite->getSetting('mink_session');
+
+        if (!is_string($session)) {
+            throw new SuiteConfigurationException(
+                sprintf(
+                    '`mink_session` setting of the "%s" suite is expected to be a string, %s given.',
+                    $suite->getName(),
+                    gettype($session)
+                ),
+                $suite->getName()
+            );
+        }
+
+        return $session;
+    }
+
+    private function getJavascriptSession(Suite $suite)
+    {
+        if (!$suite->hasSetting('mink_javascript_session')) {
+            if (null === $this->javascriptSession) {
+                throw new ProcessingException('The @javascript tag cannot be used without enabling a javascript session');
+            }
+
+            return $this->javascriptSession;
+        }
+
+        $session = $suite->getSetting('mink_javascript_session');
+
+        if (!is_string($session)) {
+            throw new SuiteConfigurationException(
+                sprintf(
+                    '`mink_javascript_session` setting of the "%s" suite is expected to be a string, %s given.',
+                    $suite->getName(),
+                    gettype($session)
+                ),
+                $suite->getName()
+            );
+        }
+
+        if (!in_array($session, $this->availableJavascriptSessions)) {
+            throw new SuiteConfigurationException(
+                sprintf(
+                    '`mink_javascript_session` setting of the "%s" suite is not a javascript session. %s given but expected one of %s.',
+                    $suite->getName(),
+                    $session,
+                    implode(', ', $this->availableJavascriptSessions)
+                ),
+                $suite->getName()
+            );
+        }
+
+        return $session;
     }
 }

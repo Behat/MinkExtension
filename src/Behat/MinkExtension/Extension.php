@@ -255,6 +255,7 @@ class Extension implements ExtensionInterface
 
         $container->setParameter('mink.default_session', $defaultSession);
         $container->setParameter('mink.javascript_session', $javascriptSession);
+        $container->setParameter('mink.available_javascript_sessions', $javascriptSessions);
     }
 
     private function loadSessionsListener(ContainerBuilder $container)
@@ -263,6 +264,7 @@ class Extension implements ExtensionInterface
             new Reference(self::MINK_ID),
             '%mink.default_session%',
             '%mink.javascript_session%',
+            '%mink.available_javascript_sessions%',
         ));
         $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, array('priority' => 0));
         $container->setDefinition('mink.listener.sessions', $definition);

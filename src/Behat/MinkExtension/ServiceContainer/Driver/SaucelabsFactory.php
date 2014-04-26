@@ -11,9 +11,8 @@
 namespace Behat\MinkExtension\ServiceContainer\Driver;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use Symfony\Component\DependencyInjection\Definition;
 
-class SaucelabsFactory implements DriverFactory
+class SaucelabsFactory extends Selenium2Factory
 {
     /**
      * {@inheritdoc}
@@ -21,14 +20,6 @@ class SaucelabsFactory implements DriverFactory
     public function getDriverName()
     {
         return 'saucelabs';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function supportsJavascript()
-    {
-        return true;
     }
 
     /**
@@ -42,19 +33,7 @@ class SaucelabsFactory implements DriverFactory
                 ->scalarNode('access_key')->defaultValue(getenv('SAUCE_ACCESS_KEY'))->end()
                 ->booleanNode('connect')->defaultFalse()->end()
                 ->scalarNode('browser')->defaultValue('firefox')->end()
-                ->arrayNode('capabilities')
-                    ->addDefaultsIfNotSet()
-                    ->normalizeKeys(false)
-                    ->children()
-                        ->scalarNode('name')->defaultValue('Behat feature suite')->end()
-                        ->scalarNode('platform')->defaultValue('Linux')->end()
-                        ->scalarNode('version')->defaultValue('21')->end()
-                        ->scalarNode('selenium-version')->defaultValue('2.31.0')->end()
-                        ->scalarNode('max-duration')->defaultValue('300')->end()
-                        ->scalarNode('deviceType')->defaultNull()->end()
-                        ->scalarNode('deviceOrientation')->defaultNull()->end()
-                    ->end()
-                ->end()
+                ->append($this->getCapabilitiesNode())
             ->end()
         ;
     }
@@ -64,11 +43,6 @@ class SaucelabsFactory implements DriverFactory
      */
     public function buildDriver(array $config)
     {
-        if (!class_exists('Behat\Mink\Driver\Selenium2Driver')) {
-            throw new \RuntimeException(
-                'Install MinkSelenium2Driver in order to use saucelabs driver.'
-            );
-        }
         $capabilities = $config['capabilities'];
         $capabilities['tags'] = array(php_uname('n'), 'PHP '.phpversion());
 
@@ -83,10 +57,34 @@ class SaucelabsFactory implements DriverFactory
             $host = 'localhost:4445';
         }
 
-        return new Definition('Behat\Mink\Driver\Selenium2Driver', array(
-            $config['browser'],
-            $capabilities,
-            sprintf('%s:%s@%s/wd/hub', $config['username'], $config['access_key'], $host),
-        ));
+        $config['capabilities'] = $capabilities;
+        $config['wd_host'] = sprintf('%s:%s@%s/wd/hub', $config['username'], $config['access_key'], $host);
+
+        return parent::buildDriver($config);
+    }
+
+    protected function getCapabilitiesNode()
+    {
+        $node = parent::getCapabilitiesNode();
+
+        $node
+            ->children()
+                ->scalarNode('name')->defaultValue('Behat feature suite')->end()
+                ->scalarNode('platform')->defaultValue('Linux')->end()
+                ->scalarNode('selenium-version')->defaultValue('2.31.0')->end()
+                ->scalarNode('max-duration')->defaultValue('300')->end()
+                ->scalarNode('build')->info('will be set automatically based on the TRAVIS_JOB_NUMBER environment variable if available')->end()
+                ->arrayNode('custom-data')
+                    ->useAttributeAsKey('')
+                    ->prototype('variable')->end()
+                ->end()
+                ->booleanNode('record-video')->end()
+                ->booleanNode('record-screenshots')->end()
+                ->booleanNode('capture-html')->end()
+                ->booleanNode('disable-popup-handler')->end()
+            ->end()
+        ;
+
+        return $node;
     }
 }

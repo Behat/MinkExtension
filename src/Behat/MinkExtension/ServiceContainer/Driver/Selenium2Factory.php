@@ -57,9 +57,12 @@ class Selenium2Factory implements DriverFactory
             ));
         }
 
+        $extraCapabilities = $config['capabilities']['extra_capabilities'];
+        unset($config['capabilities']['extra_capabilities']);
+
         return new Definition('Behat\Mink\Driver\Selenium2Driver', array(
             $config['browser'],
-            $config['capabilities'],
+            array_replace($extraCapabilities, $config['capabilities']),
             $config['wd_host'],
         ));
     }
@@ -124,6 +127,12 @@ class Selenium2Factory implements DriverFactory
                         ->scalarNode('binary')->end()
                         ->arrayNode('extensions')->prototype('scalar')->end()->end()
                     ->end()
+                ->end()
+                ->arrayNode('extra_capabilities')
+                    ->info('Custom capabilities merged with the known ones')
+                    ->normalizeKeys(false)
+                    ->useAttributeAsKey('name')
+                    ->prototype('variable')->end()
                 ->end()
             ->end();
 

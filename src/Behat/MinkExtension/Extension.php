@@ -11,6 +11,7 @@
 namespace Behat\MinkExtension;
 
 use Behat\Behat\Context\ServiceContainer\ContextExtension;
+use Behat\MinkExtension\ServiceContainer\Driver\BrowserStackFactory;
 use Behat\MinkExtension\ServiceContainer\Driver\DriverFactory;
 use Behat\MinkExtension\ServiceContainer\Driver\GoutteFactory;
 use Behat\MinkExtension\ServiceContainer\Driver\SahiFactory;
@@ -52,6 +53,7 @@ class Extension implements ExtensionInterface
         $this->registerDriverFactory(new SeleniumFactory());
         $this->registerDriverFactory(new Selenium2Factory());
         $this->registerDriverFactory(new SaucelabsFactory());
+        $this->registerDriverFactory(new BrowserStackFactory());
         $this->registerDriverFactory(new ZombieFactory());
     }
 

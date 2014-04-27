@@ -59,10 +59,18 @@ class SessionsListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            ScenarioTested::BEFORE   => array('prepareDefaultMinkSession', 10),
-            ExampleTested::BEFORE    => array('prepareDefaultMinkSession', 10),
+            'beforeExample' => 'setDefaultSessionName',
+            ScenarioTested::BEFORE   => array('handleInsulatedScenario', 10),
+            ScenarioTested::BEFORE   => array('handleScenarioSpecificSessionName', 10),
+            ExampleTested::BEFORE   => array('handleInsulatedScenario', 10),
+            ExampleTested::BEFORE   => array('handleScenarioSpecificSessionName', 10),
             ExerciseCompleted::AFTER => array('tearDownMinkSessions', -10)
         );
+    }
+
+    public function setDefaultSessionName()
+    {
+        $this->mink->setDefaultSessionName($this->defaultSession);
     }
 
     /**
@@ -76,11 +84,11 @@ class SessionsListener implements EventSubscriberInterface
      * `@insulated` tag will cause Mink to stop current sessions before scenario
      * instead of just soft-resetting them
      *
-     * @param ScenarioLikeTested $event
+     * @param AbstractScenarioTested $event
      *
      * @throws ProcessingException when the @javascript tag is used without a javascript session
      */
-    public function prepareDefaultMinkSession(ScenarioLikeTested $event)
+    public function handleInsulatedScenario(AbstractScenarioTested $event)
     {
         $scenario = $event->getScenario();
         $feature  = $event->getFeature();
@@ -102,6 +110,25 @@ class SessionsListener implements EventSubscriberInterface
             $this->mink->stopSessions();
         } else {
             $this->mink->resetSessions();
+        }
+    }
+
+    public function handleScenarioSpecificSessionName(AbstractScenarioTested $event)
+    {
+        $scenario = $event->getScenario();
+        $feature  = $event->getFeature();
+        $session  = $this->defaultSession;
+
+        foreach (array_merge($feature->getTags(), $scenario->getTags()) as $tag) {
+            if ('javascript' === $tag) {
+                if (null === $this->javascriptSession) {
+                    throw new ProcessingException('The @javascript tag cannot be used without enabling a javascript session');
+                }
+
+                $session = $this->javascriptSession;
+            } elseif (preg_match('/^mink\:(.+)/', $tag, $matches)) {
+                $session = $matches[1];
+            }
         }
 
         $this->mink->setDefaultSessionName($session);

@@ -30,5 +30,12 @@
 
     "autoload": {
         "psr-0": { "Behat\\MinkExtension": "src/" }
+    },
+    
+
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
     }
 }

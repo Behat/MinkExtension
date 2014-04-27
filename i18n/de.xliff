@@ -75,8 +75,8 @@
             <target><![CDATA[/^(?:|ich )sollte (?:|ich )auf "(?P<page>[^"]+)" sein$/]]></target>
         </trans-unit>
        <trans-unit id="the-url-should-match">
-            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"([^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^(?:|sollte )die Webadresse (?:|sollte )mit (?P<pattern>"([^"]|\\")*") übereinstimmen$/]]></target>
+            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^(?:|sollte )die Webadresse (?:|sollte )mit (?P<pattern>"(?:[^"]|\\")*") übereinstimmen$/]]></target>
         </trans-unit>
         <trans-unit id="the-response-status-code-should-be">
             <source><![CDATA[/^the response status code should be (?P<code>\d+)$/]]></source>

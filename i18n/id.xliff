@@ -131,8 +131,8 @@
             <target><![CDATA[/^(?:|saya )harus (?:|berada )di (?:|halaman )beranda$/]]></target>
         </trans-unit>
         <trans-unit id="the-url-should-match">
-            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"([^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^url (?i)url(?-i) harus cocok dengan (?:|pola )(?P<pattern>"([^"]|\\")*")$/]]></target>
+            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^url (?i)url(?-i) harus cocok dengan (?:|pola )(?P<pattern>"(?:[^"]|\\")*")$/]]></target>
         </trans-unit>
         <trans-unit id="the-element-should-contain">
             <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
@@ -181,7 +181,7 @@
         <trans-unit id="show-last-response">
             <source><![CDATA[/^show last response$/]]></source>
             <target><![CDATA[/^tampilkan respon terakhir$/]]></target>
-        </trans-unit>        
+        </trans-unit>
     </body>
   </file>
 </xliff>

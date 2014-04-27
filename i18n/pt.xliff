@@ -115,8 +115,8 @@
             <target><![CDATA[/^(?:|Eu )estar em "(?P<page>[^"]+)"$/]]></target>
         </trans-unit>
         <trans-unit id="the-url-should-match">
-            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"([^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^a (?i)url(?-i) deve coincidir com (?P<pattern>"([^"]|\\")*")$/]]></target>
+            <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
+            <target><![CDATA[/^a (?i)url(?-i) deve coincidir com (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
         </trans-unit>
         <trans-unit id="the-element-should-contain">
             <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>

@@ -240,6 +240,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Checks, that page contains specified text.
      *
      * @Then /^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/
+     * @Then /^I should see \'(?P<text>[^\']*)\'$/
      */
     public function assertPageContainsText($text)
     {

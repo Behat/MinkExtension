@@ -51,6 +51,12 @@ class SauceLabsFactory extends Selenium2Factory
             $capabilities['build'] = getenv('TRAVIS_BUILD_NUMBER');
             $capabilities['tags'] = array('Travis-CI', 'PHP '.phpversion());
         }
+        
+        if (getenv('JENKINS_HOME')) {
+            $capabilities['tunnel-identifier'] = getenv('JOB_NAME');
+            $capabilities['build'] = getenv('BUILD_NUMBER');
+            $capabilities['tags'] = array('Jenkins', 'PHP '.phpversion(), getenv('BUILD_TAG'));
+        }
 
         $host = 'ondemand.saucelabs.com';
         if ($config['connect']) {

@@ -3,7 +3,7 @@
     "type": "behat-extension",
     "description": "Mink extension for Behat",
     "keywords": ["web", "test", "browser", "gui"],
-    "homepage": "http://mink.behat.org",
+    "homepage": "http://extensions.behat.org/mink",
     "license": "MIT",
     "authors": [
         {
@@ -18,7 +18,7 @@
 
     "require": {
         "php":          ">=5.3.2",
-        "behat/behat":  "~3.0",
+        "behat/behat":  "~3.0,>=3.0.5",
         "behat/mink":   "~1.5",
         "symfony/config": "~2.2"
     },
@@ -31,7 +31,6 @@
     "autoload": {
         "psr-0": { "Behat\\MinkExtension": "src/" }
     },
-    
 
     "extra": {
         "branch-alias": {

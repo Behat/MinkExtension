@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Behat\MinkExtension;
+namespace Behat\MinkExtension\ServiceContainer;
 
 use Behat\Behat\Context\ServiceContainer\ContextExtension;
 use Behat\MinkExtension\ServiceContainer\Driver\BrowserStackFactory;
@@ -33,8 +33,9 @@ use Symfony\Component\DependencyInjection\Reference;
  * Mink extension for Behat class.
  *
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
+ * @author Christophe Coevoet <stof@notk.org>
  */
-class Extension implements ExtensionInterface
+class MinkExtension implements ExtensionInterface
 {
     const MINK_ID = 'mink';
     const SELECTORS_HANDLER_ID = 'mink.selectors_handler';

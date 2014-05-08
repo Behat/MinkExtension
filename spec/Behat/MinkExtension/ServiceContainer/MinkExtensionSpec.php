@@ -1,10 +1,10 @@
 <?php
 
-namespace spec\Behat\MinkExtension;
+namespace spec\Behat\MinkExtension\ServiceContainer;
 
 use PhpSpec\ObjectBehavior;
 
-class ExtensionSpec extends ObjectBehavior
+class MinkExtensionSpec extends ObjectBehavior
 {
     function it_is_a_testwork_extension()
     {

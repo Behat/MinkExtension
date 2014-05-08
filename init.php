@@ -16,4 +16,4 @@ spl_autoload_register(function($class) {
     }
 }, true, false);
 
-return new Behat\MinkExtension\Extension;
+return new Behat\MinkExtension\ServiceContainer\MinkExtension;

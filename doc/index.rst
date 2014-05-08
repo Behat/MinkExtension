@@ -58,7 +58,7 @@ The easiest way to keep your suite updated is to use `Composer <http://getcompos
         default:
           # ...
           extensions:
-            Behat\MinkExtension\Extension:
+            Behat\MinkExtension:
               base_url:  'http://example.com'
               sessions:
                 default:
@@ -148,7 +148,7 @@ will need to choose the driver you want to use.
 
     default:
         extensions:
-            Behat\MinkExtension\Extension:
+            Behat\MinkExtension:
                 sessions:
                     first_session:
                         selenium2: ~
@@ -197,7 +197,7 @@ with support for 6 drivers out of the box:
 
         default:
             extensions:
-                Behat\MinkExtension\Extension:
+                Behat\MinkExtension:
                     sessions:
                         my_session:
                             goutte: ~
@@ -211,7 +211,7 @@ the following parameters to avoid the validation error triggered by Guzzle :
 
     default:
       extensions:
-        Behat\MinkExtension\Extension:
+        Behat\MinkExtension:
           sessions:
             my_session:
               goutte:
@@ -225,7 +225,7 @@ the following parameters to avoid the validation error triggered by Guzzle :
 
         default:
             extensions:
-                Behat\MinkExtension\Extension:
+                Behat\MinkExtension:
                     sessions:
                         my_session:
                             selenium2: ~
@@ -238,7 +238,7 @@ the following parameters to avoid the validation error triggered by Guzzle :
 
         default:
             extensions:
-                Behat\MinkExtension\Extension:
+                Behat\MinkExtension:
                     sessions:
                         my_session:
                             sauce_labs: ~
@@ -251,7 +251,7 @@ the following parameters to avoid the validation error triggered by Guzzle :
 
         default:
             extensions:
-                Behat\MinkExtension\Extension:
+                Behat\MinkExtension:
                     sessions:
                         my_session:
                             browser_stack: ~
@@ -263,7 +263,7 @@ the following parameters to avoid the validation error triggered by Guzzle :
 
         default:
             extensions:
-                Behat\MinkExtension\Extension:
+                Behat\MinkExtension:
                     sessions:
                         my_session:
                             selenium: ~
@@ -287,7 +287,7 @@ the following parameters to avoid the validation error triggered by Guzzle :
 
         default:
             extensions:
-                Behat\MinkExtension\Extension:
+                Behat\MinkExtension:
                     sessions:
                         default:
                             zombie: ~

@@ -4,7 +4,7 @@ default:
       path: %paths.base%/features
       contexts: [Behat\MinkExtension\Context\MinkContext]
   extensions:
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       base_url: http://en.wikipedia.org/
       sessions:
         default:

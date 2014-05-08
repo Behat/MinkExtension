@@ -66,6 +66,12 @@ class Selenium2Factory implements DriverFactory
                 'build' => getenv('TRAVIS_BUILD_NUMBER'),
                 'tags' => array('Travis-CI', 'PHP '.phpversion()),
             );
+        } elseif (getenv('JENKINS_HOME')) {
+            $guessedCapabilities = array(
+                'tunnel-identifier' => getenv('JOB_NAME'),
+                'build' => getenv('BUILD_NUMBER'),
+                'tags' => array('Jenkins', 'PHP '.phpversion(), getenv('BUILD_TAG')),
+            );
         } else {
             $guessedCapabilities = array(
                 'tags' => array(php_uname('n'), 'PHP '.phpversion()),

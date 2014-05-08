@@ -42,16 +42,6 @@ class BrowserStackFactory extends Selenium2Factory
      */
     public function buildDriver(array $config)
     {
-        $capabilities = $config['capabilities'];
-        $capabilities['tags'] = array(php_uname('n'), 'PHP '.phpversion());
-
-        if (getenv('TRAVIS_JOB_NUMBER')) {
-            $capabilities['tunnel-identifier'] = getenv('TRAVIS_JOB_NUMBER');
-            $capabilities['build'] = getenv('TRAVIS_BUILD_NUMBER');
-            $capabilities['tags'] = array('Travis-CI', 'PHP '.phpversion());
-        }
-
-        $config['capabilities'] = $capabilities;
         $config['wd_host'] = sprintf('%s:%s@hub.browserstack.com/wd/hub', $config['username'], $config['access_key']);
 
         return parent::buildDriver($config);

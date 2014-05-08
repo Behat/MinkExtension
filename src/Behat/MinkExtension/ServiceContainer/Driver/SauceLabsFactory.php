@@ -43,21 +43,11 @@ class SauceLabsFactory extends Selenium2Factory
      */
     public function buildDriver(array $config)
     {
-        $capabilities = $config['capabilities'];
-        $capabilities['tags'] = array(php_uname('n'), 'PHP '.phpversion());
-
-        if (getenv('TRAVIS_JOB_NUMBER')) {
-            $capabilities['tunnel-identifier'] = getenv('TRAVIS_JOB_NUMBER');
-            $capabilities['build'] = getenv('TRAVIS_BUILD_NUMBER');
-            $capabilities['tags'] = array('Travis-CI', 'PHP '.phpversion());
-        }
-
         $host = 'ondemand.saucelabs.com';
         if ($config['connect']) {
             $host = 'localhost:4445';
         }
 
-        $config['capabilities'] = $capabilities;
         $config['wd_host'] = sprintf('%s:%s@%s/wd/hub', $config['username'], $config['access_key'], $host);
 
         return parent::buildDriver($config);
@@ -75,13 +65,13 @@ class SauceLabsFactory extends Selenium2Factory
                 ->scalarNode('max-duration')->defaultValue('300')->end()
                 ->scalarNode('command-timeout')->end()
                 ->scalarNode('idle-timeout')->end()
-                ->scalarNode('build')->info('will be set automatically based on the TRAVIS_JOB_NUMBER environment variable if available')->end()
+                ->scalarNode('build')->info('will be set automatically based on the TRAVIS_BUILD_NUMBER environment variable if available')->end()
                 ->arrayNode('custom-data')
                     ->useAttributeAsKey('')
                     ->prototype('variable')->end()
                 ->end()
                 ->scalarNode('screen-resolution')->end()
-                ->scalarNode('tunnel-identifier')->end()
+                ->scalarNode('tunnel-identifier')->info('will be set automatically based on the TRAVIS_JOB_NUMBER environment variable if available')->end()
                 ->arrayNode('prerun')
                     ->children()
                         ->scalarNode('executable')->isRequired()->end()

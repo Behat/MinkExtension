@@ -53,6 +53,13 @@ class Extension implements ExtensionInterface
                 );
             }
 
+            $refl = new \ReflectionParameter(array('Goutte\Client', 'setClient'), 0);
+            if (!$refl->getClass() || 'Guzzle\Http\ClientInterface' !== $refl->getClass()->getName()) {
+                throw new \RuntimeException(
+                    'MinkExtension 1.3 only supports Goutte 1.x for MinkGoutteDriver, not Goutte 2.x.'
+                );
+            }
+
             $loader->load('sessions/goutte.xml');
         }
         if (isset($config['sahi'])) {

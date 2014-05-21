@@ -144,7 +144,7 @@
         </trans-unit>
         <trans-unit id="i-should-see-num-elements">
             <source><![CDATA[/^(?:|I )should see (?P<num>\d+) "(?P<element>[^"]*)" elements?$/]]></source>
-            <target><![CDATA[/^moet (?:|ik ) (?P<num>\d+) "(?P<element>[^"]*)" elementen zien$/]]></target>
+            <target><![CDATA[/^moet (?:|ik )(?P<num>\d+) "(?P<element>[^"]*)" elementen zien$/]]></target>
         </trans-unit>
         <trans-unit id="the-response-status-code-should-be">
             <source><![CDATA[/^the response status code should be (?P<code>\d+)$/]]></source>

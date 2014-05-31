@@ -148,7 +148,7 @@
         </trans-unit>
         <trans-unit id="the-response-status-code-should-not-be">
             <source><![CDATA[/^the response status code should not be (?P<code>\d+)$/]]></source>
-            <target><![CDATA[/^o código do statis da resposta não deve ser (?P<code>\d+)$/]]></target>
+            <target><![CDATA[/^o código de status da resposta não deve ser (?P<code>\d+)$/]]></target>
         </trans-unit>
         <trans-unit id="print-last-response">
             <source><![CDATA[/^print last response$/]]></source>

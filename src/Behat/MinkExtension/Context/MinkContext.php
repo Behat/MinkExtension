@@ -209,7 +209,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
     /**
      * Checks, that current page PATH matches regular expression.
      *
-     * @Then /^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\\")*")$/
+     * @Then /^the (?i)url(?-i) should match "(?P<pattern>(?:[^"]|\\")*)"$/
      */
     public function assertUrlRegExp($pattern)
     {
@@ -259,7 +259,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
     /**
      * Checks, that page contains text matching specified pattern.
      *
-     * @Then /^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/
+     * @Then /^(?:|I )should see text matching "(?P<pattern>(?:[^"]|\\")*)"$/
      */
     public function assertPageMatchesText($pattern)
     {
@@ -269,7 +269,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
     /**
      * Checks, that page doesn't contain text matching specified pattern.
      *
-     * @Then /^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/
+     * @Then /^(?:|I )should not see text matching "(?P<pattern>(?:[^"]|\\")*)"$/
      */
     public function assertPageNotMatchesText($pattern)
     {

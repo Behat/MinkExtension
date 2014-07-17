@@ -334,6 +334,7 @@ class Extension implements ExtensionInterface
                                         scalarNode('ftpProxy')->end()->
                                         scalarNode('httpProxy')->end()->
                                         scalarNode('sslProxy')->end()->
+                                        scalarNode('noProxy')->end()->
                                     end()->
                                     validate()->
                                         ifTrue(function ($v) {

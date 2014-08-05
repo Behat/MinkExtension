@@ -326,6 +326,10 @@ class Extension implements ExtensionInterface
                                         scalarNode('ftpProxy')->end()->
                                         scalarNode('httpProxy')->end()->
                                         scalarNode('sslProxy')->end()->
+                                        scalarNode('socksProxy')->end()->
+                                        scalarNode('socksUsername')->end()->
+                                        scalarNode('socksPassword')->end()->
+                                        scalarNode('noProxy')->end()->
                                     end()->
                                     validate()->
                                         ifTrue(function ($v) {

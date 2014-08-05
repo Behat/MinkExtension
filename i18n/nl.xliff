@@ -114,6 +114,10 @@
             <source><![CDATA[/^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>
             <target><![CDATA[/^moet (?:|ik )op "(?P<page>[^"]+)" zijn$/]]></target>
         </trans-unit>
+        <trans-unit id="i-should-be-on-homepage">
+            <source><![CDATA[/^(?:|I )should be on (?:|the )homepage$/]]></source>
+            <target><![CDATA[/^moet (?:|ik )op de homepage zijn$/]]></target>
+        </trans-unit>
         <trans-unit id="the-url-should-match">
             <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
             <target><![CDATA[/^moet de url overeenkomen met (?P<pattern>"(?:[^"]|\\")*")$/]]></target>

@@ -30,9 +30,9 @@ For now exist 10 translated languages: `cs`,`de`,`es`,`fr`,`ja`,`nl`,`pl`,`pt`,`
 If you want to translate another language, you can use as reference the `ru` language file under
 [translations folder](https://github.com/Behat/MinkExtension/tree/master/i18n).
 
-**Important:** The filename must match with the same translated language name in [Behat](https://github.com/Behat/Behat/tree/master/i18n) and [Gherkin](https://github.com/Behat/Gherkin/blob/master/i18n.php) in order to work correctly.
+**Important:** The filename must match with the same translated language name in [Behat](https://github.com/Behat/Behat/blob/master/i18n.php) and [Gherkin](https://github.com/Behat/Gherkin/blob/master/i18n.php) in order to work correctly.
 
-If the language does not exist in [Gherkin](https://github.com/Behat/Gherkin/tree/master/i18n).
+If the language does not exist in [Gherkin](https://github.com/Behat/Gherkin/blob/master/i18n.php).
 You should consider making a [Pull Request](https://github.com/cucumber/cucumber/pulls) to
 [cucumber\gherkin i18n file](https://github.com/cucumber/gherkin/blob/master/lib/gherkin/i18n.yml).
 

@@ -1,7 +1,7 @@
 # MinkExtension
 
 [![Build
-Status](https://travis-ci.org/Behat/MinkExtension.png?branch=master)](http://travis-ci.org/Behat/MinkExtension)
+Status](https://travis-ci.org/Behat/MinkExtension.svg?branch=master)](https://travis-ci.org/Behat/MinkExtension)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Behat/MinkExtension/badges/quality-score.png?s=c6474ca52322f5176a2f0cab10974aeee5e6133c)](https://scrutinizer-ci.com/g/Behat/MinkExtension/)
 
 Provides integration layer:
@@ -17,7 +17,7 @@ between Behat 2.4+ and Mink 1.4+.
 
 ## Docs
 
-[Official documentation](http://extensions.behat.org/mink/index.html).
+[Official documentation](doc/index.rst).
 
 ## Translated languages
 
@@ -33,8 +33,7 @@ If you want to translate another language, you can use as reference the `ru` lan
 **Important:** The filename must match with the same translated language name in [Behat](https://github.com/Behat/Behat/blob/master/i18n.php) and [Gherkin](https://github.com/Behat/Gherkin/blob/master/i18n.php) in order to work correctly.
 
 If the language does not exist in [Gherkin](https://github.com/Behat/Gherkin/blob/master/i18n.php).
-You should consider making a [Pull Request](https://github.com/cucumber/cucumber/pulls) to
-[cucumber\gherkin i18n file](https://github.com/cucumber/gherkin/blob/master/lib/gherkin/i18n.yml).
+You should consider [contributing to Gherkin translations](https://github.com/Behat/Gherkin/blob/master/CONTRIBUTING.md#contributing-to-gherkin-translations).
 
 ## Copyright
 

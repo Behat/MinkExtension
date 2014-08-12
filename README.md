@@ -43,7 +43,3 @@ Copyright (c) 2012 Konstantin Kudryashov (ever.zet). See LICENSE for details.
 
 * Konstantin Kudryashov [everzet](http://github.com/everzet) [lead developer]
 * Other [awesome developers](https://github.com/Behat/MinkExtension/graphs/contributors)
-
-## Sponsors
-
-* knpLabs [knpLabs](http://www.knplabs.com/) [main sponsor]

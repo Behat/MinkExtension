@@ -4,7 +4,7 @@
 Status](https://travis-ci.org/Behat/MinkExtension.svg?branch=master)](https://travis-ci.org/Behat/MinkExtension)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Behat/MinkExtension/badges/quality-score.png?s=c6474ca52322f5176a2f0cab10974aeee5e6133c)](https://scrutinizer-ci.com/g/Behat/MinkExtension/)
 
-MinkExtension is an integration layer between Behat 3.0+ and Mink 1.4+
+MinkExtension is an integration layer between Behat 3.0+ and Mink 1.5+
 and it provides:
 
 * Additional services for Behat (``Mink``, ``Sessions``, ``Drivers``).

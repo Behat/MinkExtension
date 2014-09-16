@@ -4,16 +4,15 @@
 Status](https://travis-ci.org/Behat/MinkExtension.svg?branch=master)](https://travis-ci.org/Behat/MinkExtension)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Behat/MinkExtension/badges/quality-score.png?s=c6474ca52322f5176a2f0cab10974aeee5e6133c)](https://scrutinizer-ci.com/g/Behat/MinkExtension/)
 
-Provides integration layer:
+MinkExtension is an integration layer between Behat 3.0+ and Mink 1.5+
+and it provides:
 
-* Additional services for Behat (`Mink`, `Sessions`, `Drivers`).
-* `Behat\MinkExtension\Context\MinkAwareContext` which provides `Mink`
-  instance for your contexts or subcontexts.
-* Base `Behat\MinkExtension\Context\MinkContext` context which provides base
+* Additional services for Behat (``Mink``, ``Sessions``, ``Drivers``).
+* ``Behat\MinkExtension\Context\MinkAwareContext`` which provides ``Mink``
+  instance for your contexts.
+* Base ``Behat\MinkExtension\Context\MinkContext`` context which provides base
   step definitions and hooks for your contexts or subcontexts. Or it could be
-  even used as subcontext on its own.
-
-between Behat 2.4+ and Mink 1.4+.
+  even used as context on its own.
 
 ## Docs
 

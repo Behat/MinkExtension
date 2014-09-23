@@ -29,7 +29,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      */
     public function iAmOnHomepage()
     {
-        $this->getSession()->visit($this->locatePath('/'));
+        $this->visitPath('/');
     }
 
     /**
@@ -40,7 +40,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      */
     public function visit($page)
     {
-        $this->getSession()->visit($this->locatePath($page));
+        $this->visitPath($page);
     }
 
     /**

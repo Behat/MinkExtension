@@ -114,6 +114,17 @@ class RawMinkContext implements MinkAwareContext
     }
 
     /**
+     * Visits provided relative path using provided or default session.
+     *
+     * @param string      $path
+     * @param string|null $sessionName
+     */
+    public function visitPath($path, $sessionName = null)
+    {
+        $this->getSession($sessionName)->visit($this->locatePath($path));
+    }
+
+    /**
      * Locates url, based on provided path.
      * Override to provide custom routing mechanism.
      *

@@ -70,7 +70,7 @@ Usage
 After installing extension, there would be 6 usage options available for you:
 
 1. Extending ``Behat\MinkExtension\Context\RawMinkContext`` in your feature suite.
-   This will give you ability to use preconfigured `Mink` instance altogether with some
+   This will give you ability to use a preconfigured `Mink` instance altogether with some
    convenience methods:
    * ``getSession($name = null)``
    * ``assertSession($name = null)``
@@ -78,7 +78,7 @@ After installing extension, there would be 6 usage options available for you:
    in as many contexts as you want - you'll never get ``RedundantStepException``.
 
 2. Extending ``Behat\MinkExtension\Context\MinkContext`` with one of your contexts.
-   Exactly like previous option, but also provides lot of predefined step definitions out
+   Exactly like the previous option, but also provides lots of predefined step definitions out
    of the box. As this context provides step definitions and hooks, you can use it **only once**
    inside your feature context tree.
 
@@ -101,12 +101,12 @@ After installing extension, there would be 6 usage options available for you:
 
     .. warning::
 
-        Keep in mind, that you can not have multiple step definitions with same regex.
-        It will cause ``RedundantException``. So, you can inherit from ``MinkContext``
+        Keep in mind, that you can not have multiple step definitions with the same regex.
+        It will cause a ``RedundantException``. So, you can inherit from ``MinkContext``
         only with one of your context/subcontext classes.
 
 3. Adding ``Behat\MinkExtension\Context\MinkContext`` as context in your suite.
-   Exactly like previous option, but gives you ability to keep your main context
+   Exactly like previous option, but gives you the ability to keep your main context
    class clean.
 
     .. code-block:: yaml
@@ -120,13 +120,13 @@ After installing extension, there would be 6 usage options available for you:
 
     .. note::
 
-        Keep in mind, that you can not have multiple step definitions with same regex.
-        It will cause ``RedundantException``. So, you can inherit from ``MinkContext``
+        Keep in mind, that you can not have multiple step definitions with the same regex.
+        It will cause a ``RedundantException``. So, you can inherit from ``MinkContext``
         only with one of your context/subcontext classes.
 
 4. Implementing ``Behat\MinkExtension\Context\MinkAwareContext`` with your context.
 
-There's common things these methods. In each of those, target context will implement
+There are common things between these methods. In each of those, the target context will implement
 ``setMink(Mink $mink)`` and ``setMinkParameters(array $parameters)`` methods. Those methods would
 be automatically called **immediately after** each context creation before each scenario. And
 this ``$mink`` instance will be preconfigured based on the settings you've provided in your
@@ -135,13 +135,13 @@ this ``$mink`` instance will be preconfigured based on the settings you've provi
 Configuration
 -------------
 
-MinkExtension comes with flexible configuration system, that gives you
-ability to configure Mink inside Behat to fulfil all your needs.
+MinkExtension comes with a flexible configuration system, that gives you
+the ability to configure Mink inside Behat to fulfil all your needs.
 
 Sessions
 --------
 
-You can register as many Mink session as you want. For each session, you
+You can register as many Mink sessions as you want. For each session, you
 will need to choose the driver you want to use.
 
 .. code-block:: yaml
@@ -187,7 +187,7 @@ javascript).
 Drivers
 ~~~~~~~
 
-First of all, there's drivers enabling configuration. MinkExtension comes
+First of all, there are drivers enabling configuration. MinkExtension comes
 with support for 6 drivers out of the box:
 
 * ``GoutteDriver`` - headless driver without JavaScript support. In order to use
@@ -294,7 +294,7 @@ the following parameters to avoid the validation error triggered by Guzzle :
 
 .. note::
 
-    phar version of Mink comes bundles with all 5 drivers and you don't need to do
+    The phar version of Mink comes bundled with all 5 drivers and you don't need to do
     anything except enabling them in order to use them.
 
     But if you're using Composer, you need to install drivers that you need first:
@@ -307,9 +307,9 @@ the following parameters to avoid the validation error triggered by Guzzle :
 
 .. note::
 
-    All drivers share same API, which means that you could use multiple drivers
+    All drivers share the same API, which means that you could use multiple drivers
     for the same suite - which one fits your needs for concrete scenarios. Don't
-    try to stick to single driver as there's simply no universal solution - every
+    try to stick to a single driver as there's simply no universal solution - every
     driver has its pros and cons.
 
 Additional Parameters
@@ -318,12 +318,12 @@ Additional Parameters
 There's other useful parameters, that you can use to configure your suite:
 
 * ``base_url`` - if you're using relative paths in your ``*.feature`` files
-  (and you should), then this option will define which url use as a basename
+  (and you should), then this option will define which url to use as a basename
   for them.
-* ``files_path`` - there's special step definition for file upload inputs
+* ``files_path`` - there's a special step definition for file upload inputs
   usage. You can use relative paths in those steps. ``files_path`` defines
   base path in which Mink should search those relative files.
-* ``show_cmd`` - there's special definition in MinkExtension, that saves
+* ``show_cmd`` - there's a special definition in MinkExtension, that saves
   currently opened page into temporary file and opens it with some browser
   utility (for debugging). This option defines command to be used for opening.
   For example: ``show_cmd: 'firefox %s'``.

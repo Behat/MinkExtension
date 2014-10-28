@@ -285,12 +285,15 @@ the following parameters to avoid the validation error triggered by Guzzle :
 
     .. code-block:: yaml
 
-        default:
-            extensions:
-                Behat\MinkExtension:
-                    sessions:
-                        default:
-                            zombie: ~
+      default:
+        extensions:
+          Behat\MinkExtension\Extension:
+            zombie:
+              # Specify the path to the node_modules directory.
+              node_modules_path: /usr/local/lib/node_modules/
+            default_session: 'zombie'
+            javascript_session: 'zombie'
+                              
 
 .. note::
 

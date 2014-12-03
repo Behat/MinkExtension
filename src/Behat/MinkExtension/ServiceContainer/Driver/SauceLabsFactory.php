@@ -84,6 +84,14 @@ class SauceLabsFactory extends Selenium2Factory
                 ->booleanNode('capture-html')->end()
                 ->booleanNode('disable-popup-handler')->end()
             ->end()
+            ->validate()
+                ->ifTrue(function ($v) {return empty($v['custom-data']);})
+                ->then(function ($v) {
+                    unset ($v['custom-data']);
+
+                    return $v;
+                })
+            ->end()
         ;
 
         return $node;

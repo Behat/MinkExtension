@@ -42,6 +42,13 @@ class RawMinkContext implements MinkAwareContext
      */
     public function getMink()
     {
+        if (null === $this->mink) {
+            throw new \RuntimeException(
+                'Mink instance has not been set on Mink context class. ' . 
+                'Have you enabled the Mink Extension?'
+            );
+        }
+
         return $this->mink;
     }
 

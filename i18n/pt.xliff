@@ -104,11 +104,11 @@
         </trans-unit>
         <trans-unit id="the-checkbox-should-be-checked">
             <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should be checked$/]]></source>
-            <target><![CDATA[/^o checkbox "(?P<checkbox>(?:[^"]|\\")*)" deve ser marcado$/]]></target>
+            <target><![CDATA[/^o checkbox "(?P<checkbox>(?:[^"]|\\")*)" deve (?:ser|estar) marcado$/]]></target>
         </trans-unit>
         <trans-unit id="the-checkbox-should-not-be-checked">
             <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should not be checked$/]]></source>
-            <target><![CDATA[/^o checkbox "(?P<checkbox>(?:[^"]|\\")*)" não deve ser marcado$/]]></target>
+            <target><![CDATA[/^o checkbox "(?P<checkbox>(?:[^"]|\\")*)" não deve (?:ser|estar) marcado$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-be-on-page">
             <source><![CDATA[/^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>

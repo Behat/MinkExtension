@@ -80,7 +80,7 @@ class Selenium2Factory implements DriverFactory
 
         return new Definition('Behat\Mink\Driver\Selenium2Driver', array(
             $config['browser'],
-            array_replace($extraCapabilities, $guessedCapabilities, $config['capabilities']),
+            array_replace($guessedCapabilities, $extraCapabilities, $config['capabilities']),
             $config['wd_host'],
         ));
     }

@@ -59,10 +59,9 @@ class SauceLabsFactory extends Selenium2Factory
 
         $node
             ->children()
-                ->scalarNode('name')->defaultValue('Behat feature suite')->end()
                 ->scalarNode('platform')->defaultValue('Linux')->end()
-                ->scalarNode('selenium-version')->defaultValue('2.31.0')->end()
-                ->scalarNode('max-duration')->defaultValue('300')->end()
+                ->scalarNode('selenium-version')->end()
+                ->scalarNode('max-duration')->end()
                 ->scalarNode('command-timeout')->end()
                 ->scalarNode('idle-timeout')->end()
                 ->scalarNode('build')->info('will be set automatically based on the TRAVIS_BUILD_NUMBER environment variable if available')->end()

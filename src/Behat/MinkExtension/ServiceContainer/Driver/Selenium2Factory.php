@@ -98,7 +98,7 @@ class Selenium2Factory implements DriverFactory
                 ->scalarNode('platform')->defaultValue('ANY')->end()
                 ->scalarNode('browserVersion')->defaultValue('9')->end()
                 ->scalarNode('browser')->defaultValue('firefox')->end()
-                ->scalarNode('ignoreZoomSetting')->defaultValue('false')->end()
+                ->booleanNode('ignoreZoomSetting')->defaultFalse()->end()
                 ->scalarNode('name')->defaultValue('Behat feature suite')->end()
                 ->scalarNode('deviceOrientation')->defaultValue('portrait')->end()
                 ->scalarNode('deviceType')->defaultValue('tablet')->end()

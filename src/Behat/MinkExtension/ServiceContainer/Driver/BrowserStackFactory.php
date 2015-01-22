@@ -53,7 +53,6 @@ class BrowserStackFactory extends Selenium2Factory
 
         $node
             ->children()
-                ->scalarNode('name')->defaultValue('Behat feature suite')->end()
                 ->scalarNode('project')->end()
                 ->scalarNode('resolution')->end()
                 ->scalarNode('build')->info('will be set automatically based on the TRAVIS_JOB_NUMBER environment variable if available')->end()

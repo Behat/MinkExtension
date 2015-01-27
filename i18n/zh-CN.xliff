@@ -60,7 +60,7 @@
         </trans-unit>
         <trans-unit id="i-attach-the-file-to-field">
             <source><![CDATA[/^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|我)把文件“(?P<path>[^"]*)”添加到文件选择框“(?P<field>(?:[^"]|\\")*)”里$/]]></target>
+            <target><![CDATA[/^(?:|我)把文件“(?P<path>[^"]*)”添加到文件选择框“(?P<field>(?:[^"]|\\")*)”中$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-text">
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
@@ -144,11 +144,11 @@
         </trans-unit>
         <trans-unit id="-should-see-text-matching">
             <source><![CDATA[/^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^(?:|我)应该可以看见匹配“(?P<pattern>"(?:[^"]|\\")*")”的文本$/]]></target>
+            <target><![CDATA[/^(?:|我)应该可以看见匹配“(?P<pattern>"(?:[^"]|\\")*")”的文本内容$/]]></target>
         </trans-unit>
         <trans-unit id="-should-not-see-text-matching">
             <source><![CDATA[/^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^(?:|我)应该不能看见匹配“(?P<pattern>"(?:[^"]|\\")*")”的文本$/]]></target>
+            <target><![CDATA[/^(?:|我)应该不能看见匹配“(?P<pattern>"(?:[^"]|\\")*")”的文本内容$/]]></target>
         </trans-unit>
     </body>
   </file>

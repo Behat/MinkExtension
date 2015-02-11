@@ -54,8 +54,8 @@ class AppiumFactory extends Selenium2Factory
         $node
             ->children()
             ->scalarNode('automationName')->defaultValue('Appium')->end()
-            ->scalarNode('platformName')->defaultValue('iOS')->end()
-            ->scalarNode('platformVersion')->defaultValue('8.1')->end()
+            ->scalarNode('platformName')->end()
+            ->scalarNode('platformVersion')->end()
             ->scalarNode('deviceName')->end()
             ->scalarNode('app')->end()
             ->scalarNode('browserName')->end()

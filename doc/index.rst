@@ -216,7 +216,7 @@ the following parameters to avoid the validation error triggered by Guzzle :
             my_session:
               goutte:
                 guzzle_parameters:
-                  ssl.certificate_authority: false
+                  verify: false
 
 * ``Selenium2Driver`` - javascript driver. In order to use it, modify your
   ``behat.yml`` profile:

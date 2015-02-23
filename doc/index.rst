@@ -205,18 +205,33 @@ with support for 6 drivers out of the box:
   .. Tips : HTTPS and self-signed certificate
   In case you use Behat/Mink/Goutte to test your application, and want to test an
   application secured with HTTPS, but with a self-signed certificate, you can use
-  the following parameters to avoid the validation error triggered by Guzzle :
+  the following parameters to avoid the validation error triggered by Guzzle:
 
-    .. code-block:: yaml
+  * For ``Guzzle 4`` or later:
+  
+      .. code-block:: yaml
 
-        default:
-            extensions:
-                Behat\MinkExtension:
-                    sessions:
-                        my_session:
-                            goutte:
-                                guzzle_parameters:
-                                    verify: false
+          default:
+              extensions:
+                  Behat\MinkExtension:
+                      sessions:
+                          my_session:
+                              goutte:
+                                  guzzle_parameters:
+                                      verify: false
+  
+  * For ``Guzzle 3`` or earlier:
+  
+      .. code-block:: yaml
+
+          default:
+              extensions:
+                  Behat\MinkExtension:
+                      sessions:
+                          my_session:
+                              goutte:
+                                  guzzle_parameters:
+                                      ssl.certificate_authority: false
 
 * ``Selenium2Driver`` - javascript driver. In order to use it, modify your
   ``behat.yml`` profile:

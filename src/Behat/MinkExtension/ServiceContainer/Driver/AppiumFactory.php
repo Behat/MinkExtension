@@ -24,6 +24,8 @@ class AppiumFactory extends Selenium2Factory
             ->children()
                 ->scalarNode('browser')->defaultValue('remote')->end()
                 ->append($this->getCapabilitiesNode())
+                ->scalarNode('appium_host')->defaultValue(getenv('APPIUM_HOST'))->end()
+                ->scalarNode('appium_port')->defaultValue(getenv('APPIUM_PORT'))->end()
             ->end()
         ;
     }
@@ -33,7 +35,7 @@ class AppiumFactory extends Selenium2Factory
      */
     public function buildDriver(array $config)
     {
-        $host = '0.0.0.0:4723';
+        $host = $config['appium_host'].":".$config['appium_port'];
 
         $config['wd_host'] = sprintf('%s/wd/hub', $host);
 

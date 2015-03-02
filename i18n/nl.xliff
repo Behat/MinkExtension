@@ -42,6 +42,10 @@
             <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^(?:|ik )het veld "(?P<field>(?:[^"]|\\")*)" invul met "(?P<value>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
+        <trans-unit id="i-fill-in-field-with">
+            <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with:$/]]></source>
+            <target><![CDATA[/^(?:|ik )het veld "(?P<field>(?:[^"]|\\")*)" invul met:$/]]></target>
+        </trans-unit>
         <trans-unit id="i-fill-in-value-for-field">
             <source><![CDATA[/^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)"$/]]></source>
             <target><![CDATA[/^(?:|ik )de waarde "(?P<value>(?:[^"]|\\")*)" invul in "(?P<field>(?:[^"]|\\")*)"$/]]></target>
@@ -106,9 +110,21 @@
             <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should be checked$/]]></source>
             <target><![CDATA[/^moet "(?P<checkbox>(?:[^"]|\\")*)" aangevinkt zijn$/]]></target>
         </trans-unit>
+        <trans-unit id="the-checkbox-should-is-checked">
+            <source><![CDATA[/^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" (?:is|should be) checked$/]]></source>
+            <target><![CDATA[/^"(?P<checkbox>(?:[^"]|\\")*)" (?:is|zou moeten zijn) aangevinkt$/]]></target>
+        </trans-unit>
+        <trans-unit id="the-checkbox-should-be-unchecked">
+            <source><![CDATA[/^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" should (?:be unchecked|not be checked)$/]]></source>
+            <target><![CDATA[/^moet "(?P<checkbox>(?:[^"]|\\")*)" niet aangevinkt zijn$/]]></target>
+        </trans-unit>
         <trans-unit id="the-checkbox-should-not-be-checked">
             <source><![CDATA[/^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should not be checked$/]]></source>
             <target><![CDATA[/^moet "(?P<checkbox>(?:[^"]|\\")*)" niet aangevinkt zijn$/]]></target>
+        </trans-unit>
+        <trans-unit id="the-checkbox-is-unchecked">
+            <source><![CDATA[/^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" is (?:unchecked|not checked)$/]]></source>
+            <target><![CDATA[/^"(?P<checkbox>(?:[^"]|\\")*)" is niet aangevinkt$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-be-on-page">
             <source><![CDATA[/^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>
@@ -153,6 +169,10 @@
         <trans-unit id="the-response-status-code-should-not-be">
             <source><![CDATA[/^the response status code should not be (?P<code>\d+)$/]]></source>
             <target><![CDATA[/^moet de statuscode van het antwoord niet (?P<code>\d+) zijn$/]]></target>
+        </trans-unit>
+        <trans-unit id="print-current-URL">
+            <source><![CDATA[/^print current URL$/]]></source>
+            <target><![CDATA[/^print huidige URL$/]]></target>
         </trans-unit>
         <trans-unit id="print-last-response">
             <source><![CDATA[/^print last response$/]]></source>

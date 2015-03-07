@@ -24,8 +24,8 @@ class AppiumFactory extends Selenium2Factory
             ->children()
                 ->scalarNode('browser')->defaultValue('remote')->end()
                 ->append($this->getCapabilitiesNode())
-                ->scalarNode('appium_host')->defaultValue(getenv('APPIUM_HOST'))->end()
-                ->scalarNode('appium_port')->defaultValue(getenv('APPIUM_PORT'))->end()
+                ->scalarNode('appium_host')->defaultValue('0.0.0.0')->end()
+                ->scalarNode('appium_port')->defaultValue('4723')->end()
             ->end()
         ;
     }

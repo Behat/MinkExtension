@@ -8,7 +8,7 @@
         </trans-unit>
         <trans-unit id="i-go-to-homepage">
             <source><![CDATA[/^(?:|I )go to (?:|the )homepage$/]]></source>
-            <target><![CDATA[/^(?:|Eu )vou a página inicial$/]]></target>
+            <target><![CDATA[/^(?:|Eu )vou à página inicial$/]]></target>
         </trans-unit>
         <trans-unit id="i-am-on-page">
             <source><![CDATA[/^(?:|I )am on "(?P<page>[^"]+)"$/]]></source>
@@ -16,7 +16,7 @@
         </trans-unit>
         <trans-unit id="i-go-to-page">
             <source><![CDATA[/^(?:|I )go to "(?P<page>[^"]+)"$/]]></source>
-            <target><![CDATA[/^(?:|Eu )vou a "(?P<page>[^"]+)"$/]]></target>
+            <target><![CDATA[/^(?:|Eu )vou à "(?P<page>[^"]+)"$/]]></target>
         </trans-unit>
         <trans-unit id="reload-the-page">
             <source><![CDATA[/^(?:|I )reload the page$/]]></source>
@@ -164,11 +164,11 @@
         </trans-unit>
         <trans-unit id="the-response-status-code-should-be">
             <source><![CDATA[/^the response status code should be (?P<code>\d+)$/]]></source>
-            <target><![CDATA[/^o codigo de status da resposta deve ser (?P<code>\d+)$/]]></target>
+            <target><![CDATA[/^o código da resposta deve ser (?P<code>\d+)$/]]></target>
         </trans-unit>
         <trans-unit id="the-response-status-code-should-not-be">
             <source><![CDATA[/^the response status code should not be (?P<code>\d+)$/]]></source>
-            <target><![CDATA[/^o codigo de status da resposta não deve ser (?P<code>\d+)$/]]></target>
+            <target><![CDATA[/^o código da resposta não deve ser (?P<code>\d+)$/]]></target>
         </trans-unit>
         <trans-unit id="print-current-URL">
             <source><![CDATA[/^print current URL$/]]></source>

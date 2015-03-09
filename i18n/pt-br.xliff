@@ -32,7 +32,7 @@
         </trans-unit>
         <trans-unit id="i-press-button">
             <source><![CDATA[/^(?:|I )press "(?P<button>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|Eu )pressiono o botão"(?P<button>(?:[^"]|\\")*)"$/]]></target>
+            <target><![CDATA[/^(?:|Eu )pressiono o botão "(?P<button>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-follow-link">
             <source><![CDATA[/^(?:|I )follow "(?P<link>(?:[^"]|\\")*)"$/]]></source>
@@ -40,7 +40,7 @@
         </trans-unit>
         <trans-unit id="i-fill-in-field-with-value">
             <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(?:|Eu )preencho o campo"(?P<field>(?:[^"]|\\")*)" com "(?P<value>(?:[^"]|\\")*)"$/]]></target>
+            <target><![CDATA[/^(?:|Eu )preencho o campo "(?P<field>(?:[^"]|\\")*)" com "(?P<value>(?:[^"]|\\")*)"$/]]></target>
         </trans-unit>
         <trans-unit id="i-fill-in-field-with">
             <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with:$/]]></source>

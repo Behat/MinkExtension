@@ -61,6 +61,7 @@ class BrowserStackFactory extends Selenium2Factory
                 ->scalarNode('device')->end()
                 ->booleanNode('browserstack-debug')->end()
                 ->booleanNode('browserstack-tunnel')->end()
+                ->booleanNode('emulator')->end()
             ->end()
         ;
 

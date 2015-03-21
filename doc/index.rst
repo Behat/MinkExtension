@@ -32,25 +32,13 @@ Through Composer
 
 The easiest way to keep your suite updated is to use `Composer <http://getcomposer.org>`_:
 
-1. Define dependencies in your ``composer.json``:
-
-    .. code-block:: js
-
-        {
-            "require-dev": {
-                ...
-
-                "behat/mink-extension": "~2.0@dev"
-            }
-        }
-
-2. Install/update your vendors:
+1. Install with composer:
 
     .. code-block:: bash
 
-        $ composer update behat/mink-extension
+        $ composer require --dev behat/mink-extension
 
-3. Activate extension by specifying its class in your ``behat.yml``:
+2. Activate extension by specifying its class in your ``behat.yml``:
 
     .. code-block:: yaml
 

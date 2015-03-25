@@ -60,8 +60,10 @@ After installing extension, there would be 6 usage options available for you:
 1. Extending ``Behat\MinkExtension\Context\RawMinkContext`` in your feature suite.
    This will give you ability to use a preconfigured `Mink` instance altogether with some
    convenience methods:
+
    * ``getSession($name = null)``
    * ``assertSession($name = null)``
+
    ``RawMinkContext`` doesn't provide any hooks or definitions, so you can inherit from it
    in as many contexts as you want - you'll never get ``RedundantStepException``.
 
@@ -278,7 +280,7 @@ with support for 6 drivers out of the box:
 
         default:
             extensions:
-                Behat\MinkExtension\Extension:
+                Behat\MinkExtension:
                     sessions:
                         my_session:
                             sahi: ~

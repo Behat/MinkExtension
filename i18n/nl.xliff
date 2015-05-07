@@ -144,7 +144,7 @@
         </trans-unit>
         <trans-unit id="the-element-should-not-contain">
             <source><![CDATA[/^the "(?P<element>[^"]*)" element should not contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^moet het element "(?P<element>[^"]*)" niet "(?P<value>(?:[^"]|\\")*)" bevatten $/]]></target>
+            <target><![CDATA[/^moet het element "(?P<element>[^"]*)" niet "(?P<value>(?:[^"]|\\")*)" bevatten$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-text-in-element">
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>

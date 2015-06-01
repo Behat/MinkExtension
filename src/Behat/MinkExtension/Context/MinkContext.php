@@ -38,8 +38,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
     /**
      * Opens specified page
      * Example: Given I am on "http://batman.com"
-     * Example: When I am on "http://batman.com"
-     * Example: And I go to "http://batman.com"
+     * Example: And I am on "/articles/isBatmanBruceWayne"
+     * Example: When I go to "/articles/isBatmanBruceWayne"
      *
      * @Given /^(?:|I )am on "(?P<page>[^"]+)"$/
      * @When /^(?:|I )go to "(?P<page>[^"]+)"$/
@@ -56,6 +56,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I reload the page
      *
      * @When /^(?:|I )reload the page$/
+     *
      */
     public function reload()
     {
@@ -118,7 +119,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Fills in form field with specified id|name|label|value
-     * Example: Given I fill in "username" with: "bwayne"
+     * Example: Given I fill in "username" with "bwayne"
      * Example: When I fill in "username" with: "bwayne"
      * Example: And I fill in "bwayne" for "username"
      *
@@ -482,6 +483,18 @@ class MinkContext extends RawMinkContext implements TranslatableContext
     }
 
     /**
+     * Checks, that (?P<num>\d+) CSS elements exist on the page
+     * Example: Then I should see 5 "div" elements
+     * Example: And I should see 5 "div" elements
+     *
+     * @Then /^(?:|I )should see (?P<num>\d+) "(?P<element>[^"]*)" elements?$/
+     */
+    public function assertNumElements($num, $element)
+    {
+        $this->assertSession()->elementsCount('css', $element, intval($num));
+    }
+
+    /**
      * Checks, that checkbox with specified in|name|label|value is unchecked
      * Example: Then the "newsletter" checkbox should be unchecked
      * Example: Then the "newsletter" checkbox should not be checked
@@ -494,18 +507,6 @@ class MinkContext extends RawMinkContext implements TranslatableContext
     public function assertCheckboxNotChecked($checkbox)
     {
         $this->assertSession()->checkboxNotChecked($this->fixStepArgument($checkbox));
-    }
-
-    /**
-     * Checks, that (?P<num>\d+) CSS elements exist on the page
-     * Example: Then I should see 5 "div" elements
-     * Example: And I should see 5 "div" elements
-     *
-     * @Then /^(?:|I )should see (?P<num>\d+) "(?P<element>[^"]*)" elements?$/
-     */
-    public function assertNumElements($num, $element)
-    {
-        $this->assertSession()->elementsCount('css', $element, intval($num));
     }
 
     /**

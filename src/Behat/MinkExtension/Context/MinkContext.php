@@ -51,12 +51,10 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Reloads current page
-     * Example: Given I reload the page
      * Example: When I reload the page
      * Example: And I reload the page
      *
      * @When /^(?:|I )reload the page$/
-     *
      */
     public function reload()
     {
@@ -65,9 +63,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Moves backward one page in history
-     * Example: Given I move backward one page
      * Example: When I move backward one page
-     * Example: And I move backward one page
      *
      * @When /^(?:|I )move backward one page$/
      */
@@ -78,8 +74,6 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Moves forward one page in history
-     * Example: Given I move forward one page
-     * Example: When I move forward one page
      * Example: And I move forward one page
      *
      * @When /^(?:|I )move forward one page$/
@@ -91,7 +85,6 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Presses button with specified id|name|title|alt|value
-     * Example: Given I press "Log In"
      * Example: When I press "Log In"
      * Example: And I press "Log In"
      *
@@ -105,7 +98,6 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Clicks link with specified id|title|alt|text
-     * Example: Given I follow "Log In"
      * Example: When I follow "Log In"
      * Example: And I follow "Log In"
      *
@@ -119,7 +111,6 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Fills in form field with specified id|name|label|value
-     * Example: Given I fill in "username" with "bwayne"
      * Example: When I fill in "username" with: "bwayne"
      * Example: And I fill in "bwayne" for "username"
      *
@@ -136,9 +127,6 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Fills in form fields with provided table
-     * Example: Given I fill in the following"
-     *              | username | bruceWayne |
-     *              | password | iLoveBats123 |
      * Example: When I fill in the following"
      *              | username | bruceWayne |
      *              | password | iLoveBats123 |
@@ -157,7 +145,6 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Selects option in select field with specified id|name|label|value
-     * Example: Given I select "Bats" from "user_fears"
      * Example: When I select "Bats" from "user_fears"
      * Example: And I select "Bats" from "user_fears"
      *
@@ -172,7 +159,6 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Selects additional option in select field with specified id|name|label|value
-     * Example: Given I additionally select "Deceased" from "parents_alive_status"
      * Example: When I additionally select "Deceased" from "parents_alive_status"
      * Example: And I additionally select "Deceased" from "parents_alive_status"
      *
@@ -187,7 +173,6 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Checks checkbox with specified id|name|label|value
-     * Example: Given I check "Pearl Necklace" from "itemsClaimed"
      * Example: When I check "Pearl Necklace" from "itemsClaimed"
      * Example: And I check "Pearl Necklace" from "itemsClaimed"
      *
@@ -201,7 +186,6 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Unchecks checkbox with specified id|name|label|value
-     * Example: Given I uncheck "Broadway Plays" from "hobbies"
      * Example: When I uncheck "Broadway Plays" from "hobbies"
      * Example: And I uncheck "Broadway Plays" from "hobbies"
      *
@@ -215,7 +199,6 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Attaches file to field with specified id|name|label|value
-     * Example: Given I attach "bwayne_profile.png" to "profileImageUpload"
      * Example: When I attach "bwayne_profile.png" to "profileImageUpload"
      * Example: And I attach "bwayne_profile.png" to "profileImageUpload"
      *
@@ -470,6 +453,18 @@ class MinkContext extends RawMinkContext implements TranslatableContext
     }
 
     /**
+     * Checks, that (?P<num>\d+) CSS elements exist on the page
+     * Example: Then I should see 5 "div" elements
+     * Example: And I should see 5 "div" elements
+     *
+     * @Then /^(?:|I )should see (?P<num>\d+) "(?P<element>[^"]*)" elements?$/
+     */
+    public function assertNumElements($num, $element)
+    {
+        $this->assertSession()->elementsCount('css', $element, intval($num));
+    }
+
+    /**
      * Checks, that checkbox with specified in|name|label|value is checked
      * Example: Then the "remember_me" checkbox should be checked
      * Example: And the "remember_me" checkbox is checked
@@ -480,18 +475,6 @@ class MinkContext extends RawMinkContext implements TranslatableContext
     public function assertCheckboxChecked($checkbox)
     {
         $this->assertSession()->checkboxChecked($this->fixStepArgument($checkbox));
-    }
-
-    /**
-     * Checks, that (?P<num>\d+) CSS elements exist on the page
-     * Example: Then I should see 5 "div" elements
-     * Example: And I should see 5 "div" elements
-     *
-     * @Then /^(?:|I )should see (?P<num>\d+) "(?P<element>[^"]*)" elements?$/
-     */
-    public function assertNumElements($num, $element)
-    {
-        $this->assertSession()->elementsCount('css', $element, intval($num));
     }
 
     /**

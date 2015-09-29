@@ -1,5 +1,11 @@
 language: php
 
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
 php:
   - 5.3
   - 5.4
@@ -11,12 +17,20 @@ matrix:
   include:
     - php: 5.5
       env: SYMFONY_VERSION='2.3.*'
-    - php: 5.5
-      env: SYMFONY_VERSION='2.5.*@dev'
+    # Test against dev dependencies
+    - php: 5.6
+      env: DEPS=dev
+
+before_install:
+  - composer self-update
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/symfony=$SYMFONY_VERSION; fi;
+  - if [ "$DEPS" = 'dev' ]; then perl -pi -e 's/^}$/,"minimum-stability":"dev"}/' composer.json; fi;
+
+install:
+  - composer install --no-progress
 
 before_script:
-  - sh -c 'if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/symfony=$SYMFONY_VERSION; fi;'
-  - composer install --prefer-source
+  - export PATH=./vendor/bin:$PATH
   - export PATH=./vendor/bin:$PATH
 
 script:

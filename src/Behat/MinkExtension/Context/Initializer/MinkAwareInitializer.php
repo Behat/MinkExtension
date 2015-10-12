@@ -16,6 +16,8 @@ use Behat\Behat\Context\Initializer\ContextInitializer;
 use Behat\Mink\Mink;
 use Behat\MinkExtension\Context\MinkAwareContext;
 
+use Behat\Testwork\Hook\HookDispatcher;
+
 /**
  * Mink aware contexts initializer.
  * Sets Mink instance and parameters to the MinkAware contexts.
@@ -26,17 +28,20 @@ class MinkAwareInitializer implements ContextInitializer
 {
     private $mink;
     private $parameters;
+    private $dispatcher;
 
     /**
      * Initializes initializer.
      *
-     * @param Mink  $mink
-     * @param array $parameters
+     * @param Mink           $mink
+     * @param array          $parameters
+     * @param HookDispatcher $dispatcher
      */
-    public function __construct(Mink $mink, array $parameters)
+    public function __construct(Mink $mink, array $parameters, HookDispatcher $dispatcher)
     {
         $this->mink       = $mink;
         $this->parameters = $parameters;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -52,5 +57,6 @@ class MinkAwareInitializer implements ContextInitializer
 
         $context->setMink($this->mink);
         $context->setMinkParameters($this->parameters);
+        $context->setDispatcher($this->dispatcher);
     }
 }

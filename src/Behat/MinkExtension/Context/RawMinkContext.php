@@ -140,9 +140,9 @@ class RawMinkContext implements MinkAwareContext
     public function visitPath($path, $sessionName = null)
     {
         $session = $this->getSession($sessionName);
-        $this->dispatchRequestHooks($session, 'before');
+        $this->dispatchRequestHooks($session, $path, 'before');
         $session->visit($this->locatePath($path));
-        $this->dispatchRequestHooks($session, 'after');
+        $this->dispatchRequestHooks($session, $path, 'after');
     }
 
     /**
@@ -180,20 +180,23 @@ class RawMinkContext implements MinkAwareContext
     /**
      * Dispatch request scope hooks.
      *
-     * @param string $scopeType The scope hook to dispatch.
+     * @param Session $session The Mink session that performed the request.
+     * @param string  $path    The path being requested.
+     * @param string  $type    The type of request hook to dispatch. Either
+     *                         'before' or 'after'.
      *
      * @throws \Exception Exceptions caught during execution of the scope hooks
      *                    will be thrown here.
      */
-    protected function dispatchRequestHooks($scopeType) {
-        $fullScopeClass = 'Behat\\MinkExtension\\Hook\\Scope\\' . $scopeType;
-        $scope = new $fullScopeClass($this->getDrupal()->getEnvironment(), $this, $entity);
-        $callResults = $this->dispatcher->dispatchScopeHooks($scope);
+    protected function dispatchRequestHooks(Session $session, $path, $type) {
+        $class = 'Behat\\MinkExtension\\Hook\\Scope\\' . ucfirst($type) . 'RequestScope';
+        $scope = new $class($this->getMink(), $session, $path);
+        $results = $this->dispatcher->dispatchScopeHooks($scope);
 
         // The dispatcher suppresses exceptions, throw them here if there are
         // any.
         /** @var \Behat\TestWork\Call\CallResult $result */
-        foreach ($callResults as $result) {
+        foreach ($results as $result) {
             if ($result->hasException()) {
                 $exception = $result->getException();
                 throw $exception;

@@ -74,4 +74,22 @@ abstract class BaseRequestScope implements RequestScope
     {
         return $this->path;
     }
+
+    /**
+     * Returns hook suite.
+     *
+     * @return Suite
+     */
+    public function getSuite()
+    {
+    }
+
+    /**
+     * Returns hook environment.
+     *
+     * @return Environment
+     */
+    public function getEnvironment()
+    {
+    }
 }

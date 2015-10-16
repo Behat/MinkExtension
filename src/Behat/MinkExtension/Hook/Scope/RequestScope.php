@@ -21,27 +21,27 @@ use Behat\Testwork\Hook\Scope\HookScope;
  */
 interface RequestScope extends HookScope
 {
-  const BEFORE = 'request.before';
-  const AFTER = 'request.after';
+    const BEFORE = 'request.before';
+    const AFTER = 'request.after';
 
-  /**
-   * Returns the Mink instance.
-   *
-   * @return Mink
-   */
-  public function getMink();
+    /**
+     * Returns the Mink instance.
+     *
+     * @return Mink
+     */
+    public function getMink();
 
-  /**
-   * Returns the Mink session.
-   *
-   * @return Session
-   */
-  public function getSession();
+    /**
+     * Returns the Mink session.
+     *
+     * @return Session
+     */
+    public function getSession();
 
-  /**
-   * Returns the path.
-   *
-   * @return string
-   */
-  public function getPath();
+    /**
+     * Returns the path.
+     *
+     * @return string
+     */
+    public function getPath();
 }

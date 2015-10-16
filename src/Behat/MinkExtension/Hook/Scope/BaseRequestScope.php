@@ -20,58 +20,58 @@ use Behat\Testwork\Hook\Scope\HookScope;
  */
 abstract class BaseRequestScope implements RequestScope
 {
-  /**
-   * @var Mink
-   */
-  private $mink;
+    /**
+     * @var Mink
+     */
+    private $mink;
 
-  /**
-   * @var Session
-   */
-  private $session;
+    /**
+     * @var Session
+     */
+    private $session;
 
-  /**
-   * @var string
-   */
-  private $path;
+    /**
+     * @var string
+     */
+    private $path;
 
-  /**
-   * Initializes the scope.
-   */
-  public function __construct(Mink $mink, Session $session, $path)
-  {
-      $this->mink = $mink;
-      $this->session = $session;
-      $this->path = $path;
-  }
+    /**
+     * Initializes the scope.
+     */
+    public function __construct(Mink $mink, Session $session, $path)
+    {
+        $this->mink = $mink;
+        $this->session = $session;
+        $this->path = $path;
+    }
 
-  /**
-   * Returns the Mink instance.
-   *
-   * @return Mink
-   */
-  public function getMink()
-  {
-      return $this->mink;
-  }
+    /**
+     * Returns the Mink instance.
+     *
+     * @return Mink
+     */
+    public function getMink()
+    {
+        return $this->mink;
+    }
 
-  /**
-   * Returns the Mink session.
-   *
-   * @return Session
-   */
-  public function getSession()
-  {
-      return $this->session;
-  }
+    /**
+     * Returns the Mink session.
+     *
+     * @return Session
+     */
+    public function getSession()
+    {
+        return $this->session;
+    }
 
-  /**
-   * Returns the path.
-   *
-   * @return string
-   */
-  public function getPath()
-  {
-      return $this->path;
-  }
+    /**
+     * Returns the path.
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
 }

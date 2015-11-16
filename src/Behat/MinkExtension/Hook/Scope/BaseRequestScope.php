@@ -11,7 +11,10 @@ namespace Behat\MinkExtension\Hook\Scope;
 
 use Behat\Mink\Mink;
 use Behat\Mink\Session;
+use Behat\Testwork\Environment\Environment;
+use Behat\Testwork\Environment\StaticEnvironment;
 use Behat\Testwork\Hook\Scope\HookScope;
+use Behat\Testwork\Suite\GenericSuite;
 
 /**
  * Base class for request scopes.
@@ -36,6 +39,11 @@ abstract class BaseRequestScope implements RequestScope
     private $path;
 
     /**
+     * @var Environment
+     */
+    private $environment;
+
+    /**
      * Initializes the scope.
      */
     public function __construct(Mink $mink, Session $session, $path)
@@ -43,6 +51,9 @@ abstract class BaseRequestScope implements RequestScope
         $this->mink = $mink;
         $this->session = $session;
         $this->path = $path;
+
+        // @todo: Figure out how to pass in the actual Environment.
+        $this->environment = new StaticEnvironment(new GenericSuite('suite', []));
     }
 
     /**
@@ -82,6 +93,7 @@ abstract class BaseRequestScope implements RequestScope
      */
     public function getSuite()
     {
+        return $this->environment->getSuite();
     }
 
     /**
@@ -91,5 +103,6 @@ abstract class BaseRequestScope implements RequestScope
      */
     public function getEnvironment()
     {
+        return $this->environment;
     }
 }

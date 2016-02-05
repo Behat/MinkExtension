@@ -90,7 +90,7 @@ class GoutteFactory implements DriverFactory
         $parameters['allow_redirects'] = false;
         $parameters['cookies'] = true;
 
-        return new Definition('GuzzleHttp\Client', array(array('defaults' => $parameters)));
+        return new Definition('GuzzleHttp\Client', array($parameters));
 
     }
 

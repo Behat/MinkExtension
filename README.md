@@ -20,7 +20,7 @@ and it provides:
 
 ## Translated languages
 
-For now exist 10 translated languages: `cs`,`de`,`es`,`fr`,`ja`,`nl`,`pl`,`pt`,`ru`,`sv`.
+For now exist 11 translated languages: `cs`,`de`,`es`,`fr`,`ja`,`nl`,`pl`,`pt`,`ro`,`ru`,`sv`.
 
 **Note:** The `ja`,`nl` and `sv` are outdated.
 

@@ -295,7 +295,9 @@ with support for 6 drivers out of the box:
                 Behat\MinkExtension:
                     sessions:
                         default:
-                            zombie: ~
+                            zombie:
+                                # Specify the path to the node_modules directory.
+                                node_modules_path: /usr/local/lib/node_modules/
 
 .. note::
 

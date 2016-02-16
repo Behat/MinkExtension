@@ -111,6 +111,7 @@ class Selenium2Factory implements DriverFactory
                 ->booleanNode('rotatable')->end()
                 ->booleanNode('acceptSslCerts')->end()
                 ->booleanNode('nativeEvents')->end()
+                ->booleanNode('overlappingCheckDisabled')->end()
                 ->arrayNode('proxy')
                     ->children()
                         ->scalarNode('proxyType')->end()

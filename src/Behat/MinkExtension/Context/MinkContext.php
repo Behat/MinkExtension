@@ -465,7 +465,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
     }
 
     /**
-     * Checks, that checkbox with specified in|name|label|value is checked
+     * Checks, that checkbox with specified id|name|label|value is checked
      * Example: Then the "remember_me" checkbox should be checked
      * Example: And the "remember_me" checkbox is checked
      *
@@ -478,7 +478,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
     }
 
     /**
-     * Checks, that checkbox with specified in|name|label|value is unchecked
+     * Checks, that checkbox with specified id|name|label|value is unchecked
      * Example: Then the "newsletter" checkbox should be unchecked
      * Example: Then the "newsletter" checkbox should not be checked
      * Example: And the "newsletter" checkbox is unchecked

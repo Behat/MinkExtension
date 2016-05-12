@@ -173,8 +173,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Checks checkbox with specified id|name|label|value
-     * Example: When I check "Pearl Necklace" from "itemsClaimed"
-     * Example: And I check "Pearl Necklace" from "itemsClaimed"
+     * Example: When I check "Pearl Necklace"
+     * Example: And I check "Pearl Necklace"
      *
      * @When /^(?:|I )check "(?P<option>(?:[^"]|\\")*)"$/
      */
@@ -186,8 +186,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Unchecks checkbox with specified id|name|label|value
-     * Example: When I uncheck "Broadway Plays" from "hobbies"
-     * Example: And I uncheck "Broadway Plays" from "hobbies"
+     * Example: When I uncheck "Broadway Plays"
+     * Example: And I uncheck "Broadway Plays"
      *
      * @When /^(?:|I )uncheck "(?P<option>(?:[^"]|\\")*)"$/
      */

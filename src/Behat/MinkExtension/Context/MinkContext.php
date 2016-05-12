@@ -470,6 +470,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the "remember_me" checkbox is checked
      *
      * @Then /^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should be checked$/
+     * @Then /^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox is checked$/
      * @Then /^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" (?:is|should be) checked$/
      */
     public function assertCheckboxChecked($checkbox)
@@ -483,7 +484,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then the "newsletter" checkbox should not be checked
      * Example: And the "newsletter" checkbox is unchecked
      *
-     * @Then /^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should not be checked$/
+     * @Then /^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox should (?:be unchecked|not be checked)$/
+     * @Then /^the "(?P<checkbox>(?:[^"]|\\")*)" checkbox is (?:unchecked|not checked)$/
      * @Then /^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" should (?:be unchecked|not be checked)$/
      * @Then /^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" is (?:unchecked|not checked)$/
      */

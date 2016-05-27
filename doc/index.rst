@@ -358,4 +358,4 @@ BrowserStack provides "remote web browsers as a service",
 making it easy to do this sort of matrix testing without having to maintain the multiple
 browser installations yourself.
 
-* `BrowserStack's sample repository for integration with Behat <https://github.com/browserstack/behat-browserstack>`_
+* `BrowserStack's sample repository for integration with Behat Mink <https://github.com/browserstack/behat-mink-browserstack>`_

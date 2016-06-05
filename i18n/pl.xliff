@@ -168,11 +168,11 @@
             </trans-unit>
             <trans-unit id="the-response-status-code-should-be">
                 <source><![CDATA[/^the response status code should be (?P<code>\d+)$/]]></source>
-                <target><![CDATA[/^kod statusu odpowiedzi powinien być równy (?P<code>\d+)$/]]></target>
+                <target><![CDATA[/^kod (?:|statusu )odpowiedzi powinien (?:wynosić|być równy) (?P<code>\d+)$/]]></target>
             </trans-unit>
             <trans-unit id="the-response-status-code-should-not-be">
                 <source><![CDATA[/^the response status code should not be (?P<code>\d+)$/]]></source>
-                <target><![CDATA[/^kod statusu odpowiedzi nie powinien być równy (?P<code>\d+)$/]]></target>
+                <target><![CDATA[/^kod (?:|statusu )odpowiedzi nie powinien (?:wynosić|być równy) (?P<code>\d+)$/]]></target>
             </trans-unit>
             <trans-unit id="print-current-URL">
                 <source><![CDATA[/^print current URL$/]]></source>

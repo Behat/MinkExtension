@@ -124,7 +124,7 @@
             </trans-unit>
             <trans-unit id="the-checkbox-is-unchecked">
                 <source><![CDATA[/^the checkbox "(?P<checkbox>(?:[^"]|\\")*)" is (?:unchecked|not checked)$/]]></source>
-                <target><![CDATA[/^pole "(?P<checkbox>(?:[^"]|\\")*)" (?jest|powinno być) odznaczone$/]]></target>
+                <target><![CDATA[/^pole "(?P<checkbox>(?:[^"]|\\")*)" (?:jest|powinno być) odznaczone$/]]></target>
             </trans-unit>
             <trans-unit id="i-should-be-on-page">
                 <source><![CDATA[/^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>

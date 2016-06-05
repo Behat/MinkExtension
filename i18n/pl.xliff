@@ -4,87 +4,87 @@
         <body>
             <trans-unit id="i-am-homepage">
                 <source><![CDATA[/^(?:|I )am on (?:|the )homepage$/]]></source>
-                <target><![CDATA[/^(?:|że )jestem na stronie głównej$/]]></target>
+                <target><![CDATA[/^jestem na stronie głównej$/]]></target>
             </trans-unit>
             <trans-unit id="i-go-to-homepage">
                 <source><![CDATA[/^(?:|I )go to (?:|the )homepage$/]]></source>
-                <target><![CDATA[/^(?:|że )odwiedzę stronę główną$/]]></target>
+                <target><![CDATA[/^odwiedzę stronę główną$/]]></target>
             </trans-unit>
             <trans-unit id="i-am-on-page">
                 <source><![CDATA[/^(?:|I )am on "(?P<page>[^"]+)"$/]]></source>
-                <target><![CDATA[/^(?:|że )jestem na stronie "(?P<page>[^"]+)"$/]]></target>
+                <target><![CDATA[/^jestem na stronie "(?P<page>[^"]+)"$/]]></target>
             </trans-unit>
             <trans-unit id="i-go-to-page">
                 <source><![CDATA[/^(?:|I )go to "(?P<page>[^"]+)"$/]]></source>
-                <target><![CDATA[/^(?:|że )odwiedzę stronę "(?P<page>[^"]+)"$/]]></target>
+                <target><![CDATA[/^odwiedzę stronę "(?P<page>[^"]+)"$/]]></target>
             </trans-unit>
             <trans-unit id="reload-the-page">
                 <source><![CDATA[/^(?:|I )reload the page$/]]></source>
-                <target><![CDATA[/^(?:|że )odświeżę stronę$/]]></target>
+                <target><![CDATA[/^odświeżę stronę$/]]></target>
             </trans-unit>
             <trans-unit id="move-backward-one-page">
                 <source><![CDATA[/^(?:|I )move backward one page$/]]></source>
-                <target><![CDATA[/^(?:|że )cofnę się do poprzedniej strony$/]]></target>
+                <target><![CDATA[/^cofnę się do poprzedniej strony$/]]></target>
             </trans-unit>
             <trans-unit id="move-forward-one-page">
                 <source><![CDATA[/^(?:|I )move forward one page$/]]></source>
-                <target><![CDATA[/^(?:|że )przejdę na kolejną stronę$/]]></target>
+                <target><![CDATA[/^przejdę na kolejną stronę$/]]></target>
             </trans-unit>
             <trans-unit id="i-press-button">
                 <source><![CDATA[/^(?:|I )press "(?P<button>(?:[^"]|\\")*)"$/]]></source>
-                <target><![CDATA[/^(?:|że )nacisnę przycisk "(?P<button>(?:[^"]|\\")*)"$/]]></target>
+                <target><![CDATA[/^nacisnę przycisk "(?P<button>(?:[^"]|\\")*)"$/]]></target>
             </trans-unit>
             <trans-unit id="i-follow-link">
                 <source><![CDATA[/^(?:|I )follow "(?P<link>(?:[^"]|\\")*)"$/]]></source>
-                <target><![CDATA[/^(?:|że )kliknę na link "(?P<link>(?:[^"]|\\")*)"$/]]></target>
+                <target><![CDATA[/^kliknę na link "(?P<link>(?:[^"]|\\")*)"$/]]></target>
             </trans-unit>
             <trans-unit id="i-fill-in-field-with-value">
                 <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-                <target><![CDATA[/^(?:|że )wypełnię pole "(?P<field>(?:[^"]|\\")*)" wartością "(?P<value>(?:[^"]|\\")*)"$/]]></target>
+                <target><![CDATA[/^wypełnię pole "(?P<field>(?:[^"]|\\")*)" wartością "(?P<value>(?:[^"]|\\")*)"$/]]></target>
             </trans-unit>
             <trans-unit id="i-fill-in-field-with">
                 <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with:$/]]></source>
-                <target><![CDATA[/^(?:|że )wypełnię pole "(?P<field>(?:[^"]|\\")*)" wartością:$/]]></target>
+                <target><![CDATA[/^wypełnię pole "(?P<field>(?:[^"]|\\")*)" wartością:$/]]></target>
             </trans-unit>
             <trans-unit id="i-fill-in-value-for-field">
                 <source><![CDATA[/^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)"$/]]></source>
-                <target><![CDATA[/^(?:|że )wpiszę "(?P<value>(?:[^"]|\\")*)" w polu "(?P<field>(?:[^"]|\\")*)"$/]]></target>
+                <target><![CDATA[/^wpiszę "(?P<value>(?:[^"]|\\")*)" w polu "(?P<field>(?:[^"]|\\")*)"$/]]></target>
             </trans-unit>
             <trans-unit id="i-fill-in-the-following">
                 <source><![CDATA[/^(?:|I )fill in the following:$/]]></source>
-                <target><![CDATA[/^(?:|że )wypełnię następujące pola:$/]]></target>
+                <target><![CDATA[/^wypełnię następujące pola:$/]]></target>
             </trans-unit>
             <trans-unit id="i-select-option-from-select">
                 <source><![CDATA[/^(?:|I )select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/]]></source>
-                <target><![CDATA[/^(?:|że )wybiorę opcję "(?P<option>(?:[^"]|\\")*)" w polu "(?P<select>(?:[^"]|\\")*)"$/]]></target>
+                <target><![CDATA[/^wybiorę opcję "(?P<option>(?:[^"]|\\")*)" w polu "(?P<select>(?:[^"]|\\")*)"$/]]></target>
             </trans-unit>
             <trans-unit id="i-additionally-select-option-from-select">
                 <source><![CDATA[/^(?:|I )additionally select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/]]></source>
-                <target><![CDATA[/^(?:|że )dodatkowo zaznaczę opcję "(?P<option>(?:[^"]|\\")*)" w polu "(?P<select>(?:[^"]|\\")*)"$/]]></target>
+                <target><![CDATA[/^dodatkowo zaznaczę opcję "(?P<option>(?:[^"]|\\")*)" w polu "(?P<select>(?:[^"]|\\")*)"$/]]></target>
             </trans-unit>
             <trans-unit id="i-check-option">
                 <source><![CDATA[/^(?:|I )check "(?P<option>(?:[^"]|\\")*)"$/]]></source>
-                <target><![CDATA[/^(?:|że )zaznaczę opcję "(?P<option>(?:[^"]|\\")*)"$/]]></target>
+                <target><![CDATA[/^zaznaczę opcję "(?P<option>(?:[^"]|\\")*)"$/]]></target>
             </trans-unit>
             <trans-unit id="i-uncheck-option">
                 <source><![CDATA[/^(?:|I )uncheck "(?P<option>(?:[^"]|\\")*)"$/]]></source>
-                <target><![CDATA[/^(?:|że )odznaczę opcję "(?P<option>(?:[^"]|\\")*)"$/]]></target>
+                <target><![CDATA[/^odznaczę opcję "(?P<option>(?:[^"]|\\")*)"$/]]></target>
             </trans-unit>
             <trans-unit id="i-attach-the-file-to-field">
                 <source><![CDATA[/^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/]]></source>
-                <target><![CDATA[/^(?:|że )załączę plik "(?P<path>[^"]*)" w polu "(?P<field>(?:[^"]|\\")*)"$/]]></target>
+                <target><![CDATA[/^załączę plik "(?P<path>[^"]*)" w polu "(?P<field>(?:[^"]|\\")*)"$/]]></target>
             </trans-unit>
             <trans-unit id="i-should-see-text">
                 <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-                <target><![CDATA[/^(?:|że )zobaczę tekst "(?P<text>(?:[^"]|\\")*)"$/]]></target>
+                <target><![CDATA[/^zobaczę tekst "(?P<text>(?:[^"]|\\")*)"$/]]></target>
             </trans-unit>
             <trans-unit id="i-should-see-text-matching">
                 <source><![CDATA[/^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
-                <target><![CDATA[/^(?:|że )zobaczę tekst pasujący do (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+                <target><![CDATA[/^zobaczę tekst pasujący do (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
             </trans-unit>
             <trans-unit id="i-should-not-see-text-matching">
                 <source><![CDATA[/^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
-                <target><![CDATA[/^(?:|że )nie zobaczę tekstu pasującego do (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
+                <target><![CDATA[/^nie zobaczę tekstu pasującego do (?P<pattern>"(?:[^"]|\\")*")$/]]></target>
             </trans-unit>
             <trans-unit id="the-response-should-contain">
                 <source><![CDATA[/^the response should contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
@@ -92,7 +92,7 @@
             </trans-unit>
             <trans-unit id="i-should-not-see-text">
                 <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-                <target><![CDATA[/^(?:|że )nie zobaczę tekstu "(?P<text>(?:[^"]|\\")*)"$/]]></target>
+                <target><![CDATA[/^nie zobaczę tekstu "(?P<text>(?:[^"]|\\")*)"$/]]></target>
             </trans-unit>
             <trans-unit id="the-response-should-not-contain">
                 <source><![CDATA[/^the response should not contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
@@ -128,11 +128,11 @@
             </trans-unit>
             <trans-unit id="i-should-be-on-page">
                 <source><![CDATA[/^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>
-                <target><![CDATA[/^(?:|że )powinienem być na stronie "(?P<page>[^"]+)"$/]]></target>
+                <target><![CDATA[/^powinienem być na stronie "(?P<page>[^"]+)"$/]]></target>
             </trans-unit>
             <trans-unit id="i-should-be-on-homepage">
                 <source><![CDATA[/^(?:|I )should be on (?:|the )homepage$/]]></source>
-                <target><![CDATA[/^(?:|że )powinienem być na stronie głównej/]]></target>
+                <target><![CDATA[/^powinienem być na stronie głównej/]]></target>
             </trans-unit>
             <trans-unit id="the-url-should-match">
                 <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
@@ -148,23 +148,23 @@
             </trans-unit>
             <trans-unit id="i-should-see-text-in-element">
                 <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
-                <target><![CDATA[/^(?:|że )powinienem widzieć "(?P<text>(?:[^"]|\\")*)" wewnątrz elementu "(?P<element>[^"]*)"$/]]></target>
+                <target><![CDATA[/^powinienem widzieć "(?P<text>(?:[^"]|\\")*)" wewnątrz elementu "(?P<element>[^"]*)"$/]]></target>
             </trans-unit>
             <trans-unit id="i-should-not-see-text-in-element">
                 <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
-                <target><![CDATA[/^(?:|że )nie powinienem widzieć "(?P<text>(?:[^"]|\\")*)" wewnątrz elementu "(?P<element>[^"]*)"$/]]></target>
+                <target><![CDATA[/^nie powinienem widzieć "(?P<text>(?:[^"]|\\")*)" wewnątrz elementu "(?P<element>[^"]*)"$/]]></target>
             </trans-unit>
             <trans-unit id="i-should-see-element">
                 <source><![CDATA[/^(?:|I )should see an? "(?P<element>[^"]*)" element$/]]></source>
-                <target><![CDATA[/^(?:|że )powinienem widzieć element "(?P<element>[^"]*)"$/]]></target>
+                <target><![CDATA[/^powinienem widzieć element "(?P<element>[^"]*)"$/]]></target>
             </trans-unit>
             <trans-unit id="i-should-not-see-element">
                 <source><![CDATA[/^(?:|I )should not see an? "(?P<element>[^"]*)" element$/]]></source>
-                <target><![CDATA[/^(?:|że )nie powinienem widzieć elementu "(?P<element>[^"]*)"$/]]></target>
+                <target><![CDATA[/^nie powinienem widzieć elementu "(?P<element>[^"]*)"$/]]></target>
             </trans-unit>
             <trans-unit id="i-should-see-num-elements">
                 <source><![CDATA[/^(?:|I )should see (?P<num>\d+) "(?P<element>[^"]*)" elements?$/]]></source>
-                <target><![CDATA[/^(?:|że )powinienem widzieć (?P<num>\d+) element(y|ów)? "(?P<element>[^"]*)"$/]]></target>
+                <target><![CDATA[/^powinienem widzieć (?P<num>\d+) element(y|ów)? "(?P<element>[^"]*)"$/]]></target>
             </trans-unit>
             <trans-unit id="the-response-status-code-should-be">
                 <source><![CDATA[/^the response status code should be (?P<code>\d+)$/]]></source>

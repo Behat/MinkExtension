@@ -178,7 +178,7 @@ Drivers
 ~~~~~~~
 
 First of all, there are drivers enabling configuration. MinkExtension comes
-with support for 6 drivers out of the box:
+with support for 7 drivers out of the box:
 
 * ``GoutteDriver`` - headless driver without JavaScript support. In order to use
   it, modify your ``behat.yml`` profile:
@@ -308,7 +308,7 @@ with support for 6 drivers out of the box:
 
     - GoutteDriver - ``behat/mink-goutte-driver``
     - SeleniumDriver - ``behat/mink-selenium-driver``
-    - Selenium2Driver (also used for Saucelabs) - ``behat/mink-selenium2-driver``
+    - Selenium2Driver (also used for SauceLabs and BrowserStack) - ``behat/mink-selenium2-driver``
     - SahiDriver - ``behat/mink-sahi-driver``
     - ZombieDriver - ``behat/mink-zombie-driver``
 

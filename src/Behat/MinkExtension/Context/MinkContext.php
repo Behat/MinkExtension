@@ -508,8 +508,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Prints last response to console
-     * Example: Then print current response
-     * Example: And print current response
+     * Example: Then print last response
+     * Example: And print last response
      *
      * @Then /^print last response$/
      */

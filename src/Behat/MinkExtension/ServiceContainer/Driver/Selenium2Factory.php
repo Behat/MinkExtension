@@ -57,6 +57,12 @@ class Selenium2Factory implements DriverFactory
             ));
         }
 
+        // Allow custom class to extend Selenium2Driver.
+        $driverClass ='Behat\Mink\Driver\Selenium2Driver';
+        if (isset($config['class']) && class_exists($config['class'])) {
+            $driverClass = $config['class'];
+        }
+
         $extraCapabilities = $config['capabilities']['extra_capabilities'];
         unset($config['capabilities']['extra_capabilities']);
 
@@ -78,7 +84,7 @@ class Selenium2Factory implements DriverFactory
             );
         }
 
-        return new Definition('Behat\Mink\Driver\Selenium2Driver', array(
+        return new Definition($driverClass, array(
             $config['browser'],
             array_replace($guessedCapabilities, $extraCapabilities, $config['capabilities']),
             $config['wd_host'],

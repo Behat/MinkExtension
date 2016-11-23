@@ -12,6 +12,7 @@ namespace Behat\MinkExtension\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Mink;
+use Behat\Testwork\Hook\HookDispatcher;
 
 /**
  * Mink aware interface for contexts.
@@ -33,4 +34,11 @@ interface MinkAwareContext extends Context
      * @param array $parameters
      */
     public function setMinkParameters(array $parameters);
+
+    /**
+     * Sets event dispatcher.
+     *
+     * @param HookDispatcher $dispatcher The dispatcher.
+     */
+    public function setDispatcher(HookDispatcher $dispatcher);
 }

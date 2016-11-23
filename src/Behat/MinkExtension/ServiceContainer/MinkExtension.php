@@ -199,6 +199,7 @@ class MinkExtension implements ExtensionInterface
         $definition = new Definition('Behat\MinkExtension\Context\Initializer\MinkAwareInitializer', array(
             new Reference(self::MINK_ID),
             '%mink.parameters%',
+            new Reference('hook.dispatcher'),
         ));
         $definition->addTag(ContextExtension::INITIALIZER_TAG, array('priority' => 0));
         $container->setDefinition('mink.context_initializer', $definition);

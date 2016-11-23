@@ -13,6 +13,7 @@ namespace Behat\MinkExtension\Context;
 use Behat\Mink\Mink;
 use Behat\Mink\WebAssert;
 use Behat\Mink\Session;
+use Behat\Testwork\Hook\HookDispatcher;
 
 /**
  * Raw Mink context for Behat BDD tool.
@@ -24,6 +25,7 @@ class RawMinkContext implements MinkAwareContext
 {
     private $mink;
     private $minkParameters;
+    private $dispatcher;
 
     /**
      * Sets Mink instance.
@@ -109,6 +111,15 @@ class RawMinkContext implements MinkAwareContext
     }
 
     /**
+     * Sets event dispatcher.
+     *
+     * @param HookDispatcher $dispatcher The dispatcher.
+     */
+    public function setDispatcher(HookDispatcher $dispatcher) {
+        $this->dispatcher = $dispatcher;
+    }
+
+    /**
      * Returns Mink session assertion tool.
      *
      * @param string|null $name name of the session OR active session will be used
@@ -128,7 +139,10 @@ class RawMinkContext implements MinkAwareContext
      */
     public function visitPath($path, $sessionName = null)
     {
-        $this->getSession($sessionName)->visit($this->locatePath($path));
+        $session = $this->getSession($sessionName);
+        $this->dispatchRequestHooks($session, $path, 'before');
+        $session->visit($this->locatePath($path));
+        $this->dispatchRequestHooks($session, $path, 'after');
     }
 
     /**
@@ -161,5 +175,32 @@ class RawMinkContext implements MinkAwareContext
         $filename = $filename ?: sprintf('%s_%s_%s.%s', $this->getMinkParameter('browser_name'), date('c'), uniqid('', true), 'png');
         $filepath = $filepath ?: (ini_get('upload_tmp_dir') ? ini_get('upload_tmp_dir') : sys_get_temp_dir());
         file_put_contents($filepath . '/' . $filename, $this->getSession()->getScreenshot());
+    }
+
+    /**
+     * Dispatch request scope hooks.
+     *
+     * @param Session $session The Mink session that performed the request.
+     * @param string  $path    The path being requested.
+     * @param string  $type    The type of request hook to dispatch. Either
+     *                         'before' or 'after'.
+     *
+     * @throws \Exception Exceptions caught during execution of the scope hooks
+     *                    will be thrown here.
+     */
+    protected function dispatchRequestHooks(Session $session, $path, $type) {
+        $class = 'Behat\\MinkExtension\\Hook\\Scope\\' . ucfirst($type) . 'RequestScope';
+        $scope = new $class($this->getMink(), $session, $path);
+        $results = $this->dispatcher->dispatchScopeHooks($scope);
+
+        // The dispatcher suppresses exceptions, throw them here if there are
+        // any.
+        /** @var \Behat\TestWork\Call\CallResult $result */
+        foreach ($results as $result) {
+            if ($result->hasException()) {
+                $exception = $result->getException();
+                throw $exception;
+            }
+        }
     }
 }

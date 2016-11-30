@@ -100,6 +100,15 @@ class Extension implements ExtensionInterface
 
             $loader->load('sessions/saucelabs.xml');
         }
+        if (isset($config['browserstack'])) {
+            if (!class_exists('Behat\\Mink\\Driver\\Selenium2Driver')) {
+                throw new \RuntimeException(
+                    'Install MinkSelenium2Driver in order to activate browserstack session.'
+                );
+            }
+
+            $loader->load('sessions/browserstack.xml');
+        }
 
         $minkParameters = array();
         foreach ($config as $ns => $tlValue) {
@@ -139,6 +148,26 @@ class Extension implements ExtensionInterface
 
             $container->setParameter('behat.mink.saucelabs.wd_host', sprintf(
                 '%s:%s@%s/wd/hub', $username, $accessKey, $host
+            ));
+        }
+
+        if (isset($config['browserstack'])) {
+            $capabilities = $container->getParameter('behat.mink.browserstack.capabilities');
+
+            if (!isset($capabilities['browserstack-tunnel'])) {
+                $capabilities['browserstack-tunnel'] = $config['browserstack']['tunnel'];
+            }
+            if (!isset($capabilities['browserstack-debug'])) {
+                $capabilities['browserstack-debug'] = $config['browserstack']['debug'];
+            }
+
+            $container->setParameter('behat.mink.browserstack.capabilities', $capabilities);
+
+            $username = $config['browserstack']['username'];
+            $accessKey = $config['browserstack']['access_key'];
+
+            $container->setParameter('behat.mink.browserstack.wd_host', sprintf(
+                "http://%s:%s@hub.browserstack.com/wd/hub", $username, $accessKey
             ));
         }
 
@@ -399,6 +428,56 @@ class Extension implements ExtensionInterface
                                 end()->
                                 scalarNode('deviceOrientation')->
                                     defaultValue(isset($config['saucelabs']['deviceOrientation']) ? $config['saucelabs']['deviceOrientation'] : null)->
+                                end()->
+                            end()->
+                        end()->
+                    end()->
+                end()->
+                arrayNode('browserstack')->
+                    children()->
+                        scalarNode('username')->
+                            defaultValue(getenv('BROWSERSTACK_USERNAME'))->
+                        end()->
+                        scalarNode('access_key')->
+                            defaultValue(getenv('BROWSERSTACK_ACCESS_KEY'))->
+                        end()->
+                        scalarNode('browser')->
+                            defaultValue(isset($config['browserstack']['browser']) ? $config['browserstack']['browser'] : 'firefox')->
+                        end()->
+                        scalarNode('tunnel')->
+                            defaultValue(isset($config['browserstack']['tunnel']) ? $config['browserstack']['tunnel'] : 'false')->
+                        end()->
+                        scalarNode('debug')->
+                            defaultValue(isset($config['browserstack']['debug']) ? $config['browserstack']['debug'] : 'false')->
+                        end()->
+                        arrayNode('capabilities')->
+                            children()->
+                                scalarNode('name')->
+                                    defaultValue(isset($config['browserstack']['name']) ? $config['browserstack']['name'] : 'Behat feature suite')->
+                                end()->
+                                scalarNode('project')->
+                                    defaultValue(isset($config['browserstack']['project']) ? $config['browserstack']['project'] : null)->
+                                end()->
+                                scalarNode('build')->
+                                    defaultValue(isset($config['browserstack']['build']) ? $config['browserstack']['build'] : null)->
+                                end()->
+                                scalarNode('platform')->
+                                    defaultValue(isset($config['browserstack']['platform']) ? $config['browserstack']['platform'] : 'Linux')->
+                                end()->
+                                scalarNode('version')->
+                                    defaultValue(isset($config['browserstack']['version']) ? $config['browserstack']['version'] : '21')->
+                                end()->
+                                scalarNode('os')->
+                                    defaultValue(isset($config['browserstack']['os']) ? $config['browserstack']['os'] : null)->
+                                end()->
+                                scalarNode('os_version')->
+                                    defaultValue(isset($config['browserstack']['os_version']) ? $config['browserstack']['os_version'] : null)->
+                                end()->
+                                scalarNode('device')->
+                                    defaultValue(isset($config['browserstack']['device']) ? $config['browserstack']['device'] : null)->
+                                end()->
+                                scalarNode('acceptSslCerts')->
+                                    defaultValue(isset($config['browserstack']['acceptSslCerts']) ? $config['browserstack']['acceptSslCerts'] : null)->
                                 end()->
                             end()->
                         end()->

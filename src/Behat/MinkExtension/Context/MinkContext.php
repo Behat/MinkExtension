@@ -213,6 +213,9 @@ class MinkContext extends RawMinkContext implements TranslatableContext
             if (is_file($fullPath)) {
                 $path = $fullPath;
             }
+            else {
+                throw new \Exception(sprintf('"The file "%s" was not found in "%s" folder.', $path, $this->getMinkParameter('files_path')));
+            }
         }
 
         $this->getSession()->getPage()->attachFileToField($field, $path);

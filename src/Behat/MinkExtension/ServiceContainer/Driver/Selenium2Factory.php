@@ -103,6 +103,7 @@ class Selenium2Factory implements DriverFactory
                 ->scalarNode('name')->defaultValue('Behat feature suite')->end()
                 ->scalarNode('deviceOrientation')->end()
                 ->scalarNode('deviceType')->end()
+                ->scalarNode('device')->end()
                 ->booleanNode('javascriptEnabled')->end()
                 ->booleanNode('databaseEnabled')->end()
                 ->booleanNode('locationContextEnabled')->end()

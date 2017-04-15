@@ -271,6 +271,7 @@ class Extension implements ExtensionInterface
                             defaultValue(isset($config['selenium2']['browser']) ? $config['selenium2']['browser'] : '%behat.mink.browser_name%')->
                         end()->
                         arrayNode('capabilities')->
+                            normalizeKeys(false)->
                             children()->
                                 scalarNode('browserName')->
                                     defaultValue(isset($config['selenium2']['capabilities']['browserName']) ? $config['selenium2']['capabilities']['browserName'] : 'firefox')->

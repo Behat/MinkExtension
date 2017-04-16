@@ -286,6 +286,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And I should see "Who is the Batman?"
      *
      * @Then /^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/
+     * @Then /^I should see \'(?P<text>[^\']*)\'$/
      */
     public function assertPageContainsText($text)
     {

@@ -249,7 +249,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then the uri should match "log in"
      * Example: And the url should match "log in"
      *
-     * @Then /^the (?i)url(?-i) should match (?P<pattern>"(?:[^"]|\\")*")$/
+     * @Then /^the (?i)url(?-i) should match "(?P<pattern>(?:[^"]|\\")*)"$/
      */
     public function assertUrlRegExp($pattern)
     {
@@ -309,7 +309,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then I should see text matching "Batman, the vigilante"
      * Example: And I should not see "Batman, the vigilante"
      *
-     * @Then /^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/
+     * @Then /^(?:|I )should see text matching "(?P<pattern>(?:[^"]|\\")*)"$/
      */
     public function assertPageMatchesText($pattern)
     {
@@ -321,7 +321,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: Then I should see text matching "Bruce Wayne, the vigilante"
      * Example: And I should not see "Bruce Wayne, the vigilante"
      *
-     * @Then /^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/
+     * @Then /^(?:|I )should not see text matching "(?P<pattern>(?:[^"]|\\")*)"$/
      */
     public function assertPageNotMatchesText($pattern)
     {

@@ -93,6 +93,7 @@ class Selenium2Factory implements DriverFactory
             ->addDefaultsIfNotSet()
             ->normalizeKeys(false)
             ->children()
+                ->scalarNode('unexpectedAlertBehavior')->defaultValue('ignore')->end()
                 ->scalarNode('browserName')->end()
                 ->scalarNode('version')->end()
                 ->scalarNode('platform')->end()

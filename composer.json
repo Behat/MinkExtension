@@ -1,5 +1,5 @@
 {
-    "name": "behat/mink-extension",
+    "name": "gforces-pl/mink-extension",
     "type": "behat-extension",
     "description": "Mink extension for Behat",
     "keywords": ["web", "test", "browser", "gui"],

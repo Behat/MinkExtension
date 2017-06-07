@@ -28,8 +28,7 @@
   },
   "require-dev": {
     "phpspec/phpspec": "~2.0",
-    "behat/mink-goutte-driver": "~1.1",
-    "internations/http-mock": "^0.10.0"
+    "behat/mink-goutte-driver": "~1.1"
   },
   "autoload": {
     "psr-0": {

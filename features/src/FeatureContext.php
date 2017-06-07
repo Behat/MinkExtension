@@ -4,7 +4,6 @@ namespace Behat\MinkExtension\Tests;
 
 use Behat\Mink\Exception\ExpectationException;
 use Behat\MinkExtension\Context\RawMinkContext;
-use InterNations\Component\HttpMock\PHPUnit\HttpMockTrait;
 
 /**
  * Feature context for testing advanced scenarios.
@@ -12,48 +11,12 @@ use InterNations\Component\HttpMock\PHPUnit\HttpMockTrait;
 class FeatureContext extends RawMinkContext
 {
 
-    use HttpMockTrait;
-
-    /**
-     * @BeforeScenario
-     */
-    public function setUp()
-    {
-        static::setUpHttpMockBeforeClass('8082', 'localhost');
-        $this->setUpHttpMock();
-
-        $this->http->mock->when()
-          ->methodIs('GET')
-          ->pathIs('/foo')
-          ->then()
-          ->body('Request body')
-          ->end();
-        $this->http->setUp();
-    }
-
-    /**
-     * @AfterScenario
-     */
-    public function tearDown()
-    {
-        static::tearDownHttpMockAfterClass();
-        $this->tearDownHttpMock();
-    }
-
     /**
      * @BeforeScenario @MockXdebug
      */
     public function setUpXdebugMock()
     {
         $_SERVER['XDEBUG_CONFIG'] = 'xdebug';
-    }
-
-    /**
-     * Mocking the phpunit assertion as it is used by HttpMockTrait.
-     */
-    public static function assertSame($message, $argument_1, $argument_2)
-    {
-        return $argument_1 !== $argument_2;
     }
 
     /**

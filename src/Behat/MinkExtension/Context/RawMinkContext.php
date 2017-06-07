@@ -25,6 +25,19 @@ class RawMinkContext implements MinkAwareContext
     private $mink;
     private $minkParameters;
 
+
+    /**
+     * Currently supports PHPSTORM.
+     *
+     * @beforeScenario
+     */
+    public function setUpXdebugIfIdeIsConfigured()
+    {
+        if (isset($_SERVER['XDEBUG_CONFIG'])) {
+            $this->getSession()->setCookie('XDEBUG_SESSION', 'xdebug');
+        }
+    }
+
     /**
      * Sets Mink instance.
      *

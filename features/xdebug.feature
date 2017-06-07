@@ -5,13 +5,9 @@ Feature: Xdebug
 
   Scenario: Xdebug cookie should not be present on normal requests
     Given I am on "/foo"
-    Then I should not have the "XDEBUG_SESSION_START" cookie
+    Then I should not have the "XDEBUG_SESSION" cookie
 
-  @xdebug
+  @MockXdebug
   Scenario: Xdebug cookie should be passed on to requests
     Given I am on "/foo"
-    Then I should have the "XDEBUG_SESSION_START" cookie with value "xdebug"
-
-  Scenario: When running php with xdebug from the command line the cookie should be set
-    Given I am on "/foo"
-    Then I should have the "XDEBUG_SESSION_START" cookie with value "xdebug"
+    Then I should have the "XDEBUG_SESSION" cookie with value "xdebug"

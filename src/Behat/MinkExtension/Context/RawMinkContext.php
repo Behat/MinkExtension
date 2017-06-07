@@ -25,7 +25,6 @@ class RawMinkContext implements MinkAwareContext
     private $mink;
     private $minkParameters;
 
-
     /**
      * Currently supports PHPSTORM.
      *

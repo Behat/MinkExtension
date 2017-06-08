@@ -2,5 +2,4 @@
 *.phar
 composer.lock
 vendor
-.idea
 behat.yml

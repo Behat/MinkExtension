@@ -22,30 +22,19 @@ class FeatureContext extends RawMinkContext
     /**
      * @Then /^I should have the "([^"]*)" cookie with value "([^"]*)"$/
      */
-    public function iShouldHaveTheCookieWithValue($cookie_name, $cookie_expected_value) {
-        if ($cookie_real_value = $this->getSession()->getCookie($cookie_name)) {
-            if ($cookie_real_value !== $cookie_expected_value) {
-                throw new ExpectationException(
-                  'The cookie with name ' . $cookie_name . ' was found, but does not contain ' . $cookie_real_value . ', yet it contains ' . $cookie_expected_value . '.',
-                  $this->getSession()
-                );
-            }
-        } else {
-            throw new ExpectationException(
-              'The cookie with name ' . $cookie_name . ' was not found',
-              $this->getSession()
-            );
-        }
+    public function iShouldHaveTheCookieWithValue($cookieName, $cookieExpectedValue)
+    {
+        $this->assertSession()->cookieEquals($cookieName, $cookieExpectedValue);
     }
 
     /**
      * @Then /^I should not have the "([^"]*)" cookie$/
      */
-    public function iShouldNotHaveTheCookie($cookie_name)
+    public function iShouldNotHaveTheCookie($cookieName)
     {
-        if ($cookie_real_value = $this->getSession()->getCookie($cookie_name)) {
+        if ($this->getSession()->getCookie($cookieName)) {
             throw new ExpectationException(
-              'The cookie with name ' . $cookie_name . ' was not found, but it should not be present.',
+              'The cookie with name ' . $cookieName . ' was not found, but it should not be present.',
               $this->getSession()
             );
         }

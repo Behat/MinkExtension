@@ -44,6 +44,10 @@ class ZombieFactory implements DriverFactory
                 ->scalarNode('server_path')->defaultNull()->end()
                 ->scalarNode('threshold')->defaultValue(2000000)->end()
                 ->scalarNode('node_modules_path')->defaultValue('')->end()
+                ->arrayNode('options')
+                  ->prototype('scalar')->end()
+                  ->defaultValue(array())
+                  ->end()
             ->end()
         ;
     }
@@ -67,6 +71,7 @@ class ZombieFactory implements DriverFactory
                 $config['server_path'],
                 $config['threshold'],
                 $config['node_modules_path'],
+                $config['options'],
             )),
         ));
     }

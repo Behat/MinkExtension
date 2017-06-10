@@ -198,7 +198,7 @@ with support for 7 drivers out of the box:
   the following parameters to avoid the validation error triggered by Guzzle:
 
   * For ``Guzzle 4`` or later:
-  
+
       .. code-block:: yaml
 
           default:
@@ -209,9 +209,9 @@ with support for 7 drivers out of the box:
                               goutte:
                                   guzzle_parameters:
                                       verify: false
-  
+
   * For ``Guzzle 3`` or earlier:
-  
+
       .. code-block:: yaml
 
           default:
@@ -298,6 +298,9 @@ with support for 7 drivers out of the box:
                             zombie:
                                 # Specify the path to the node_modules directory.
                                 node_modules_path: /usr/local/lib/node_modules/
+                            options:
+                                # Optionally specify zombie specific options like:
+                                waitDuration: '5s'
 
 .. note::
 

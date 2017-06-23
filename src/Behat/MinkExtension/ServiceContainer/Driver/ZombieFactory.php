@@ -45,9 +45,9 @@ class ZombieFactory implements DriverFactory
                 ->scalarNode('threshold')->defaultValue(2000000)->end()
                 ->scalarNode('node_modules_path')->defaultValue('')->end()
                 ->arrayNode('options')
-                  ->prototype('scalar')->end()
-                  ->defaultValue(array())
-                  ->end()
+                    ->useAttributeAsKey('name')
+                    ->prototype('scalar')->end()
+                    ->end()
             ->end()
         ;
     }

@@ -68,7 +68,7 @@ class Selenium2Factory implements DriverFactory
                 'tags' => array('Travis-CI', 'PHP '.phpversion())
             );
 
-            if ($config['tunnel_autodiscovery']) {
+            if (isset($config['tunnel_autodiscovery']) && $config['tunnel_autodiscovery']) {
                 $guessedCapabilities['tunnel-identifier'] = getenv('TRAVIS_JOB_NUMBER');
             }
 
@@ -78,7 +78,7 @@ class Selenium2Factory implements DriverFactory
                 'tags' => array('Jenkins', 'PHP '.phpversion(), getenv('BUILD_TAG'))
             );
 
-            if ($config['tunnel_autodiscovery']) {
+            if (isset($config['tunnel_autodiscovery']) && $config['tunnel_autodiscovery']) {
                 $guessedCapabilities['tunnel-identifier'] = getenv('JOB_NAME');
             }
 

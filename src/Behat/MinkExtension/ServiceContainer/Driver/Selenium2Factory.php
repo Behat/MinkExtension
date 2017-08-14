@@ -41,6 +41,7 @@ class Selenium2Factory implements DriverFactory
                 ->scalarNode('browser')->defaultValue('%mink.browser_name%')->end()
                 ->append($this->getCapabilitiesNode())
                 ->scalarNode('wd_host')->defaultValue('http://localhost:4444/wd/hub')->end()
+                ->booleanNode('tunnel_autodiscovery')->defaultTrue()->end()
             ->end()
         ;
     }
@@ -61,17 +62,26 @@ class Selenium2Factory implements DriverFactory
         unset($config['capabilities']['extra_capabilities']);
 
         if (getenv('TRAVIS_JOB_NUMBER')) {
+
             $guessedCapabilities = array(
-                'tunnel-identifier' => getenv('TRAVIS_JOB_NUMBER'),
                 'build' => getenv('TRAVIS_BUILD_NUMBER'),
-                'tags' => array('Travis-CI', 'PHP '.phpversion()),
+                'tags' => array('Travis-CI', 'PHP '.phpversion())
             );
+
+            if ($config['tunnel_autodiscovery']) {
+                $guessedCapabilities['tunnel-identifier'] = getenv('TRAVIS_JOB_NUMBER');
+            }
+
         } elseif (getenv('JENKINS_HOME')) {
             $guessedCapabilities = array(
-                'tunnel-identifier' => getenv('JOB_NAME'),
                 'build' => getenv('BUILD_NUMBER'),
-                'tags' => array('Jenkins', 'PHP '.phpversion(), getenv('BUILD_TAG')),
+                'tags' => array('Jenkins', 'PHP '.phpversion(), getenv('BUILD_TAG'))
             );
+
+            if ($config['tunnel_autodiscovery']) {
+                $guessedCapabilities['tunnel-identifier'] = getenv('JOB_NAME');
+            }
+
         } else {
             $guessedCapabilities = array(
                 'tags' => array(php_uname('n'), 'PHP '.phpversion()),

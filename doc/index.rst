@@ -347,3 +347,6 @@ There's other useful parameters, that you can use to configure your suite:
   name.
 * ``mink_loader`` - path to a file loaded to make Mink available (useful when
   using the PHAR archive for Mink, useless when using Composer)
+* ``tunnel_autodiscovery`` - If Jenkins is having issues connecting to Sauce Labs,
+  it is probably because the tunnel-identifier is getting set to a bad value.
+  Set this to false to bypass autodiscovery of tunnel-identifier.

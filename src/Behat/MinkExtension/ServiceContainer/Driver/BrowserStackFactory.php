@@ -63,6 +63,9 @@ class BrowserStackFactory extends Selenium2Factory
                 ->booleanNode('browserstack-tunnel')->end()
                 ->booleanNode('emulator')->end()
                 ->booleanNode('acceptSslCert')->end()
+            	->scalarNode('realMobile')->end() // Support latest Browser Stack Funcitionality
+				->booleanNode('browserstack-ie-enablePopups')->end() // Support latest Browser Stack Funcitionality
+				->booleanNode('browserstack-safari-enablePopups')->end() // Support latest Browser Stack Funcitionality
             ->end()
         ;
 

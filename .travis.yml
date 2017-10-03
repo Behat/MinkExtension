@@ -9,11 +9,13 @@ cache:
 php:
   - 5.6
   - hhvm
+  - 7.0
+  - 7.1
 
 matrix:
   include:
     - php: 5.6
-      env: SYMFONY_VERSION='2.3.*'
+      env: SYMFONY_VERSION='2.8.*'
     # Test against dev dependencies
     - php: 5.6
       env: DEPS=dev

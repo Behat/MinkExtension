@@ -59,6 +59,7 @@ class BrowserStackFactory extends Selenium2Factory
                 ->scalarNode('os')->end()
                 ->scalarNode('os_version')->end()
                 ->scalarNode('device')->end()
+                ->integerNode('browserstack-idleTimeout')->end()
                 ->booleanNode('browserstack-debug')->end()
                 ->booleanNode('browserstack-tunnel')->end()
                 ->booleanNode('emulator')->end()

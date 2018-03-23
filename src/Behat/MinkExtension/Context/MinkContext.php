@@ -199,8 +199,8 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Attaches file to field with specified id|name|label|value
-     * Example: When I attach "bwayne_profile.png" to "profileImageUpload"
-     * Example: And I attach "bwayne_profile.png" to "profileImageUpload"
+     * Example: When I attach the file "bwayne_profile.png" to "profileImageUpload"
+     * Example: And I attach the file "bwayne_profile.png" to "profileImageUpload"
      *
      * @When /^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/
      */

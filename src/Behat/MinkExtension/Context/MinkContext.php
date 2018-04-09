@@ -430,6 +430,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      * Example: And the "username" field should contain "bwayne"
      *
      * @Then /^the "(?P<field>(?:[^"]|\\")*)" field should contain "(?P<value>(?:[^"]|\\")*)"$/
+     * @Then /^the "(?P<field>(?:[^"]|\\")*)" field should contain:$/
      */
     public function assertFieldContains($field, $value)
     {

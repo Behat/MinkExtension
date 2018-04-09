@@ -235,6 +235,42 @@ with support for 7 drivers out of the box:
                         my_session:
                             selenium2: ~
 
+
+  .. Tips : HTTPS and self-signed certificate
+  If you use Behat/Mink/Selenium2 to test your application, and want to test an
+  application secured with HTTPS, but with a self-signed certificate, you can use
+  the following parameters to avoid the validation error:
+
+  * For ``Firefox``:
+  
+      .. code-block:: yaml
+
+          default:
+              extensions:
+                  Behat\MinkExtension:
+                    sessions:
+                        my_session:
+                            selenium2:
+                              browser: firefox
+                              capabilities: { "browserName": "firefox", "browser": "firefox", "version":  "", "acceptInsecureCerts" : true}
+
+
+  * For ``Chrome``:
+  
+      .. code-block:: yaml
+
+          default:
+              extensions:
+                  Behat\MinkExtension:
+                    sessions:
+                        my_session:
+                            selenium2:
+                              browser: chrome
+                              capabilities: { "browserName": "chrome", "browser": "chrome", "version":  "", "acceptInsecureCerts" : true}
+
+
+
+
 * ``SauceLabsDriver`` - special flavor of the Selenium2Driver configured to use the
   selenium2 hosted installation of saucelabs.com. In order to use it, modify your
   ``behat.yml`` profile:

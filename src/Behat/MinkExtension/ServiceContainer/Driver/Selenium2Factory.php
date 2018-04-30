@@ -62,19 +62,19 @@ class Selenium2Factory implements DriverFactory
 
         if (getenv('TRAVIS_JOB_NUMBER')) {
             $guessedCapabilities = array(
-                'tunnel-identifier' => getenv('TRAVIS_JOB_NUMBER'),
-                'build' => getenv('TRAVIS_BUILD_NUMBER'),
-                'tags' => array('Travis-CI', 'PHP '.phpversion()),
+                'tunnel-identifier' => $this->escapeForSymfonyDi(getenv('TRAVIS_JOB_NUMBER')),
+                'build' => $this->escapeForSymfonyDi(getenv('TRAVIS_BUILD_NUMBER')),
+                'tags' => array('Travis-CI', $this->escapeForSymfonyDi('PHP '.phpversion())),
             );
         } elseif (getenv('JENKINS_HOME')) {
             $guessedCapabilities = array(
-                'tunnel-identifier' => getenv('JOB_NAME'),
-                'build' => getenv('BUILD_NUMBER'),
-                'tags' => array('Jenkins', 'PHP '.phpversion(), getenv('BUILD_TAG')),
+                'tunnel-identifier' => $this->escapeForSymfonyDi(getenv('JOB_NAME')),
+                'build' => $this->escapeForSymfonyDi(getenv('BUILD_NUMBER')),
+                'tags' => array('Jenkins', $this->escapeForSymfonyDi('PHP '.phpversion()), $this->escapeForSymfonyDi(getenv('BUILD_TAG'))),
             );
         } else {
             $guessedCapabilities = array(
-                'tags' => array(php_uname('n'), 'PHP '.phpversion()),
+                'tags' => array($this->escapeForSymfonyDi(php_uname('n')), $this->escapeForSymfonyDi('PHP '.phpversion())),
             );
         }
 
@@ -157,5 +157,14 @@ class Selenium2Factory implements DriverFactory
             ->end();
 
         return $node;
+    }
+
+    /**
+     * @param string $getenv
+     * @param string
+     */
+    private function escapeForSymfonyDi($getenv)
+    {
+        return str_replace('%', '%%', $getenv);
     }
 }

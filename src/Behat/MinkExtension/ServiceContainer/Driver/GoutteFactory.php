@@ -53,6 +53,7 @@ class GoutteFactory implements DriverFactory
                         'For Goutte 2.x, these are the elements passed in the "defaults" key of the Guzzle4 config.'
                     )
                 ->end()
+                ->scalarNode('follow_meta_refresh')->defaultFalse()->end()
             ->end()
         ;
     }
@@ -80,6 +81,7 @@ class GoutteFactory implements DriverFactory
             $config['server_parameters'],
         ));
         $clientDefinition->addMethodCall('setClient', array($guzzleClient));
+        $clientDefinition->addMethodCall('followMetaRefresh', array($config['follow_meta_refresh']));
 
         return new Definition('Behat\Mink\Driver\GoutteDriver', array(
             $clientDefinition,

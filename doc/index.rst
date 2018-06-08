@@ -174,6 +174,12 @@ session using a non-javascript driver if any, or to the first javascript session
 otherwise (it would be ``second_session`` above as ``goutte`` does not support
 javascript).
 
+MinkExtension isolates sessions between scenarios by calling Mink ``resetSessions()`` 
+before each scenario. To achieve more isolation between scenarios, tag the scenario 
+or overall feature with the ``@insulated`` tag and Mink ``stopSessions()`` will be
+called before each scenario instead. This provides improved isolation at the cost
+of more time taken to stop existing sessions and start new sessions.
+
 Drivers
 ~~~~~~~
 

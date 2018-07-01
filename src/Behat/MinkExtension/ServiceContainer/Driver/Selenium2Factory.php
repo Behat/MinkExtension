@@ -111,6 +111,7 @@ class Selenium2Factory implements DriverFactory
                 ->booleanNode('webStorageEnabled')->end()
                 ->booleanNode('rotatable')->end()
                 ->booleanNode('acceptSslCerts')->end()
+                ->booleanNode('acceptInsecureCerts')->end()
                 ->booleanNode('nativeEvents')->end()
                 ->booleanNode('overlappingCheckDisabled')->end()
                 ->arrayNode('proxy')

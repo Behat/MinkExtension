@@ -515,7 +515,7 @@ class MinkContext extends RawMinkContext implements TranslatableContext
      */
     public function printLastResponse()
     {
-        echo $this->getSession()->getCurrentUrl() . PHP_EOL . PHP_EOL
+        echo $this->getSession()->getCurrentUrl() . "\n\n"
             . $this->getSession()->getPage()->getContent();
     }
 

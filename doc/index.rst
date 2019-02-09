@@ -2,8 +2,8 @@ Mink Extension
 ==============
 
 You can use Behat to describe anything, that you can describe in business
-logic. It’s tools, gui applications, web applications. Most interesting part
-is web applications. First, behavioral testing already exists in web world -
+logic. It’s tools, gui applications, web applications. The most interesting part
+is web applications. First, behavioral testing already exists in the web world -
 it’s called functional or acceptance testing. Almost all popular frameworks
 and languages provide functional testing tools. Today we’ll talk about how to
 use Behat for functional testing of web applications. `Mink <http://mink.behat.org>`_
@@ -13,7 +13,7 @@ Basically, MinkExtension is an integration layer between Behat 3.0+ and Mink 1.4
 and it provides:
 
 * Additional services for Behat (``Mink``, ``Sessions``, ``Drivers``).
-* ``Behat\MinkExtension\Context\MinkAwareContext`` which provides ``Mink``
+* ``Behat\MinkExtension\Context\MinkAwareContext`` which provides a ``Mink``
   instance for your contexts.
 * Base ``Behat\MinkExtension\Context\MinkContext`` context which provides base
   step definitions and hooks for your contexts or subcontexts. Or it could be
@@ -38,7 +38,7 @@ The easiest way to keep your suite updated is to use `Composer <http://getcompos
 
         $ composer require --dev behat/mink-extension
 
-2. Activate extension by specifying its class in your ``behat.yml``:
+2. Activate the extension by specifying its class in your ``behat.yml``:
 
     .. code-block:: yaml
 
@@ -55,10 +55,10 @@ The easiest way to keep your suite updated is to use `Composer <http://getcompos
 Usage
 -----
 
-After installing extension, there would be 6 usage options available for you:
+After installing the extension, there are 4 usage options available:
 
 1. Extending ``Behat\MinkExtension\Context\RawMinkContext`` in your feature suite.
-   This will give you ability to use a preconfigured `Mink` instance altogether with some
+   This will give you the ability to use a preconfigured `Mink` instance with some
    convenience methods:
 
    * ``getSession($name = null)``
@@ -95,8 +95,8 @@ After installing extension, there would be 6 usage options available for you:
         It will cause a ``RedundantException``. So, you can inherit from ``MinkContext``
         only with one of your context/subcontext classes.
 
-3. Adding ``Behat\MinkExtension\Context\MinkContext`` as context in your suite.
-   Exactly like previous option, but gives you the ability to keep your main context
+3. Adding ``Behat\MinkExtension\Context\MinkContext`` as a context in your suite.
+   Exactly like the previous option, but gives you the ability to keep your main context
    class clean.
 
     .. code-block:: yaml
@@ -151,8 +151,8 @@ MinkExtension will set the default Mink session for each scenario based on
 the configuration settings ``default_session`` and ``javascript_session``
 and on scenario tags:
 
-* A scenario tagged with ``@mink:foo`` will use ``foo`` as default session;
-* A scenario tagged with ``@javascript`` will use the javascript session as default session;
+* A scenario tagged with ``@mink:foo`` will use ``foo`` as its default session;
+* A scenario tagged with ``@javascript`` will use the javascript session as its default session;
 * Other scenarios will use the default session.
 
 The default session and the default javascript session can also be configured for
@@ -193,7 +193,7 @@ with support for 7 drivers out of the box:
                             goutte: ~
 
   .. Tips : HTTPS and self-signed certificate
-  In case you use Behat/Mink/Goutte to test your application, and want to test an
+  If you use Behat/Mink/Goutte to test your application, and want to test an
   application secured with HTTPS, but with a self-signed certificate, you can use
   the following parameters to avoid the validation error triggered by Guzzle:
 
@@ -315,7 +315,7 @@ with support for 7 drivers out of the box:
 .. note::
 
     All drivers share the same API, which means that you could use multiple drivers
-    for the same suite - which one fits your needs for concrete scenarios. Don't
+    for the same suite - whichever one fits your needs for concrete scenarios. Don't
     try to stick to a single driver as there's simply no universal solution - every
     driver has its pros and cons.
 
@@ -329,10 +329,10 @@ There's other useful parameters, that you can use to configure your suite:
   for them.
 * ``files_path`` - there's a special step definition for file upload inputs
   usage. You can use relative paths in those steps. ``files_path`` defines
-  base path in which Mink should search those relative files.
+  the base path in which Mink should search for those relative files.
 * ``show_cmd`` - there's a special definition in MinkExtension, that saves
-  currently opened page into temporary file and opens it with some browser
-  utility (for debugging). This option defines command to be used for opening.
+  the currently opened page into a temporary file and opens it with some browser
+  utility (for debugging). This option defines the command to be used for opening.
   For example: ``show_cmd: 'firefox %s'``.
 * ``show_tmp_dir`` - the temporary folder used to show the opened page (defaults
   to the system temp dir)
@@ -340,10 +340,10 @@ There's other useful parameters, that you can use to configure your suite:
   a step fails.
 * ``browser_name`` - meta-option, that defines which browser to use for Sahi,
   Selenium and Selenium2 drivers.
-* ``default_session`` - defines default session (driver) to be used for all
-  untagged scenarios. Could be any enabled session name.
-* ``javascript_session`` - defines javascript session (driver) (the one, which
-  will be used for ``@javascript`` tagged scenarios). Could be any enabled session
+* ``default_session`` - defines the default session (driver) to be used for all
+  untagged scenarios. This could be any enabled session name.
+* ``javascript_session`` - defines the javascript session (driver) (the one, which
+  will be used for ``@javascript`` tagged scenarios). This could be any enabled session
   name.
 * ``mink_loader`` - path to a file loaded to make Mink available (useful when
   using the PHAR archive for Mink, useless when using Composer)

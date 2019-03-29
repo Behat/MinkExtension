@@ -66,7 +66,7 @@ class PantherFactory implements DriverFactory
         return new Definition(
             'Behat\Mink\Driver\PantherDriver',
             array(
-                'panther', $config['options']
+                $config['options']
             )
         );
     }

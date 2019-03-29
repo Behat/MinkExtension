@@ -178,7 +178,7 @@ Drivers
 ~~~~~~~
 
 First of all, there are drivers enabling configuration. MinkExtension comes
-with support for 7 drivers out of the box:
+with support for 8 drivers out of the box:
 
 * ``GoutteDriver`` - headless driver without JavaScript support. In order to use
   it, modify your ``behat.yml`` profile:
@@ -234,6 +234,18 @@ with support for 7 drivers out of the box:
                     sessions:
                         my_session:
                             selenium2: ~
+
+* ``PantherDriver`` - javascript driver based on symfony/panther. In order to use it, modify your
+  ``behat.yml`` profile:
+
+    .. code-block:: yaml
+
+        default:
+            extensions:
+                Behat\MinkExtension:
+                    sessions:
+                        my_session:
+                            panther: ~
 
 * ``SauceLabsDriver`` - special flavor of the Selenium2Driver configured to use the
   selenium2 hosted installation of saucelabs.com. In order to use it, modify your

@@ -12,6 +12,7 @@ namespace Behat\MinkExtension\Context;
 
 use Behat\Behat\Context\TranslatableContext;
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Exception\ElementNotFoundException;
 
 /**
  * Mink context for Behat BDD tool.
@@ -21,6 +22,8 @@ use Behat\Gherkin\Node\TableNode;
  */
 class MinkContext extends RawMinkContext implements TranslatableContext
 {
+    const MAXIMUM_WAIT_TIME = 60;
+
     /**
      * Opens homepage
      * Example: Given I am on "/"
@@ -569,5 +572,45 @@ class MinkContext extends RawMinkContext implements TranslatableContext
     protected function fixStepArgument($argument)
     {
         return str_replace('\\"', '"', $argument);
+    }
+
+    /**
+     * Waits for an element to appear on page.
+     * Example: Then I wait for element "#someID" to appear
+     *
+     * @Then I wait for element "(?P<element>[^"]*)" to appear
+     */
+    public function iWaitForElementToAppear($element, $secondsToWait = null)
+    {
+        $waitFunction = function ($context) use ($element) {
+            try {
+                $context->assertElementOnPage($element);
+            } catch (ElementNotFoundException $e) {
+                return false;
+            }
+
+            return true;
+        };
+
+        $this->spin($waitFunction, $secondsToWait);
+    }
+
+    /**
+     * Executes a function and waits until the function returns true.
+     * @see http://docs.behat.org/en/v2.5/cookbook/using_spin_functions.html#adding-a-timeout
+     */
+    private function spin($callback, $maxTimeToWait = null)
+    {
+        $waitingTime = $maxTimeToWait === null ? self::MAXIMUM_WAIT_TIME : $maxTimeToWait;
+        $stopTime = time() + $waitingTime;
+        while (time() < $stopTime) {
+            if ($callback($this)) {
+                return;
+            }
+
+            usleep(250000);
+        }
+
+        throw new \RuntimeException("Spin function timed out after {$waitingTime} seconds");
     }
 }

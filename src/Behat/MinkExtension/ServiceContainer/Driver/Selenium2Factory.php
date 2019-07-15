@@ -145,6 +145,7 @@ class Selenium2Factory implements DriverFactory
                     ->children()
                         ->arrayNode('switches')->prototype('scalar')->end()->end()
                         ->scalarNode('binary')->end()
+                        ->booleanNode('w3c')->end()
                         ->arrayNode('extensions')->prototype('scalar')->end()->end()
                     ->end()
                 ->end()

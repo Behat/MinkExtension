@@ -1,5 +1,5 @@
 {
-    "name": "behat/mink-extension",
+    "name": "friends-of-behat/mink-extension",
     "type": "behat-extension",
     "description": "Mink extension for Behat",
     "keywords": ["web", "test", "browser", "gui"],
@@ -17,15 +17,19 @@
     ],
 
     "require": {
-        "php":          ">=5.3.2",
-        "behat/behat":  "^3.0.5",
-        "behat/mink":   "^1.5",
-        "symfony/config": "^2.7|^3.0|^4.0"
+        "php": "^7.2",
+        "behat/behat": "^3.0.5",
+        "behat/mink": "^1.5",
+        "symfony/config": "^4.4|^5.0"
     },
 
     "require-dev": {
         "behat/mink-goutte-driver": "^1.1",
-        "phpspec/phpspec":          "^2.0"
+        "phpspec/phpspec": "^6.0"
+    },
+
+    "replace": {
+        "behat/mink-extension": "self.version"
     },
 
     "autoload": {

@@ -29,8 +29,7 @@
     },
 
     "replace": {
-        "behat/mink-extension": "self.version",
-        "behat/mink-extension": "^2.0"
+        "behat/mink-extension": "self.version"
     },
 
     "autoload": {

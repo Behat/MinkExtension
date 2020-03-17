@@ -6,28 +6,26 @@ cache:
   directories:
     - $HOME/.composer/cache/files
 
-php:
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
-  - 7.1
-  - 7.2
-  - hhvm
-
 matrix:
   include:
-    - php: 5.3
-      dist: precise
+    - php: 5.5
+      dist: trusty
+    - php: 5.6
+      dist: trusty      
+    - php: 7.1    
     - php: 7.2
+    - php: 7.3    
+    - php: 7.4
       env: SYMFONY_VERSION='^2'
-    - php: 7.2
+    - php: 7.4
       env: SYMFONY_VERSION='^3'
     # Test against dev dependencies
-    - php: 7.2
-      env: DEPS=dev
-
+    - php: 7.4
+      env: DEPS=dev      
+      
+  
 before_install:
+  - echo "memory_limit=2G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini  
   - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/lts=$SYMFONY_VERSION; fi;
   - if [ "$DEPS" = 'dev' ]; then composer config minimum-stability dev; fi;
 

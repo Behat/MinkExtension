@@ -127,10 +127,10 @@ class MinkContext extends RawMinkContext implements TranslatableContext
 
     /**
      * Fills in form fields with provided table
-     * Example: When I fill in the following"
+     * Example: When I fill in the following:
      *              | username | bruceWayne |
      *              | password | iLoveBats123 |
-     * Example: And I fill in the following"
+     * Example: And I fill in the following:
      *              | username | bruceWayne |
      *              | password | iLoveBats123 |
      *

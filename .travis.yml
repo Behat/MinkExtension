@@ -21,6 +21,10 @@ matrix:
   include:
     - php: 5.3
       dist: precise
+    - php: 5.4
+      dist: trusty
+    - php: 5.5
+      dist: trusty
     - php: 7.2
       env: SYMFONY_VERSION='^2'
     - php: 7.2
@@ -30,6 +34,7 @@ matrix:
       env: DEPS=dev
 
 before_install:
+  - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/lts=$SYMFONY_VERSION; fi;
   - if [ "$DEPS" = 'dev' ]; then composer config minimum-stability dev; fi;
 

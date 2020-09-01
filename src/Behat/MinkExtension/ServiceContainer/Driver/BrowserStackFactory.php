@@ -44,6 +44,10 @@ class BrowserStackFactory extends Selenium2Factory
     {
         $config['wd_host'] = sprintf('%s:%s@hub.browserstack.com/wd/hub', $config['username'], $config['access_key']);
 
+        if ($config['capabilities']['browserstack-local']) {
+            $config['capabilities']['extra_capabilities']['browserstack.local'] = true;
+        }
+
         return parent::buildDriver($config);
     }
 
@@ -60,6 +64,7 @@ class BrowserStackFactory extends Selenium2Factory
                 ->scalarNode('os_version')->end()
                 ->scalarNode('device')->end()
                 ->booleanNode('browserstack-debug')->end()
+                ->booleanNode('browserstack-local')->end()
                 ->booleanNode('browserstack-tunnel')->end()
                 ->booleanNode('emulator')->end()
                 ->booleanNode('acceptSslCert')->end()

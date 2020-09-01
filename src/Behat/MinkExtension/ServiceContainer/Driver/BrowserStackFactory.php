@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the Behat MinkExtension.
  * (c) Konstantin Kudryashov <ever.zet@gmail.com>
@@ -7,7 +6,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Behat\MinkExtension\ServiceContainer\Driver;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -21,7 +19,6 @@ class BrowserStackFactory extends Selenium2Factory
     {
         return 'browser_stack';
     }
-
     /**
      * {@inheritdoc}
      */
@@ -36,7 +33,6 @@ class BrowserStackFactory extends Selenium2Factory
             ->end()
         ;
     }
-
     /**
      * {@inheritdoc}
      */
@@ -44,13 +40,15 @@ class BrowserStackFactory extends Selenium2Factory
     {
         $config['wd_host'] = sprintf('%s:%s@hub.browserstack.com/wd/hub', $config['username'], $config['access_key']);
 
+        if ($config['capabilities']['browserstack-local']) {
+            $config['capabilities']['extra_capabilities']['browserstack.local'] = true;
+        }
+
         return parent::buildDriver($config);
     }
-
     protected function getCapabilitiesNode()
     {
         $node = parent::getCapabilitiesNode();
-
         $node
             ->children()
                 ->scalarNode('project')->end()
@@ -60,6 +58,7 @@ class BrowserStackFactory extends Selenium2Factory
                 ->scalarNode('os_version')->end()
                 ->scalarNode('device')->end()
                 ->booleanNode('browserstack-debug')->end()
+                ->booleanNode('browserstack-local')->end()
                 ->booleanNode('browserstack-tunnel')->end()
                 ->booleanNode('emulator')->end()
                 ->booleanNode('acceptSslCert')->end()

@@ -4,87 +4,87 @@
     <body>
         <trans-unit id="i-am-homepage">
             <source><![CDATA[/^(?:|I )am on (?:|the )homepage$/]]></source>
-            <target><![CDATA[/^a címlapon (vagyok|van)$/]]></target>
+            <target><![CDATA[/^a címlapon (?:vagyok|van)$/]]></target>
         </trans-unit>
         <trans-unit id="i-go-to-homepage">
             <source><![CDATA[/^(?:|I )go to (?:|the )homepage$/]]></source>
-            <target><![CDATA[/^(ellátogat|ellátogatok) a címlapra$/]]></target>
+            <target><![CDATA[/^(?:ellátogat|ellátogatok) a címlapra$/]]></target>
         </trans-unit>
         <trans-unit id="i-am-on-page">
             <source><![CDATA[/^(?:|I )am on "(?P<page>[^"]+)"$/]]></source>
-            <target><![CDATA[/^az? "(?P<page>[^"]+)" oldalon (vagyok|van)$/]]></target>
+            <target><![CDATA[/^az? "(?P<page>[^"]+)" oldalon (?:vagyok|van)$/]]></target>
         </trans-unit>
         <trans-unit id="i-go-to-page">
             <source><![CDATA[/^(?:|I )go to "(?P<page>[^"]+)"$/]]></source>
-            <target><![CDATA[/^(ellátogat|ellátogatok) az? "(?P<page>[^"]+) oldalra"$/]]></target>
+            <target><![CDATA[/^(?:ellátogat|ellátogatok) az? "(?P<page>[^"]+) oldalra"$/]]></target>
         </trans-unit>
         <trans-unit id="reload-the-page">
             <source><![CDATA[/^(?:|I )reload the page$/]]></source>
-            <target><![CDATA[/^(újratöltöm|újratölti) az oldalt$/]]></target>
+            <target><![CDATA[/^(?:újratöltöm|újratölti) az oldalt$/]]></target>
         </trans-unit>
         <trans-unit id="move-backward-one-page">
             <source><![CDATA[/^(?:|I )move backward one page$/]]></source>
-            <target><![CDATA[/^az előző oldalra (látogatok|látogat)$/]]></target>
+            <target><![CDATA[/^az előző oldalra (?:látogatok|látogat)$/]]></target>
         </trans-unit>
         <trans-unit id="move-forward-one-page">
             <source><![CDATA[/^(?:|I )move forward one page$/]]></source>
-            <target><![CDATA[/^a következő oldalra (látogatok|látogat)$/]]></target>
+            <target><![CDATA[/^a következő oldalra (?:látogatok|látogat)$/]]></target>
         </trans-unit>
         <trans-unit id="i-press-button">
             <source><![CDATA[/^(?:|I )press "(?P<button>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(megnyomom|megnyomja|lenyomom|lenyomja) az? "(?P<button>(?:[^"]|\\")*)" gombot$/]]></target>
+            <target><![CDATA[/^(?:megnyomom|megnyomja|lenyomom|lenyomja) az? "(?P<button>(?:[^"]|\\")*)" gombot$/]]></target>
         </trans-unit>
         <trans-unit id="i-follow-link">
             <source><![CDATA[/^(?:|I )follow "(?P<link>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(követem|követi) az? "(?P<link>(?:[^"]|\\")*)" linket$/]]></target>
+            <target><![CDATA[/^(?:követem|követi) az? "(?P<link>(?:[^"]|\\")*)" linket$/]]></target>
         </trans-unit>
         <trans-unit id="i-fill-in-field-with-value">
             <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(kitöltöm|kitölti) az? "(?P<field>(?:[^"]|\\")*)" mezőt "(?P<value>(?:[^"]|\\")*)" értékkel$/]]></target>
+            <target><![CDATA[/^(?:kitöltöm|kitölti) az? "(?P<field>(?:[^"]|\\")*)" mezőt "(?P<value>(?:[^"]|\\")*)" értékkel$/]]></target>
         </trans-unit>
         <trans-unit id="i-fill-in-field-with">
             <source><![CDATA[/^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with:$/]]></source>
-            <target><![CDATA[/^(kitöltöm|kitölti) az? "(?P<field>(?:[^"]|\\")*)" mezőt a következő értékekkel:$/]]></target>
+            <target><![CDATA[/^(?:kitöltöm|kitölti) az? "(?P<field>(?:[^"]|\\")*)" mezőt a következő értékekkel:$/]]></target>
         </trans-unit>
         <trans-unit id="i-fill-in-value-for-field">
             <source><![CDATA[/^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^az? "(?P<value>(?:[^"]|\\")*)" értékkel (kitöltöm|kitölti) az? "(?P<field>(?:[^"]|\\")*)" mezőt$/]]></target>
+            <target><![CDATA[/^az? "(?P<value>(?:[^"]|\\")*)" értékkel (?:kitöltöm|kitölti) az? "(?P<field>(?:[^"]|\\")*)" mezőt$/]]></target>
         </trans-unit>
         <trans-unit id="i-fill-in-the-following">
             <source><![CDATA[/^(?:|I )fill in the following:$/]]></source>
-            <target><![CDATA[/^Amennyiben (kitöltöm|kitölti) a következőket:$/]]></target>
+            <target><![CDATA[/^Amennyiben (?:kitöltöm|kitölti) a következőket:$/]]></target>
         </trans-unit>
         <trans-unit id="i-select-option-from-select">
             <source><![CDATA[/^(?:|I )select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(kiválasztom|kiválasztja) az? "(?P<option>(?:[^"]|\\")*)" leheőséget az? "(?P<select>(?:[^"]|\\")*)" legördülő listából$/]]></target>
+            <target><![CDATA[/^(?:kiválasztom|kiválasztja) az? "(?P<option>(?:[^"]|\\")*)" leheőséget az? "(?P<select>(?:[^"]|\\")*)" legördülő listából$/]]></target>
         </trans-unit>
         <trans-unit id="i-additionally-select-option-from-select">
             <source><![CDATA[/^(?:|I )additionally select "(?P<option>(?:[^"]|\\")*)" from "(?P<select>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(kiválasztom|kiválasztja) a "(?P<option>(?:[^"]|\\")*)" további lehetőséget az? "(?P<select>(?:[^"]|\\")*)" legördülő listából$/]]></target>
+            <target><![CDATA[/^(?:kiválasztom|kiválasztja) a "(?P<option>(?:[^"]|\\")*)" további lehetőséget az? "(?P<select>(?:[^"]|\\")*)" legördülő listából$/]]></target>
         </trans-unit>
         <trans-unit id="i-check-option">
             <source><![CDATA[/^(?:|I )check "(?P<option>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(kiválasztom|kiválasztja) az? "(?P<option>(?:[^"]|\\")*) opciót"$/]]></target>
+            <target><![CDATA[/^(?:kiválasztom|kiválasztja) az? "(?P<option>(?:[^"]|\\")*) opciót"$/]]></target>
         </trans-unit>
         <trans-unit id="i-uncheck-option">
             <source><![CDATA[/^(?:|I )uncheck "(?P<option>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(törlöm|törli) az? "(?P<option>(?:[^"]|\\")*)" opciót$/]]></target>
+            <target><![CDATA[/^(?:törlöm|törli) az? "(?P<option>(?:[^"]|\\")*)" opciót$/]]></target>
         </trans-unit>
         <trans-unit id="i-attach-the-file-to-field">
             <source><![CDATA[/^(?:|I )attach the file "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^(csatolom|csatolja) az? "(?P<path>[^"]*)" fájlt az? "(?P<field>(?:[^"]|\\")*)" mezőhöz$/]]></target>
+            <target><![CDATA[/^(?:csatolom|csatolja) az? "(?P<path>[^"]*)" fájlt az? "(?P<field>(?:[^"]|\\")*)" mezőhöz$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-text">
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^az? "(?P<text>(?:[^"]|\\")*)" szöveget kell (látnom|látnia)$/]]></target>
+            <target><![CDATA[/^az? "(?P<text>(?:[^"]|\\")*)" szöveget kell (?:látnom|látnia)$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-text-matching">
             <source><![CDATA[/^(?:|I )should see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^az? (?P<pattern>"(?:[^"]|\\")*") mintára illeszkedő szöveget (látnom|látnia) kell$/]]></target>
+            <target><![CDATA[/^az? (?P<pattern>"(?:[^"]|\\")*") mintára illeszkedő szöveget (?:látnom|látnia) kell$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-not-see-text-matching">
             <source><![CDATA[/^(?:|I )should not see text matching (?P<pattern>"(?:[^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^az? (?P<pattern>"(?:[^"]|\\")*") mintára illeszkedő szöveget nem szabad (látnom|látnia)$/]]></target>
+            <target><![CDATA[/^az? (?P<pattern>"(?:[^"]|\\")*") mintára illeszkedő szöveget nem szabad (?:látnom|látnia)$/]]></target>
         </trans-unit>
         <trans-unit id="the-response-should-contain">
             <source><![CDATA[/^the response should contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
@@ -92,7 +92,7 @@
         </trans-unit>
         <trans-unit id="i-should-not-see-text">
             <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)"$/]]></source>
-            <target><![CDATA[/^az? "(?P<text>(?:[^"]|\\")*)" szöveget nem szabad (látnom|látnia)$/]]></target>
+            <target><![CDATA[/^az? "(?P<text>(?:[^"]|\\")*)" szöveget nem szabad (?:látnom|látnia)$/]]></target>
         </trans-unit>
         <trans-unit id="the-response-should-not-contain">
             <source><![CDATA[/^the response should not contain "(?P<text>(?:[^"]|\\")*)"$/]]></source>
@@ -124,15 +124,15 @@
         </trans-unit>
         <trans-unit id="i-should-be-on-page">
             <source><![CDATA[/^(?:|I )should be on "(?P<page>[^"]+)"$/]]></source>
-            <target><![CDATA[/^a? "(?P<page>[^"]+)" oldalon kell (lennem|lennie)$/]]></target>
+            <target><![CDATA[/^a? "(?P<page>[^"]+)" oldalon kell (?:lennem|lennie)$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-be-on-homepage">
             <source><![CDATA[/^(?:|I )should be on (?:|the )homepage$/]]></source>
-            <target><![CDATA[/^a címlapon kell (lennem|lennie)/]]></target>
+            <target><![CDATA[/^a címlapon kell (?:lennem|lennie)/]]></target>
         </trans-unit>
         <trans-unit id="the-url-should-match">
             <source><![CDATA[/^the (?i)url(?-i) should match (?P<pattern>"([^"]|\\")*")$/]]></source>
-            <target><![CDATA[/^az? (url|webcím) illeszkedik a következő mintára: (?P<pattern>"([^"]|\\")*")$/]]></target>
+            <target><![CDATA[/^az? (?:url|webcím) illeszkedik a következő mintára: (?P<pattern>"([^"]|\\")*")$/]]></target>
         </trans-unit>
         <trans-unit id="the-element-should-contain">
             <source><![CDATA[/^the "(?P<element>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/]]></source>
@@ -144,15 +144,15 @@
         </trans-unit>
         <trans-unit id="i-should-see-text-in-element">
             <source><![CDATA[/^(?:|I )should see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
-            <target><![CDATA[/^az? "(?P<text>(?:[^"]|\\")*)" szöveget (látnom|látnia) kell az? "(?P<element>[^"]*)" elemben$/]]></target>
+            <target><![CDATA[/^az? "(?P<text>(?:[^"]|\\")*)" szöveget (?:látnom|látnia) kell az? "(?P<element>[^"]*)" elemben$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-not-see-text-in-element">
             <source><![CDATA[/^(?:|I )should not see "(?P<text>(?:[^"]|\\")*)" in the "(?P<element>[^"]*)" element$/]]></source>
-            <target><![CDATA[/^az? "(?P<text>(?:[^"]|\\")*)" szöveget nem szabad (látnom|látnia) az? "(?P<element>[^"]*)" elemben$/]]></target>
+            <target><![CDATA[/^az? "(?P<text>(?:[^"]|\\")*)" szöveget nem szabad (?:látnom|látnia) az? "(?P<element>[^"]*)" elemben$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-see-element">
             <source><![CDATA[/^(?:|I )should see an? "(?P<element>[^"]*)" element$/]]></source>
-            <target><![CDATA[/^az? "(?P<element>[^"]*)" elemet (látnom|látnia) kell$/]]></target>
+            <target><![CDATA[/^az? "(?P<element>[^"]*)" elemet (?:látnom|látnia) kell$/]]></target>
         </trans-unit>
         <trans-unit id="i-should-not-see-element">
             <source><![CDATA[/^(?:|I )should not see an? "(?P<element>[^"]*)" element$/]]></source>
@@ -160,7 +160,7 @@
         </trans-unit>
         <trans-unit id="i-should-see-num-elements">
             <source><![CDATA[/^(?:|I )should see (?P<num>\d+) "(?P<element>[^"]*)" elements?$/]]></source>
-            <target><![CDATA[/^(?P<num>\d+) darab "(?P<element>[^"]*)" elemet kell (látnom|látnia)$/]]></target>
+            <target><![CDATA[/^(?P<num>\d+) darab "(?P<element>[^"]*)" elemet kell (?:látnom|látnia)$/]]></target>
         </trans-unit>
         <trans-unit id="the-response-status-code-should-be">
             <source><![CDATA[/^the response status code should be (?P<code>\d+)$/]]></source>

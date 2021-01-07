@@ -13,6 +13,7 @@ php:
   - 7.0
   - 7.1
   - 7.2
+  - 8.0
   - hhvm
 
 matrix:
@@ -25,6 +26,8 @@ matrix:
       env: SYMFONY_VERSION='^3'
     # Test against dev dependencies
     - php: 7.2
+      env: DEPS=dev
+    - php: 8.0
       env: DEPS=dev
 
 before_install:

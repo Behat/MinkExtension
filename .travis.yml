@@ -13,11 +13,13 @@ php:
   - 8.0
 
 env:
+  - SYMFONY_VERSION=3.4.*
   - SYMFONY_VERSION=4.4.*
   - SYMFONY_VERSION=5.0.*
+  - SYMFONY_VERSION=5.1.*
+  - SYMFONY_VERSION=5.2.*
 
 install:
-  - if [ "$SYMFONY_VERSION" = "5.0.*" ]; then composer require behat/behat:dev-master --no-update --no-scripts --prefer-dist; fi
   - composer require symfony/config:${SYMFONY_VERSION} --no-update --no-scripts --prefer-dist
   - composer update --no-progress
 

@@ -2,7 +2,12 @@
     "name": "friends-of-behat/mink-extension",
     "type": "behat-extension",
     "description": "Mink extension for Behat",
-    "keywords": ["web", "test", "browser", "gui"],
+    "keywords": [
+        "web",
+        "test",
+        "browser",
+        "gui"
+    ],
     "homepage": "http://extensions.behat.org/mink",
     "license": "MIT",
     "authors": [
@@ -15,30 +20,27 @@
             "email": "stof@notk.org"
         }
     ],
-
     "require": {
         "php": ">=7.2",
         "behat/behat": "^3.0.5",
         "behat/mink": "^1.5",
-        "symfony/config": "^3.4|^4.4|^5.0"
+        "symfony/config": "^3.4 || ^4.4 || ^5.0"
     },
-
-    "require-dev": {
-        "behat/mink-goutte-driver": "^1.1",
-        "phpspec/phpspec": "^6.0"
-    },
-
     "replace": {
         "behat/mink-extension": "self.version"
     },
-
-    "autoload": {
-        "psr-0": { "Behat\\MinkExtension": "src/" }
+    "require-dev": {
+        "behat/mink-goutte-driver": "^1.1",
+        "phpspec/phpspec": "^6.0 || ^7.0"
     },
-
     "extra": {
         "branch-alias": {
             "dev-master": "2.1.x-dev"
+        }
+    },
+    "autoload": {
+        "psr-0": {
+            "Behat\\MinkExtension": "src/"
         }
     }
 }

@@ -21,17 +21,17 @@
         }
     ],
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.4",
         "behat/behat": "^3.0.5",
         "behat/mink": "^1.5",
-        "symfony/config": "^3.4 || ^4.4 || ^5.0"
+        "symfony/config": "^4.4 || ^5.0 || ^6.0"
     },
     "replace": {
         "behat/mink-extension": "self.version"
     },
     "require-dev": {
         "behat/mink-goutte-driver": "^1.1",
-        "phpspec/phpspec": "^6.0 || ^7.0"
+        "phpspec/phpspec": "^6.0 || ^7.0 || 7.1.x-dev"
     },
     "extra": {
         "branch-alias": {

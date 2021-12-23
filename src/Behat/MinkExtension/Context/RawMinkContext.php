@@ -141,7 +141,7 @@ class RawMinkContext implements MinkAwareContext
      */
     public function locatePath($path)
     {
-        $startUrl = rtrim($this->getMinkParameter('base_url'), '/') . '/';
+        $startUrl = rtrim($this->getMinkParameter('base_url') ?? '', '/') . '/';
 
         return 0 !== strpos($path, 'http') ? $startUrl . ltrim($path, '/') : $path;
     }

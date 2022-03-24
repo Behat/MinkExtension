@@ -68,10 +68,10 @@ class GoutteFactory implements DriverFactory
             );
         }
 
-        if ($this->isGoutte1()) {
-            $guzzleClient = $this->buildGuzzle3Client($config['guzzle_parameters']);
-        } elseif ($this->isGuzzle6()) {
+        if ($this->isGuzzle6()) {
             $guzzleClient = $this->buildGuzzle6Client($config['guzzle_parameters']);
+        } elseif ($this->isGoutte1()) {
+            $guzzleClient = $this->buildGuzzle3Client($config['guzzle_parameters']);
         } else {
             $guzzleClient = $this->buildGuzzle4Client($config['guzzle_parameters']);
         }

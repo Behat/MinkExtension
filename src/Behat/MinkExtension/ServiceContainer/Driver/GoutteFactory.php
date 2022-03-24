@@ -69,8 +69,7 @@ class GoutteFactory implements DriverFactory
         }
 
         if ($this->isGuzzle6()) {
-            $guzzleClient = $this->buildGuzzle6Client($config['guzzle_parameters']);
-            $clientDefinition = new Definition('Behat\Mink\Driver\Goutte\Client', array($guzzleClient));
+            $clientDefinition = new Definition('Behat\Mink\Driver\Goutte\Client');
 
             return new Definition('Behat\Mink\Driver\GoutteDriver', array($clientDefinition));
         }

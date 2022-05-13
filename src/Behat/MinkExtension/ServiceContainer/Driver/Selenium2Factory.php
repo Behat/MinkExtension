@@ -111,6 +111,11 @@ class Selenium2Factory implements DriverFactory
                 ->booleanNode('webStorageEnabled')->end()
                 ->booleanNode('rotatable')->end()
                 ->booleanNode('acceptSslCerts')->end()
+                // https://github.com/mozilla/geckodriver#webdriver-capabilities
+                // https://www.w3.org/TR/webdriver/#dfn-accept-insecure-tls-certificates
+                ->booleanNode('acceptInsecureCerts')->end()
+                // https://github.com/mozilla/geckodriver#webdriver-capabilities
+                ->scalarNode('pageLoadStrategy')->defaultValue('normal')->end()
                 ->booleanNode('nativeEvents')->end()
                 ->booleanNode('overlappingCheckDisabled')->end()
                 ->arrayNode('proxy')

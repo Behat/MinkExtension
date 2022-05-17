@@ -68,64 +68,12 @@ class GoutteFactory implements DriverFactory
             );
         }
 
-        if ($this->isGoutte1()) {
-            $guzzleClient = $this->buildGuzzle3Client($config['guzzle_parameters']);
-        } elseif ($this->isGuzzle6()) {
-            $guzzleClient = $this->buildGuzzle6Client($config['guzzle_parameters']);
-        } else {
-            $guzzleClient = $this->buildGuzzle4Client($config['guzzle_parameters']);
-        }
-
         $clientDefinition = new Definition('Behat\Mink\Driver\Goutte\Client', array(
-            $config['server_parameters'],
+            $config['server_parameters'] ?: null,
         ));
-        $clientDefinition->addMethodCall('setClient', array($guzzleClient));
 
         return new Definition('Behat\Mink\Driver\GoutteDriver', array(
             $clientDefinition,
         ));
-    }
-
-    private function buildGuzzle6Client(array $parameters)
-    {
-        // Force the parameters set by default in Goutte to reproduce its behavior
-        $parameters['allow_redirects'] = false;
-        $parameters['cookies'] = true;
-
-        return new Definition('GuzzleHttp\Client', array($parameters));
-    }
-
-    private function buildGuzzle4Client(array $parameters)
-    {
-        // Force the parameters set by default in Goutte to reproduce its behavior
-        $parameters['allow_redirects'] = false;
-        $parameters['cookies'] = true;
-
-        return new Definition('GuzzleHttp\Client', array(array('defaults' => $parameters)));
-    }
-
-    private function buildGuzzle3Client(array $parameters)
-    {
-        // Force the parameters set by default in Goutte to reproduce its behavior
-        $parameters['redirect.disable'] = true;
-
-        return new Definition('Guzzle\Http\Client', array(null, $parameters));
-    }
-
-    private function isGoutte1()
-    {
-        $refl = new \ReflectionParameter(array('Goutte\Client', 'setClient'), 0);
-
-        if ($refl->getClass() && 'Guzzle\Http\ClientInterface' === $refl->getClass()->getName()) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private function isGuzzle6()
-    {
-        return interface_exists('GuzzleHttp\ClientInterface') &&
-            version_compare(\GuzzleHttp\ClientInterface::VERSION, '6.0.0', '>=');
     }
 }

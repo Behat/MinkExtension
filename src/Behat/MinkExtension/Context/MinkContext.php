@@ -21,30 +21,23 @@ use Behat\Gherkin\Node\TableNode;
  */
 class MinkContext extends RawMinkContext implements TranslatableContext
 {
-    /**
-     * Opens homepage
-     * Example: Given I am on "/"
-     * Example: When I go to "/"
-     * Example: And I go to "/"
-     *
-     * @Given /^(?:|I )am on (?:|the )homepage$/
-     * @When /^(?:|I )go to (?:|the )homepage$/
-     */
-    public function iAmOnHomepage()
-    {
-        $this->visitPath('/');
-    }
 
     /**
-     * Opens specified page
+     * Opens homepage or specified page
      * Example: Given I am on "http://batman.com"
      * Example: And I am on "/articles/isBatmanBruceWayne"
      * Example: When I go to "/articles/isBatmanBruceWayne"
+     * Example: Given I am on homepage
+     * Example: And I am on homepage
+     * Example: When I go to homepage
+     * Example: When I go to the homepage
      *
      * @Given /^(?:|I )am on "(?P<page>[^"]+)"$/
      * @When /^(?:|I )go to "(?P<page>[^"]+)"$/
+     * @Given /^(?:|I )am on (?:|the )homepage$/
+     * @When /^(?:|I )go to (?:|the )homepage$/
      */
-    public function visit($page)
+    public function visit($page = "/")
     {
         $this->visitPath($page);
     }

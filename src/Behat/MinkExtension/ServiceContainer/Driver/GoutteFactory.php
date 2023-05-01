@@ -10,6 +10,7 @@
 
 namespace Behat\MinkExtension\ServiceContainer\Driver;
 
+use GuzzleHttp\ClientInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -125,7 +126,18 @@ class GoutteFactory implements DriverFactory
 
     private function isGuzzle6()
     {
-        return interface_exists('GuzzleHttp\ClientInterface') &&
-            version_compare(\GuzzleHttp\ClientInterface::VERSION, '6.0.0', '>=');
+        if (!interface_exists(ClientInterface::class)) {
+            return false;
+        }
+        $rc = new \ReflectionClass(ClientInterface::class);
+        // This constant was removed in Guzzle 7.
+        if ($rc->hasConstant('VERSION')) {
+            return version_compare(ClientInterface::VERSION, '6.0.0', '>=');
+        }
+        // This constant was added in Guzzle 7.
+        if ($rc->hasConstant('MAJOR_VERSION')) {
+            ClientInterface::MAJOR_VERSION >= 6;
+        }
+        return false;
     }
 }

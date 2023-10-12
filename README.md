@@ -1,8 +1,7 @@
 # MinkExtension
 
-[![Build
-Status](https://travis-ci.org/Behat/MinkExtension.svg?branch=master)](https://travis-ci.org/Behat/MinkExtension)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Behat/MinkExtension/badges/quality-score.png?s=c6474ca52322f5176a2f0cab10974aeee5e6133c)](https://scrutinizer-ci.com/g/Behat/MinkExtension/)
+> [!IMPORTANT]
+> This package is no longer maintained. Use [`friends-of-behat/mink-extension`](https://packagist.org/packages/friends-of-behat/mink-extension) instead.
 
 MinkExtension is an integration layer between Behat 3.0+ and Mink 1.5+
 and it provides:

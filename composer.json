@@ -1,4 +1,5 @@
 {
+    "abandoned": "friends-of-behat/mink-extension",
     "name": "behat/mink-extension",
     "type": "behat-extension",
     "description": "Mink extension for Behat",

@@ -13,12 +13,9 @@ php:
   - 7.0
   - 7.1
   - 7.2
-  - hhvm
 
 matrix:
   include:
-    - php: 5.3
-      dist: precise
     - php: 7.2
       env: SYMFONY_VERSION='^2'
     - php: 7.2

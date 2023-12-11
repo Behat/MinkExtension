@@ -152,11 +152,11 @@
         </trans-unit>
         <trans-unit id="the-response-status-code-should-be">
             <source><![CDATA[/^the response status code should be (?P<code>\d+)$/]]></source>
-            <target><![CDATA[/^le code de status de la réponse devrait être (?P<code>\d+)$/]]></target>
+            <target><![CDATA[/^le code du statut de la réponse devrait être (?P<code>\d+)$/]]></target>
         </trans-unit>
         <trans-unit id="the-response-status-code-should-not-be">
             <source><![CDATA[/^the response status code should not be (?P<code>\d+)$/]]></source>
-            <target><![CDATA[/^le code de status de la réponse ne devrait pas être (?P<code>\d+)$/]]></target>
+            <target><![CDATA[/^le code du statut de la réponse ne devrait pas être (?P<code>\d+)$/]]></target>
         </trans-unit>
         <trans-unit id="print-last-response">
             <source><![CDATA[/^print last response$/]]></source>

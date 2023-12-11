@@ -2,3 +2,5 @@
 *.phar
 composer.lock
 vendor
+.idea
+.DS_Store

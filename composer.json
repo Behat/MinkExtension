@@ -26,7 +26,7 @@
 
     "require-dev": {
         "behat/mink-goutte-driver": "^1.1",
-        "phpspec/phpspec":          "^2.0"
+        "phpspec/phpspec":          "^7.0"
     },
 
     "autoload": {

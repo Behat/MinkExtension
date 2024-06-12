@@ -89,8 +89,10 @@ class GoutteFactory implements DriverFactory
     private function buildGuzzle6Client(array $parameters)
     {
         // Force the parameters set by default in Goutte to reproduce its behavior
-        $parameters['allow_redirects'] = false;
-        $parameters['cookies'] = true;
+        $parameters += array(
+          'allow_redirects' => false,
+          'cookies' => true
+        );
 
         return new Definition('GuzzleHttp\Client', array($parameters));
     }
@@ -98,8 +100,10 @@ class GoutteFactory implements DriverFactory
     private function buildGuzzle4Client(array $parameters)
     {
         // Force the parameters set by default in Goutte to reproduce its behavior
-        $parameters['allow_redirects'] = false;
-        $parameters['cookies'] = true;
+        $parameters += array(
+          'allow_redirects' => false,
+          'cookies' => true
+        );
 
         return new Definition('GuzzleHttp\Client', array(array('defaults' => $parameters)));
     }
@@ -107,7 +111,9 @@ class GoutteFactory implements DriverFactory
     private function buildGuzzle3Client(array $parameters)
     {
         // Force the parameters set by default in Goutte to reproduce its behavior
-        $parameters['redirect.disable'] = true;
+        $parameters += array(
+          'redirect.disable' => true
+        );
 
         return new Definition('Guzzle\Http\Client', array(null, $parameters));
     }
